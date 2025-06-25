@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { usePokedetails } from '../../context/Pokedetails';
 import pokeApi from '../../api/modules/pokedex.api';
 
-const useHeader = ({ openModal }) => {
+const useHeader = ({ openModal, setPokeModal }) => {
   const [modalFilterOpen, setModalFilterOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [searchList, setSearchList] = useState([]);
-  const { setPokedetails } = usePokedetails()
+  const { setPokeDetails } = usePokedetails()
 
   const onQueryChange = (e) => {
     setQuery(e.target.value);
@@ -21,8 +21,8 @@ const useHeader = ({ openModal }) => {
   };
 
   const handleSetPokedetails = (pokémon) => {
-    setPokedetails(pokémon);
-    openModal(true);
+    setPokeDetails(pokémon);
+    setPokeModal(true);
   };
 
   useEffect(() => {
@@ -39,10 +39,17 @@ const useHeader = ({ openModal }) => {
   }, []);
 
 
+  const filteredSearchList = useMemo(() => {
+    if (!query) return [];
+    return searchList.filter((poke) => 
+      poke?.name?.toLowerCase().includes(query.toLowerCase())
+    );
+  }, [query, searchList]);
+
   return {
     modalFilterOpen,
     query,
-    searchList,
+    searchList: filteredSearchList,
     onQueryChange,
     openFilterModal,
     closeFilterModal,

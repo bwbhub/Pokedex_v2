@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { Grid } from '@mui/material';
+
 import PokeSvg from '../../components/SVG/PokeSvg';
 import Header from '../../components/Header/Header';
 import ListCard from '../../components/ListCard/ListCard';
@@ -27,8 +28,16 @@ const HomePage = () => {
         minHeight: "100vh" 
       }}
       >
-      <PokeSvg />
-      <Header openModal={openModal} />
+        <Grid sx={{
+        position: "fixed",
+        top: "-53%", 
+        zIndex: 0, 
+        width: "100%",
+        height: "100%"
+        }}>
+          <PokeSvg />
+        </Grid>
+      <Header openModal={openModal} setPokeModal={setModalOpen} />
       
       <Grid 
         container 
@@ -41,7 +50,7 @@ const HomePage = () => {
         }}
         >
         {pokeList.map((pokemon) => (
-          <Grid key={pokemon.name} item xs={12} sm={6} md={4} lg={3} xl={2}>
+          <Grid key={pokemon.name} xs={12} sm={6} md={4} lg={3} xl={2}>
             <ListCard pokemonId={urlConvert(pokemon)} setOpenModal={setModalOpen} />
           </Grid>
         ))}

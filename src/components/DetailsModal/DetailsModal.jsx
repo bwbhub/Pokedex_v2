@@ -15,7 +15,7 @@ const DetailsModal = ({ closeModal, openModal }) => {
 
   const imgUrl =
     pokeDetails?.sprites?.other?.["official-artwork"]?.front_default
-  const mainType = pokeDetails?.types[0].type.name
+  const mainType = pokeDetails?.types[0]?.type?.name
   const color = bgColors[mainType]
   const id = pokeDetails?.id
 

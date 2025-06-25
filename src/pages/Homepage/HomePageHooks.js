@@ -22,13 +22,12 @@ const useHomePage = () => {
   const [initialLoading, setInitialLoading] = useState(true);
   const dispatch = useDispatch();
   const loadingRef = useRef(false);
-  const allPokemonRef = useRef([]); // Référence pour stocker tous les Pokémon
+  const allPokemonRef = useRef([]);
 
   const ITEMS_PER_PAGE = 30;
 
-  // Fonction pour récupérer la liste complète une seule fois
   const fetchAllPokemon = useCallback(async () => {
-    if (allPokemonRef.current.length > 0) return; // Si déjà chargé, ne pas recharger
+    if (allPokemonRef.current.length > 0) return;
     
     const { response, err } = await pokeApi.getAll();
     if (response && response.results) {
@@ -40,11 +39,9 @@ const useHomePage = () => {
     }
   }, []);
 
-  // Fonction pour charger une page spécifique
   const getList = useCallback(async (page) => {
     loadingRef.current = true;
     
-    // S'assurer que nous avons les données complètes d'abord
     if (allPokemonRef.current.length === 0) {
       await fetchAllPokemon();
     }
@@ -52,7 +49,6 @@ const useHomePage = () => {
     const startIndex = (page - 1) * ITEMS_PER_PAGE;
     const endIndex = page * ITEMS_PER_PAGE;
     
-    // Vérifier s'il y a plus de données à charger
     if (startIndex >= allPokemonRef.current.length) {
       loadingRef.current = false;
       return;
@@ -60,23 +56,17 @@ const useHomePage = () => {
     
     const newItems = allPokemonRef.current.slice(startIndex, endIndex);
     
-    // Mettre à jour la liste avec les nouveaux éléments
-    setPokeList((prevList) => {
-      // Créer un Map pour garantir l'unicité basée sur le nom du Pokémon
+      setPokeList((prevList) => {
       const uniqueMap = new Map();
       
-      // Ajouter d'abord les éléments précédents
       prevList.forEach(item => uniqueMap.set(item.name, item));
       
-      // Ajouter ensuite les nouveaux éléments (ils remplaceront les anciens s'il y a des doublons)
       newItems.forEach(item => {
-        // Vérifier si cet élément n'existe pas déjà
         if (!uniqueMap.has(item.name)) {
           uniqueMap.set(item.name, item);
         }
       });
       
-      // Convertir le Map en tableau
       return Array.from(uniqueMap.values());
     });
     
@@ -97,7 +87,6 @@ const useHomePage = () => {
 
   useEffect(() => {
     const handleScroll = throttle(async () => {
-      // Obtenir la hauteur de la page et la position de défilement de manière plus fiable
       const windowHeight = window.innerHeight;
       const scrollY = window.scrollY || window.pageYOffset;
       const documentHeight = Math.max(
@@ -108,7 +97,6 @@ const useHomePage = () => {
         document.documentElement.offsetHeight
       );
       
-      // Déclencher le chargement lorsque l'utilisateur est à 300px du bas de la page
       const scrollThreshold = 300;
       
       if (
@@ -131,7 +119,7 @@ const useHomePage = () => {
   return {
     pokeList,
     modalOpen,
-setModalOpen,
+    setModalOpen,
   };
 }
 

@@ -32,8 +32,11 @@ const Stats = ({ selectedPokeInfos, color, loading }) => {
       padding: "8px"
     }}>
       {loading ? (
-        <LocalLoading color={color} />
-      ) : (
+        <Grid sx={{height: "100%", width: "100%", position: "relative", display: "flex", justifyContent: "center", alignItems: "center"}}>
+          <Grid sx={{width: "25%", height: "25%"}}>
+            <LocalLoading color={color} />
+          </Grid>
+        </Grid>      ) : (
         <Grid container sx={{
           height: "100%",
           width: "100%",

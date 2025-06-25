@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 
 import Stats from "./info/Stats"
-import Evolution from "./info/Evolution"
-import About from "./info/About"
+import Evolution from "./info/Evolution/Evolution"
+import About from "./info/About/About"
 import { setLocalLoading } from "../../../redux/features/localLoadingSlice"
 import { Button, Grid } from "@mui/material"
 

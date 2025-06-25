@@ -13,13 +13,14 @@ import {
   Grid,
 } from '@mui/material';
 import logo from '../../assets/logo.png';
+import LanguageSelector from '../LanguageSelector/LanguageSelector';
 
 // import TypeFilter from '../filters/TypeFilter';
 // import RegionFilter from '../filters/RegionFilter';
 import useHeader from './HeaderHook';
 import { Search, SlidersHorizontal } from 'lucide-react';
 
-const Header = ({ openModal }) => {
+const Header = ({ openModal, setPokeModal }) => {
   const {
     modalFilterOpen,
     query,
@@ -28,7 +29,7 @@ const Header = ({ openModal }) => {
     openFilterModal,
     closeFilterModal,
     handleSetPokedetails,
-  } = useHeader({ openModal });
+  } = useHeader({ openModal, setPokeModal });
 
   return (
     <Stack
@@ -38,6 +39,8 @@ const Header = ({ openModal }) => {
       alignItems="center"
       sx={{ color: '#ACACAC', width: '100%', justifyContent: 'center', zIndex:1 }}
     >
+      {/* Sélecteur de langue */}
+      <LanguageSelector />
       <Box component="img" src={logo} alt="pokedex" sx={{ width: 240 }} />
 
       <Box sx={{ position: 'relative' }}>
@@ -70,16 +73,15 @@ const Header = ({ openModal }) => {
               width: '100%',
               bgcolor: '#2b2b2b',
               color: 'inherit',
-              zIndex: 20,
               borderRadius: '8px',
               maxHeight: "300px",
-              overflowY: "scroll"
+              overflowY: "scroll",
+              zIndex: 10000,
+              boxShadow: 3
             }}
           >
             <List dense>
-              {searchList
-                .filter((poke) => poke?.name?.toLowerCase().includes(query.toLowerCase()))
-                .map((poke) => (
+              {searchList.map((poke) => (
                   <ListItemButton
                     key={poke.name}
                     onClick={() => handleSetPokedetails(poke)}

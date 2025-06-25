@@ -92,8 +92,11 @@ const TypeStats = ({ selectedPokeInfos }) => {
       height: "33%",
       paddingX: "8px",
       color: "white",
+      display: "flex",
+      flexDirection: "column",
+      gap: "4px",
     }}>
-      { noDmg.length > 0 && <Grid>
+      {noDmg.length > 0 && <Grid>
         <Typography sx={{
           fontSize: "16px",
         }}>Takes no damages from:</Typography>
@@ -113,7 +116,7 @@ const TypeStats = ({ selectedPokeInfos }) => {
           ))}
         </Grid>
       </Grid>}
-      { halfDmg.length > 0 && <Grid>
+      {halfDmg.length > 0 && <Grid>
         <Typography sx={{
           fontSize: "16px",
         }}>Takes half damages from:</Typography>
@@ -132,7 +135,7 @@ const TypeStats = ({ selectedPokeInfos }) => {
           ))}
         </Grid>
       </Grid>}
-      { doubleDmg.length > 0 && <Grid>
+      {doubleDmg.length > 0 && <Grid>
         <Typography sx={{
           fontSize: "16px",
         }}>Takes double damages from:</Typography>

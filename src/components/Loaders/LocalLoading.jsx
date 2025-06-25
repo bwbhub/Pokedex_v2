@@ -16,40 +16,18 @@ const LocalLoading = ({ color }) => {
         setIsLocalLoading(false)
       }, 1000)
     }
-  }, [isLocalLoading])
+  }, [localLoading])
 
   return (
-    <Grid
-      container
-      justifyContent="center"
-      alignItems="center"
-      sx={{
-        display: isLocalLoading ? "block" : "hidden",
-        width: "100vw",
-        height: "100vh",
-        position: "fixed",
-        left: 0,
-        top: 0,
-        zIndex: 50,
-        backgroundColor: "#3b3b3b",
-        pointerEvents: "none",
-      }}
-    >
       <Grid
       sx={{
-        position: "absolute",
-        top: "50%",
-        left: "50%",
-        translateX: "-50%",
-        translateY: "-50%",
         transition: "all 0.5s ease-in-out",
         display: "flex",
         justifyContent: "center",
         alignItems: "center"
       }}>
-        <PokeSvg color={color} />
+        <PokeSvg color={color} animate={isLocalLoading} />
       </Grid>
-    </Grid>
   )
 }
 

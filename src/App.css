@@ -44,3 +44,16 @@ main {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: white;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #3b3b3b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2b2b2b;
+  border-radius: 6px;
+} 

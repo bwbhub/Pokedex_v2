@@ -1,6 +1,6 @@
 import React from "react"
-import { capitalizeUppercase, formatDesc } from "../../../../utils/textConvert"
-import LocalLoading from "../../../Loaders/LocalLoading"
+import { capitalizeUppercase, formatDesc } from "../../../../../utils/textConvert"
+import LocalLoading from "../../../../Loaders/LocalLoading"
 import { Grid, Typography } from "@mui/material"
 
 const About = ({ selectedPokeInfos, pokeDetails, loading, color }) => {
@@ -8,7 +8,6 @@ const About = ({ selectedPokeInfos, pokeDetails, loading, color }) => {
   const okDesc = formatDesc(rawDesc)
   const useableDesc = capitalizeUppercase(okDesc)
 
-  console.log("desc", pokeDetails)
 
   return (
     <Grid id="about" container sx={{
@@ -20,7 +19,11 @@ const About = ({ selectedPokeInfos, pokeDetails, loading, color }) => {
       pt: "12px",
     }}>
       {loading ? (
-        <LocalLoading color={color} />
+        <Grid sx={{height: "100%", width: "100%", position: "relative", display: "flex", justifyContent: "center", alignItems: "center"}}>
+          <Grid sx={{width: "25%", height: "25%"}}>
+            <LocalLoading color={color} />
+          </Grid>
+        </Grid>
       ) : (
         <Grid container sx={{flexDirection: "column"}}>
           <Typography sx={{fontSize: "18px", color: "#9e9e9e", mb: "16px"}}>{useableDesc}</Typography>
