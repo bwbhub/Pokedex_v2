@@ -1,0 +1,65 @@
+{
+  "common": {
+    "search": "Search",
+    "loading": "Loading...",
+    "error": "Error",
+    "notFound": "Not found",
+    "back": "Back",
+    "close": "Close"
+  },
+  "pokemon": {
+    "id": "ID",
+    "name": "Name",
+    "type": "Type",
+    "height": "Height",
+    "weight": "Weight",
+    "abilities": "Abilities",
+    "stats": "Stats",
+    "hp": "HP",
+    "attack": "Attack",
+    "defense": "Defense",
+    "specialAttack": "Special Attack",
+    "specialDefense": "Special Defense",
+    "speed": "Speed",
+    "evolution": "Evolution",
+    "moves": "Moves"
+  },
+  "filters": {
+    "title": "Filters",
+    "type": "Type",
+    "generation": "Generation",
+    "sort": "Sort",
+    "reset": "Reset",
+    "apply": "Apply"
+  },
+  "language": {
+    "select": "Select language",
+    "languages": {
+      "en": "English",
+      "fr": "French",
+      "es": "Spanish",
+      "de": "German",
+      "ja": "Japanese"
+    }
+  },
+  "types": {
+    "normal": "Normal",
+    "fire": "Fire",
+    "water": "Water",
+    "electric": "Electric",
+    "grass": "Grass",
+    "ice": "Ice",
+    "fighting": "Fighting",
+    "poison": "Poison",
+    "ground": "Ground",
+    "flying": "Flying",
+    "psychic": "Psychic",
+    "bug": "Bug",
+    "rock": "Rock",
+    "ghost": "Ghost",
+    "dragon": "Dragon",
+    "dark": "Dark",
+    "steel": "Steel",
+    "fairy": "Fairy"
+  }
+}

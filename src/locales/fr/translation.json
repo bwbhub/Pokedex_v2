@@ -1,0 +1,65 @@
+{
+  "common": {
+    "search": "Rechercher",
+    "loading": "Chargement...",
+    "error": "Erreur",
+    "notFound": "Non trouvé",
+    "back": "Retour",
+    "close": "Fermer"
+  },
+  "pokemon": {
+    "id": "ID",
+    "name": "Nom",
+    "type": "Type",
+    "height": "Taille",
+    "weight": "Poids",
+    "abilities": "Talents",
+    "stats": "Statistiques",
+    "hp": "PV",
+    "attack": "Attaque",
+    "defense": "Défense",
+    "specialAttack": "Attaque Spéciale",
+    "specialDefense": "Défense Spéciale",
+    "speed": "Vitesse",
+    "evolution": "Évolution",
+    "moves": "Capacités"
+  },
+  "filters": {
+    "title": "Filtres",
+    "type": "Type",
+    "generation": "Génération",
+    "sort": "Trier",
+    "reset": "Réinitialiser",
+    "apply": "Appliquer"
+  },
+  "language": {
+    "select": "Sélectionner la langue",
+    "languages": {
+      "en": "Anglais",
+      "fr": "Français",
+      "es": "Espagnol",
+      "de": "Allemand",
+      "ja": "Japonais"
+    }
+  },
+  "types": {
+    "normal": "Normal",
+    "fire": "Feu",
+    "water": "Eau",
+    "electric": "Électrik",
+    "grass": "Plante",
+    "ice": "Glace",
+    "fighting": "Combat",
+    "poison": "Poison",
+    "ground": "Sol",
+    "flying": "Vol",
+    "psychic": "Psy",
+    "bug": "Insecte",
+    "rock": "Roche",
+    "ghost": "Spectre",
+    "dragon": "Dragon",
+    "dark": "Ténèbres",
+    "steel": "Acier",
+    "fairy": "Fée"
+  }
+}

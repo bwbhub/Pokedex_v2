@@ -7,7 +7,6 @@ const pokedexEndpoints = {
   languages: `/language`,
   language: ({ languageId }) => `/language/${languageId}`,
   species: ({ pokeId }) => `/pokemon-species/${pokeId}`,
-  species: ({ pokeId }) => `/pokemon-species/${pokeId}`,
   evolution: ({ chainId }) => `/evolution-chain/${chainId}`,
   type: ({ typeName }) => `/type/${typeName}`,
   generation: '/generation',

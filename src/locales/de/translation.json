@@ -1,0 +1,65 @@
+{
+  "common": {
+    "search": "Suchen",
+    "loading": "Wird geladen...",
+    "error": "Fehler",
+    "notFound": "Nicht gefunden",
+    "back": "Zurück",
+    "close": "Schließen"
+  },
+  "pokemon": {
+    "id": "ID",
+    "name": "Name",
+    "type": "Typ",
+    "height": "Größe",
+    "weight": "Gewicht",
+    "abilities": "Fähigkeiten",
+    "stats": "Statuswerte",
+    "hp": "KP",
+    "attack": "Angriff",
+    "defense": "Verteidigung",
+    "specialAttack": "Spezial-Angriff",
+    "specialDefense": "Spezial-Verteidigung",
+    "speed": "Initiative",
+    "evolution": "Entwicklung",
+    "moves": "Attacken"
+  },
+  "filters": {
+    "title": "Filter",
+    "type": "Typ",
+    "generation": "Generation",
+    "sort": "Sortieren",
+    "reset": "Zurücksetzen",
+    "apply": "Anwenden"
+  },
+  "language": {
+    "select": "Sprache auswählen",
+    "languages": {
+      "en": "Englisch",
+      "fr": "Französisch",
+      "es": "Spanisch",
+      "de": "Deutsch",
+      "ja": "Japanisch"
+    }
+  },
+  "types": {
+    "normal": "Normal",
+    "fire": "Feuer",
+    "water": "Wasser",
+    "electric": "Elektro",
+    "grass": "Pflanze",
+    "ice": "Eis",
+    "fighting": "Kampf",
+    "poison": "Gift",
+    "ground": "Boden",
+    "flying": "Flug",
+    "psychic": "Psycho",
+    "bug": "Käfer",
+    "rock": "Gestein",
+    "ghost": "Geist",
+    "dragon": "Drache",
+    "dark": "Unlicht",
+    "steel": "Stahl",
+    "fairy": "Fee"
+  }
+}
