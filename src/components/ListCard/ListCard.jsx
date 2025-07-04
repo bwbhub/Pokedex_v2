@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Grid, Typography, Box } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import useListCard from './ListCardHooks';
 import pokeball from '../../assets/pokeball.png';
@@ -7,7 +8,6 @@ import dots from '../../assets/dot.svg';
 import { bgColors, textColors } from '../../utils/color';
 import { formatId } from '../../utils/textConvert';
 import { typeListSvg } from '../../utils/svgs';
-import { useTranslation } from 'react-i18next';
 
 const ListCard = ({ pokemonId, setOpenModal }) => {
   const { pokeInfo, species, handleOpenModal, filteredName } = useListCard({

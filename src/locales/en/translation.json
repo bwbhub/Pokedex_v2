@@ -61,5 +61,20 @@
     "dark": "Dark",
     "steel": "Steel",
     "fairy": "Fairy"
+  },
+  "botCard": {
+    "about": "About",
+    "stats": "Stats",
+    "evolution": "Evolution",
+    "pokemonData": "Pokémon's data",
+    "height": "Height:",
+    "weight": "Weight:",
+    "captureRate": "Capture Rate:",
+    "baseHappiness": "Base Happiness:",
+    "baseExp": "Base Exp:",
+    "growthRate": "Growth Rate:",
+    "takesNoDamageFrom": "Takes no damages from:",
+    "takesHalfDamageFrom": "Takes half damages from:",
+    "takesDoubleDamageFrom": "Takes double damages from:"
   }
 }

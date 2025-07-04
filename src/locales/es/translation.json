@@ -61,5 +61,20 @@
     "dark": "Siniestro",
     "steel": "Acero",
     "fairy": "Hada"
+  },
+  "botCard": {
+    "about": "Acerca de",
+    "stats": "Estadísticas",
+    "evolution": "Evolución",
+    "pokemonData": "Datos del Pokémon",
+    "height": "Altura:",
+    "weight": "Peso:",
+    "captureRate": "Tasa de captura:",
+    "baseHappiness": "Felicidad base:",
+    "baseExp": "Exp. base:",
+    "growthRate": "Tasa de crecimiento:",
+    "takesNoDamageFrom": "No recibe daño de:",
+    "takesHalfDamageFrom": "Recibe la mitad de daño de:",
+    "takesDoubleDamageFrom": "Recibe el doble de daño de:"
   }
 }

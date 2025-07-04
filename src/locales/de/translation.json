@@ -61,5 +61,20 @@
     "dark": "Unlicht",
     "steel": "Stahl",
     "fairy": "Fee"
+  },
+  "botCard": {
+    "about": "Über",
+    "stats": "Statuswerte",
+    "evolution": "Entwicklung",
+    "pokemonData": "Pokémon-Daten",
+    "height": "Größe:",
+    "weight": "Gewicht:",
+    "captureRate": "Fangrate:",
+    "baseHappiness": "Basis-Freundschaft:",
+    "baseExp": "Basis-Erfahrung:",
+    "growthRate": "Wachstumsrate:",
+    "takesNoDamageFrom": "Nimmt keinen Schaden von:",
+    "takesHalfDamageFrom": "Nimmt halben Schaden von:",
+    "takesDoubleDamageFrom": "Nimmt doppelten Schaden von:"
   }
 }

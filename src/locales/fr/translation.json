@@ -61,5 +61,20 @@
     "dark": "Ténèbres",
     "steel": "Acier",
     "fairy": "Fée"
+  },
+  "botCard": {
+    "about": "À propos",
+    "stats": "Statistiques",
+    "evolution": "Évolution",
+    "pokemonData": "Données du Pokémon",
+    "height": "Taille :",
+    "weight": "Poids :",
+    "captureRate": "Taux de capture :",
+    "baseHappiness": "Bonheur de base :",
+    "baseExp": "Exp. de base :",
+    "growthRate": "Taux de croissance :",
+    "takesNoDamageFrom": "Ne subit aucun dégât de :",
+    "takesHalfDamageFrom": "Subit la moitié des dégâts de :",
+    "takesDoubleDamageFrom": "Subit le double de dégâts de :"
   }
 }

@@ -74,17 +74,17 @@ const pokeApi = {
       return { err };
     }
   },
-  getDetails: async ({ pokeId }) => {
-    try {
-      const response = await publicClient.get(
-        pokedexEndpoints.species({ pokeId }),
-      );
+  // getDetails: async ({ pokeId }) => {
+  //   try {
+  //     const response = await publicClient.get(
+  //       pokedexEndpoints.species({ pokeId }),
+  //     );
 
-      return { response };
-    } catch (err) {
-      return { err };
-    }
-  },
+  //     return { response };
+  //   } catch (err) {
+  //     return { err };
+  //   }
+  // },
   getSpecies: async ({ pokeId }) => {
     try {
       const response = await publicClient.get(

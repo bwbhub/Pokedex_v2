@@ -1,0 +1,23 @@
+.bg-title-container {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+}
+
+.bg-title {
+  white-space: nowrap;
+  position: absolute;
+  width: max-content;
+}
+
+@keyframes sliding {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: var(--slide-distance, -100px);
+  }
+  100% {
+    left: 0;
+  }
+}
