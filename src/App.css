@@ -3,10 +3,6 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424; 
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -18,7 +14,6 @@ html {
 }
 
 main {
-  background-color: #3b3b3b;
   height: 100%;
   margin: 0; 
   display: flex;
@@ -49,11 +44,6 @@ main {
   width: 10px;
 }
 
-::-webkit-scrollbar-track {
-  background: #3b3b3b;
-}
+/* Les styles de scrollbar sont maintenant gérés par MUI */
 
-::-webkit-scrollbar-thumb {
-  background: #2b2b2b;
-  border-radius: 6px;
-} 
+/* Les styles de scrollbar sont maintenant gérés par MUI */
