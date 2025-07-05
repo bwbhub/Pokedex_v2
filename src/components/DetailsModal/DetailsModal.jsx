@@ -1,5 +1,4 @@
-import { Dialog, IconButton, useTheme } from '@mui/material';
-import { X } from 'lucide-react';
+import { Dialog, useTheme } from '@mui/material';
 
 import { usePokedetails } from '../../context/Pokedetails';
 import TopCard from './TopCard/TopCard';
@@ -21,27 +20,17 @@ const DetailsModal = ({ closeModal, openModal }) => {
       onClose={() => closeModal(false)}
       sx={{
         '& .MuiDialog-paper': {
-          height: '700px',
+          height: '830px',
           width: '100%',
           maxHeight: 'none',
           borderRadius: '24px',
           overflow: 'hidden',
           position: 'relative',
           backgroundColor: color,
+          backgroundImage: 'none', // Supprime l'overlay en mode sombre
         },
       }}
     >
-      <IconButton
-        onClick={() => closeModal(false)}
-        sx={{
-          position: 'absolute',
-          right: '16px',
-          top: '16px',
-          color: theme.palette.text.primary,
-        }}
-      >
-        <X />
-      </IconButton>
       <TopCard
         pokeInfo={pokeDetails}
         species={pokeSpecies}

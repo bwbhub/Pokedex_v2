@@ -7,6 +7,7 @@ import pokeball from '../../assets/pokeball.png';
 import dots from '../../assets/dot.svg';
 import { formatId } from '../../utils/textConvert';
 import PokemonTypeChip from '../PokemonTypeChip/PokemonTypeChip';
+import './ListCard.css';
 
 const ListCard = ({ pokemonId, setOpenModal }) => {
   const { pokeInfo, species, handleOpenModal, filteredName } = useListCard({
@@ -24,6 +25,7 @@ const ListCard = ({ pokemonId, setOpenModal }) => {
 
   return (
     <Card
+      className="pokemon-card"
       sx={{
         backgroundColor: color,
         borderRadius: '8px',
@@ -121,7 +123,12 @@ const ListCard = ({ pokemonId, setOpenModal }) => {
           filter: 'brightness(1.05) saturate(1.5)',
         }}
       >
-        <img src={imgUrl} alt={pokeInfo?.name} style={{ width: '100%' }} />
+        <img
+          src={imgUrl}
+          alt={pokeInfo?.name}
+          className="pokemon-image"
+          style={{ width: '100%' }}
+        />
       </Box>
     </Card>
   );

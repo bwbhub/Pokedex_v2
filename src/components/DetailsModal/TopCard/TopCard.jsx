@@ -43,36 +43,35 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
       sx={{
         backgroundColor: color,
         width: '100%',
-        minHeight: '235px',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
+        minHeight: '285px',
         overflow: 'hidden',
-        marginBottom: '12px',
         position: 'relative',
       }}
     >
-      <Grid
+      {/* <Grid
         ref={containerRef}
         className="bg-title-container"
         sx={{
           top: '-16px',
-          height: '120px',
+          height: '300px',
         }}
       >
         <Typography
           ref={textRef}
           className="bg-title"
           sx={{
-            color: color,
-            fontSize: '96px',
+            color: 'transparent',
+            // fontSize: '96px',
+            fontSize: '200px',
             fontWeight: 'bold',
             textTransform: 'uppercase',
             top: '1px',
             animation:
-              animationDistance > 0 ? 'sliding 10s infinite linear' : 'none',
+              animationDistance > 0 ? 'sliding 20s infinite linear' : 'none',
             left: '0',
             position: 'absolute',
+            pointerEvents: 'none',
+            zIndex: 10,
           }}
         >
           {filteredName}
@@ -89,85 +88,108 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
             pointerEvents: 'none',
           }}
         />
-      </Grid>
+      </Grid> */}
       <Grid
         sx={{
           position: 'absolute',
-          width: '45%',
-          left: 0,
-          bottom: '16px',
-          opacity: '0.3',
+          width: '65%',
+          left: '50%',
+          bottom: '50%',
+          transform: 'translate(-50%, 50%)',
+          opacity: '0.08',
         }}
       >
         <img
           src={pokeball}
           alt="Pokeball"
-          style={{ position: 'relative', width: '100%' }}
-        />
-        <span
           style={{
-            content: '""',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: `linear-gradient(to bottom, ${hexToRgba(color, 1.5)} 40%, ${hexToRgba(color, 0)} 100%)`,
-            pointerEvents: 'none',
+            position: 'relative',
+            width: '100%',
+            rotate: '35deg',
+            maskImage: `url(${pokeball})`,
+            WebkitMaskImage: `url(${pokeball})`,
+            maskSize: 'contain',
+            WebkitMaskSize: 'contain',
+            backgroundColor: theme.palette.text.secondary,
           }}
         />
       </Grid>
-      <Grid
-        sx={{
-          width: '50%',
-          height: '100%',
-          left: 0,
-          bottom: 0,
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <img
-          src={imgUrl}
-          alt={filteredName}
-          style={{
-            width: '83.3333%',
+      <Grid sx={{ position: 'absolute', top: '10px', left: '10px' }}>
+        <Box
+          sx={{
+            width: '30px',
+            height: '30px',
+            maskImage: `url(${imgUrl})`,
+            WebkitMaskImage: `url(${imgUrl})`,
+            maskSize: 'contain',
+            WebkitMaskSize: 'contain',
+            backgroundColor: '#FFFFFF',
             zIndex: 100,
-            filter: 'brightness(1.05) saturate(1.5)',
+            opacity: 0.2,
           }}
         />
-      </Grid>
-      <Grid
-        sx={{
-          position: 'relative',
-          width: '50%',
-        }}
-      >
         <Typography
           sx={{ fontSize: '12px', fontWeight: 'medium', color: '#f3f4f6' }}
         >
           {formatedId}
         </Typography>
-        <Typography
-          sx={{
-            textTransform: 'capitalize',
-            fontSize: '26px',
-            fontWeight: 'bold',
-            color: '#f3f4f6',
-          }}
-        >
-          {filteredName}
-        </Typography>
+      </Grid>
+      <Grid
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
         <Grid
           sx={{
+            width: '50%',
             display: 'flex',
-            gap: '12px',
+            justifyContent: 'center',
+            alignItems: 'center',
           }}
         >
-          {pokeInfo?.types?.map((type, idx) => (
-            <PokemonTypeChip key={type + idx} type={type} />
-          ))}
+          <img
+            src={imgUrl}
+            alt={filteredName}
+            style={{
+              width: '83.3333%',
+              zIndex: 100,
+              filter: 'brightness(1.05) saturate(1.5)',
+            }}
+          />
+        </Grid>
+        <Grid
+          sx={{
+            position: 'relative',
+            width: '50%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
+          <Typography
+            sx={{
+              textTransform: 'capitalize',
+              fontSize: '26px',
+              fontWeight: 'bold',
+              color: '#f3f4f6',
+            }}
+          >
+            {filteredName}
+          </Typography>
+          <Grid
+            sx={{
+              display: 'flex',
+              gap: '12px',
+            }}
+          >
+            {pokeInfo?.types?.map((type, idx) => (
+              <PokemonTypeChip key={type + idx} type={type} />
+            ))}
+          </Grid>
         </Grid>
       </Grid>
     </Grid>
