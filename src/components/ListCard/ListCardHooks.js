@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import pokeApi from '../../api/modules/pokedex.api';
 import { usePokedetails } from '../../context/Pokedetails';
 import { useSelector } from 'react-redux';
@@ -36,12 +36,19 @@ const useListCard = ({ id, setOpenModal }) => {
     }
   };
 
+  const filteredName = useMemo(() => {
+    const name = species?.names?.find(
+      (name) => name.language.name === activeLanguage,
+    );
+    return name?.name;
+  }, [species, activeLanguage]);
+
   useEffect(() => {
     getPoke(id);
     getSpecies(id);
   }, [id]);
 
-  return { pokeInfo, handleOpenModal, species };
+  return { pokeInfo, handleOpenModal, species, filteredName };
 };
 
 export default useListCard;

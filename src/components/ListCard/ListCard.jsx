@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Grid, Typography, Box } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import useListCard from './ListCardHooks';
 import pokeball from '../../assets/pokeball.png';
@@ -9,10 +10,11 @@ import { formatId } from '../../utils/textConvert';
 import { typeListSvg } from '../../utils/svgs';
 
 const ListCard = ({ pokemonId, setOpenModal }) => {
-  const { pokeInfo, species, handleOpenModal } = useListCard({
+  const { pokeInfo, species, handleOpenModal, filteredName } = useListCard({
     id: pokemonId,
     setOpenModal,
   });
+  const { t } = useTranslation();
 
   const imgUrl = pokeInfo?.sprites?.other?.['official-artwork']?.front_default;
   const mainType = pokeInfo?.types[0].type.name;
@@ -99,7 +101,7 @@ const ListCard = ({ pokemonId, setOpenModal }) => {
               color: '#f3f4f6',
             }}
           >
-            {pokeInfo?.name}
+            {filteredName}
           </Typography>
         </Box>
 
@@ -125,12 +127,11 @@ const ListCard = ({ pokemonId, setOpenModal }) => {
               />
               <Typography
                 sx={{
-                  textTransform: 'capitalize',
                   fontSize: '12px',
                   fontWeight: 'medium',
                 }}
               >
-                {type?.type?.name}
+                {t(`types.${type?.type?.name}`)}
               </Typography>
             </Box>
           ))}

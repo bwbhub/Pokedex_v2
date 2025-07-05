@@ -1,7 +1,8 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import useEvolutionChain from './useEvolutionChain';
-import useTranslation from '../../../../../hooks/useTranslation';
 import pokeApi from '../../../../../api/modules/pokedex.api';
+import { languageSelector } from '../../../../../redux/features/languageSlice';
+import { useSelector } from 'react-redux';
 
 const useEvolutionChainWithTranslation = (pokeDetails) => {
   const {
@@ -10,72 +11,13 @@ const useEvolutionChainWithTranslation = (pokeDetails) => {
     error,
   } = useEvolutionChain(pokeDetails);
 
-  // Récupérer les fonctions de traduction
-  const { activeLanguage } = useTranslation();
+  // Récupérer la langue active
+  const activeLanguage = useSelector(languageSelector);
 
   const [evolDetails, setEvolDetails] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fonction pour traduire les conditions d'évolution avec useCallback pour éviter les problèmes de dépendances
-  const translateEvolutionCondition = useCallback(
-    (condition) => {
-      if (!condition) return null;
-
-      // Traduction des conditions d'évolution communes
-      const conditionTranslations = {
-        en: {
-          Level: 'Level',
-          Happiness: 'Happiness',
-          Trade: 'Trade',
-          'Use Item': 'Use Item',
-          with: 'with',
-          during: 'during',
-          'knowing move': 'knowing move',
-          'at location': 'at location',
-          holding: 'holding',
-          daytime: 'daytime',
-          night: 'night',
-          rain: 'rain',
-          female: 'female',
-          male: 'male',
-        },
-        fr: {
-          Level: 'Niveau',
-          Happiness: 'Bonheur',
-          Trade: 'Échange',
-          'Use Item': 'Utiliser',
-          with: 'avec',
-          during: 'pendant',
-          'knowing move': 'connaissant',
-          'at location': 'à',
-          holding: 'tenant',
-          daytime: 'jour',
-          night: 'nuit',
-          rain: 'pluie',
-          female: 'femelle',
-          male: 'mâle',
-        },
-      };
-
-      // Si la langue active n'est pas supportée, utiliser l'anglais
-      const translations =
-        conditionTranslations[activeLanguage] || conditionTranslations.en;
-
-      // Traduire chaque partie de la condition
-      let translatedCondition = condition;
-      Object.entries(translations).forEach(([key, value]) => {
-        translatedCondition = translatedCondition.replace(
-          new RegExp(key, 'g'),
-          value,
-        );
-      });
-
-      return translatedCondition;
-    },
-    [activeLanguage],
-  );
-
-  // Effet pour récupérer et traduire les données d'évolution
+  // Effet pour récupérer les données d'évolution avec les noms localisés
   useEffect(() => {
     const fetchPokemonSpeciesData = async () => {
       if (!originalEvolDetails || isLoadingEvol) {
@@ -87,26 +29,26 @@ const useEvolutionChainWithTranslation = (pokeDetails) => {
 
       try {
         // Pour chaque Pokémon dans la chaîne d'évolution, récupérer ses données d'espèce
-        const translatedEvolutions = await Promise.all(
+        const enhancedEvolutions = await Promise.all(
           originalEvolDetails.map(async (evolution) => {
             try {
               // Récupérer les données d'espèce du Pokémon
-              const { response: speciesData } = await pokeApi.getSpeciesByName({
-                pokeName: evolution.name,
+              const { response: speciesData } = await pokeApi.getSpecies({
+                pokeId: evolution.name,
               });
 
               if (!speciesData) {
                 return {
                   ...evolution,
                   originalName: evolution.name,
-                  condition: translateEvolutionCondition(evolution.condition),
                 };
               }
 
               // Extraire le nom localisé
-              const translatedName = speciesData.names.find(
-                (name) => name.language.name === activeLanguage
-              )?.name || speciesData.name;
+              const translatedName =
+                speciesData.names.find(
+                  (name) => name.language.name === activeLanguage,
+                )?.name || speciesData.name;
 
               // Extraire la description localisée (flavor text)
               const flavorTexts = speciesData.flavor_text_entries || [];
@@ -123,7 +65,6 @@ const useEvolutionChainWithTranslation = (pokeDetails) => {
                 name: translatedName || evolution.name,
                 originalName: evolution.name, // Garder le nom original pour l'URL de l'image
                 description: translatedDescription,
-                condition: translateEvolutionCondition(evolution.condition),
               };
             } catch (err) {
               console.error(
@@ -133,15 +74,14 @@ const useEvolutionChainWithTranslation = (pokeDetails) => {
               return {
                 ...evolution,
                 originalName: evolution.name,
-                condition: translateEvolutionCondition(evolution.condition),
               };
             }
           }),
         );
 
-        setEvolDetails(translatedEvolutions);
+        setEvolDetails(enhancedEvolutions);
       } catch (err) {
-        console.error('Erreur lors de la traduction des évolutions:', err);
+        console.error('Erreur lors de la récupération des évolutions:', err);
         setEvolDetails(originalEvolDetails);
       } finally {
         setIsLoading(false);
@@ -149,12 +89,7 @@ const useEvolutionChainWithTranslation = (pokeDetails) => {
     };
 
     fetchPokemonSpeciesData();
-  }, [
-    originalEvolDetails,
-    isLoadingEvol,
-    activeLanguage,
-    translateEvolutionCondition,
-  ]);
+  }, [originalEvolDetails, isLoadingEvol, activeLanguage]);
 
   return {
     evolDetails,

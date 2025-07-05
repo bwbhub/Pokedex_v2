@@ -1,0 +1,80 @@
+{
+  "common": {
+    "search": "Buscar",
+    "loading": "Cargando...",
+    "error": "Error",
+    "notFound": "No encontrado",
+    "back": "Volver",
+    "close": "Cerrar"
+  },
+  "pokemon": {
+    "id": "ID",
+    "name": "Nombre",
+    "type": "Tipo",
+    "height": "Altura",
+    "weight": "Peso",
+    "abilities": "Habilidades",
+    "stats": "Estadísticas",
+    "hp": "PS",
+    "attack": "Ataque",
+    "defense": "Defensa",
+    "specialAttack": "Ataque Especial",
+    "specialDefense": "Defensa Especial",
+    "speed": "Velocidad",
+    "evolution": "Evolución",
+    "moves": "Movimientos"
+  },
+  "filters": {
+    "title": "Filtros",
+    "type": "Tipo",
+    "generation": "Generación",
+    "sort": "Ordenar",
+    "reset": "Reiniciar",
+    "apply": "Aplicar"
+  },
+  "language": {
+    "select": "Seleccionar idioma",
+    "languages": {
+      "en": "Inglés",
+      "fr": "Francés",
+      "es": "Español",
+      "de": "Alemán",
+      "ja": "Japonés"
+    }
+  },
+  "types": {
+    "normal": "Normal",
+    "fire": "Fuego",
+    "water": "Agua",
+    "electric": "Eléctrico",
+    "grass": "Planta",
+    "ice": "Hielo",
+    "fighting": "Lucha",
+    "poison": "Veneno",
+    "ground": "Tierra",
+    "flying": "Volador",
+    "psychic": "Psíquico",
+    "bug": "Bicho",
+    "rock": "Roca",
+    "ghost": "Fantasma",
+    "dragon": "Dragón",
+    "dark": "Siniestro",
+    "steel": "Acero",
+    "fairy": "Hada"
+  },
+  "botCard": {
+    "about": "Acerca de",
+    "stats": "Estadísticas",
+    "evolution": "Evolución",
+    "pokemonData": "Datos del Pokémon",
+    "height": "Altura:",
+    "weight": "Peso:",
+    "captureRate": "Tasa de captura:",
+    "baseHappiness": "Felicidad base:",
+    "baseExp": "Exp. base:",
+    "growthRate": "Tasa de crecimiento:",
+    "takesNoDamageFrom": "No recibe daño de:",
+    "takesHalfDamageFrom": "Recibe la mitad de daño de:",
+    "takesDoubleDamageFrom": "Recibe el doble de daño de:"
+  }
+}

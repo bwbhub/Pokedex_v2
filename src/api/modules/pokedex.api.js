@@ -7,7 +7,6 @@ const pokedexEndpoints = {
   languages: `/language`,
   language: ({ languageId }) => `/language/${languageId}`,
   species: ({ pokeId }) => `/pokemon-species/${pokeId}`,
-  species: ({ pokeId }) => `/pokemon-species/${pokeId}`,
   evolution: ({ chainId }) => `/evolution-chain/${chainId}`,
   type: ({ typeName }) => `/type/${typeName}`,
   generation: '/generation',
@@ -75,17 +74,17 @@ const pokeApi = {
       return { err };
     }
   },
-  getDetails: async ({ pokeId }) => {
-    try {
-      const response = await publicClient.get(
-        pokedexEndpoints.species({ pokeId }),
-      );
+  // getDetails: async ({ pokeId }) => {
+  //   try {
+  //     const response = await publicClient.get(
+  //       pokedexEndpoints.species({ pokeId }),
+  //     );
 
-      return { response };
-    } catch (err) {
-      return { err };
-    }
-  },
+  //     return { response };
+  //   } catch (err) {
+  //     return { err };
+  //   }
+  // },
   getSpecies: async ({ pokeId }) => {
     try {
       const response = await publicClient.get(

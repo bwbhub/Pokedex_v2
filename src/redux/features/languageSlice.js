@@ -1,12 +1,12 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from '@reduxjs/toolkit';
 
 export const languageSlice = createSlice({
-  name: "Language",
+  name: 'Language',
   initialState: {
-    activeLanguage: "fr", // Langue par défaut
+    activeLanguage: 'en', // Langue par défaut
     availableLanguages: [],
     isLoading: false,
-    error: null
+    error: null,
   },
   reducers: {
     setLanguages: (state, action) => {
@@ -24,10 +24,17 @@ export const languageSlice = createSlice({
     setLanguageError: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
-    }
-  }
-})
+    },
+  },
+});
 
-export const { setLanguages, setActiveLanguage, setLanguageLoading, setLanguageError } = languageSlice.actions
+export const {
+  setLanguages,
+  setActiveLanguage,
+  setLanguageLoading,
+  setLanguageError,
+} = languageSlice.actions;
 
-export default languageSlice.reducer
+export const languageSelector = (state) => state.language.activeLanguage;
+
+export default languageSlice.reducer;
