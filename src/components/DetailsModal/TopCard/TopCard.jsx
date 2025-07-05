@@ -1,21 +1,19 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Grid, Typography, Box, useTheme } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 
 import { formatId } from '../../../utils/textConvert';
-import { hexToRgba } from '../../../utils/color';
 import pokeball from '../../../assets/pokeball.png';
 import PokemonTypeChip from '../../PokemonTypeChip/PokemonTypeChip';
 import './TopCard.css';
 
 const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
-  const textRef = useRef(null);
-  const containerRef = useRef(null);
-  const { t } = useTranslation();
+  // const textRef = useRef(null);
+  // const containerRef = useRef(null);
   const theme = useTheme();
   const activeLanguage = useSelector((state) => state.language.activeLanguage);
-  const [animationDistance, setAnimationDistance] = useState(0);
+  // const [animationDistance, setAnimationDistance] = useState(0);
+  const audioRef = useRef(null);
 
   const formatedId = formatId(pokeInfo?.id);
 
@@ -23,18 +21,24 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
     (name) => name.language.name === activeLanguage,
   )?.name;
 
-  useEffect(() => {
-    if (containerRef.current && textRef.current) {
-      const containerWidth = containerRef.current.offsetWidth;
-      const textWidth = textRef.current.offsetWidth;
-      const distance = textWidth - containerWidth;
-      setAnimationDistance(distance > 0 ? distance : 0);
+  // useEffect(() => {
+  //   if (containerRef.current && textRef.current) {
+  //     const containerWidth = containerRef.current.offsetWidth;
+  //     const textWidth = textRef.current.offsetWidth;
+  //     const distance = textWidth - containerWidth;
+  //     setAnimationDistance(distance > 0 ? distance : 0);
 
-      if (textRef.current) {
-        textRef.current.style.setProperty('--slide-distance', `-${distance}px`);
-      }
+  //     if (textRef.current) {
+  //       textRef.current.style.setProperty('--slide-distance', `-${distance}px`);
+  //     }
+  //   }
+  // }, [filteredName]);
+
+  const playPokemonCry = () => {
+    if (pokeInfo?.cries?.latest && audioRef.current) {
+      audioRef.current.play();
     }
-  }, [filteredName]);
+  };
 
   return (
     <Grid
@@ -114,7 +118,28 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
           }}
         />
       </Grid>
-      <Grid sx={{ position: 'absolute', top: '10px', left: '10px' }}>
+      <Grid
+        sx={{
+          position: 'absolute',
+          top: '13px',
+          right: '15px',
+          opacity: 0.3,
+        }}
+      >
+        <Typography
+          sx={{ fontSize: '18px', fontWeight: '500', color: '#f3f4f6' }}
+        >
+          {formatedId}
+        </Typography>
+      </Grid>
+      <Grid
+        sx={{
+          position: 'absolute',
+          top: '10px',
+          left: '10px',
+          opacity: 0.2,
+        }}
+      >
         <Box
           sx={{
             width: '30px',
@@ -123,16 +148,10 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
             WebkitMaskImage: `url(${imgUrl})`,
             maskSize: 'contain',
             WebkitMaskSize: 'contain',
-            backgroundColor: '#FFFFFF',
+            backgroundColor: '#f3f4f6',
             zIndex: 100,
-            opacity: 0.2,
           }}
         />
-        <Typography
-          sx={{ fontSize: '12px', fontWeight: 'medium', color: '#f3f4f6' }}
-        >
-          {formatedId}
-        </Typography>
       </Grid>
       <Grid
         sx={{
@@ -150,15 +169,26 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
             alignItems: 'center',
           }}
         >
-          <img
+          <Box
+            component="img"
             src={imgUrl}
             alt={filteredName}
-            style={{
+            onClick={playPokemonCry}
+            sx={{
               width: '83.3333%',
               zIndex: 100,
               filter: 'brightness(1.05) saturate(1.5)',
+              cursor: 'pointer',
+              transition: 'transform 0.2s ease-in-out',
+              '&:hover': {
+                transform: 'scale(1.05)',
+              },
+              '&:active': {
+                transform: 'scale(0.98)',
+              },
             }}
           />
+          <audio ref={audioRef} src={pokeInfo?.cries?.latest} preload="auto" />
         </Grid>
         <Grid
           sx={{

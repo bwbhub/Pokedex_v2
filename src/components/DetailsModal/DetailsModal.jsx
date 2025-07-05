@@ -27,7 +27,7 @@ const DetailsModal = ({ closeModal, openModal }) => {
           overflow: 'hidden',
           position: 'relative',
           backgroundColor: color,
-          backgroundImage: 'none', // Supprime l'overlay en mode sombre
+          backgroundImage: 'none',
         },
       }}
     >

@@ -38,7 +38,9 @@ const Evolution = ({ pokeDetails, color, loading: externalLoading }) => {
           alignItems: 'center',
         }}
       >
-        <Typography sx={{ color: theme.palette.text.primary, fontSize: '16px' }}>
+        <Typography
+          sx={{ color: theme.palette.text.primary, fontSize: '16px' }}
+        >
           {noDataMessage}
         </Typography>
       </Grid>
@@ -56,7 +58,7 @@ const Evolution = ({ pokeDetails, color, loading: externalLoading }) => {
         justifyContent: 'center',
         alignItems: 'center',
         textTransform: 'capitalize',
-        overflowY: 'scroll',
+        overflowY: 'auto',
       }}
       container
     >

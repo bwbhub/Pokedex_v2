@@ -21,8 +21,6 @@ const ListCard = ({ pokemonId, setOpenModal }) => {
   const mainType = pokeInfo?.types[0].type.name;
   const color = theme.palette.pokemon.background[mainType];
 
-  console.log('species', species);
-
   return (
     <Card
       className="pokemon-card"
