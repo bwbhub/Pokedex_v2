@@ -6,7 +6,7 @@ import useListCard from './ListCardHooks';
 import pokeball from '../../assets/pokeball.png';
 import dots from '../../assets/dot.svg';
 import { formatId } from '../../utils/textConvert';
-import { typeListSvg } from '../../utils/svgs';
+import PokemonTypeChip from '../PokemonTypeChip/PokemonTypeChip';
 
 const ListCard = ({ pokemonId, setOpenModal }) => {
   const { pokeInfo, species, handleOpenModal, filteredName } = useListCard({
@@ -107,33 +107,7 @@ const ListCard = ({ pokemonId, setOpenModal }) => {
 
         <Box sx={{ display: 'flex', gap: '12px' }}>
           {pokeInfo?.types?.map((type, idx) => (
-            <Box
-              key={type + idx}
-              sx={{
-                padding: '5px',
-                borderRadius: '8px',
-                display: 'flex',
-                gap: '4px',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: theme.palette.pokemon.type[type?.type?.name],
-                color: '#f3f4f6',
-              }}
-            >
-              <img
-                src={typeListSvg[type?.type?.name]}
-                alt={`${type?.type?.name}`}
-                style={{ width: '16px' }}
-              />
-              <Typography
-                sx={{
-                  fontSize: '12px',
-                  fontWeight: 'medium',
-                }}
-              >
-                {t(`types.${type?.type?.name}`)}
-              </Typography>
-            </Box>
+            <PokemonTypeChip key={type + idx} type={type} />
           ))}
         </Box>
       </Grid>

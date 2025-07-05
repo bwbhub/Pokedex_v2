@@ -1,13 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Box, Grid, Typography, useTheme } from '@mui/material';
-
-import pokeball from '../../../assets/pokeball.png';
-import { hexToRgba } from '../../../utils/color';
-import { typeListSvg } from '../../../utils/svgs';
-import { formatId } from '../../../utils/textConvert';
-import { useSelector } from 'react-redux';
-import './TopCard.css';
+import { Grid, Typography, Box, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+
+import { formatId } from '../../../utils/textConvert';
+import { hexToRgba } from '../../../utils/color';
+import pokeball from '../../../assets/pokeball.png';
+import PokemonTypeChip from '../../PokemonTypeChip/PokemonTypeChip';
+import './TopCard.css';
 
 const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
   const textRef = useRef(null);
@@ -72,7 +72,6 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
             animation:
               animationDistance > 0 ? 'sliding 10s infinite linear' : 'none',
             left: '0',
-            // Assurez-vous que le texte est initialement visible
             position: 'absolute',
           }}
         >
@@ -120,7 +119,6 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
       </Grid>
       <Grid
         sx={{
-          // position: "absolute",
           width: '50%',
           height: '100%',
           left: 0,
@@ -168,34 +166,7 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
           }}
         >
           {pokeInfo?.types?.map((type, idx) => (
-            <Box
-              key={type + idx}
-              sx={{
-                padding: '5px',
-                borderRadius: '8px',
-                display: 'flex',
-                gap: '4px',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: theme.palette.pokemon.type[type?.type?.name],
-                color: '#f3f4f6',
-              }}
-            >
-              <img
-                src={typeListSvg[type?.type?.name]}
-                alt={`${type?.type?.name}`}
-                style={{ width: '16px' }}
-              />
-              <Typography
-                sx={{
-                  textTransform: 'capitalize',
-                  fontSize: '12px',
-                  fontWeight: 'medium',
-                }}
-              >
-                {t(`types.${type?.type?.name}`)}
-              </Typography>
-            </Box>
+            <PokemonTypeChip key={type + idx} type={type} />
           ))}
         </Grid>
       </Grid>
