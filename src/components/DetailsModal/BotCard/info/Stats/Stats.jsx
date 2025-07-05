@@ -1,11 +1,12 @@
 import React from 'react';
 import { ResponsiveRadar } from '@nivo/radar';
+import { Grid, useTheme } from '@mui/material';
 
 import LocalLoading from '../../../../Loaders/LocalLoading';
 import TypeStats from './TypeStats';
-import { Grid } from '@mui/material';
 
 const Stats = ({ selectedPokeInfos, color, loading }) => {
+  const theme = useTheme();
   const generalStats = selectedPokeInfos?.stats;
 
   const stats = generalStats.map((statObj) => ({
@@ -102,7 +103,7 @@ const Stats = ({ selectedPokeInfos, color, loading }) => {
                 axis: {
                   ticks: {
                     text: {
-                      fill: '#ffffff',
+                      fill: theme.palette.text.primary,
                       fontSize: 13,
                       textTransform: 'capitalize',
                     },
@@ -111,6 +112,8 @@ const Stats = ({ selectedPokeInfos, color, loading }) => {
                 tooltip: {
                   container: {
                     textTransform: 'capitalize',
+                    background: theme.palette.background.paper,
+                    color: theme.palette.text.primary,
                   },
                 },
               }}

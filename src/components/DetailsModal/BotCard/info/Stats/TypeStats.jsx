@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { Grid, Typography, useTheme } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+
 import pokeApi from '../../../../../api/modules/pokedex.api';
 import { typeListSvg } from '../../../../../utils/svgs';
 import { textColors } from '../../../../../utils/color';
-import { Grid, Typography } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 const TypeStats = ({ selectedPokeInfos }) => {
   const [mainTypeIs, setMainTypeIs] = useState(null);
   const [secondTypeIs, setSecondTypeIs] = useState(null);
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const mainType = selectedPokeInfos.types[0]?.type?.name;
   const secondType = selectedPokeInfos?.types[1]?.type?.name;
@@ -94,7 +96,7 @@ const TypeStats = ({ selectedPokeInfos }) => {
         width: '100%',
         height: '33%',
         paddingX: '8px',
-        color: 'white',
+        color: theme.palette.text.primary,
         display: 'flex',
         flexDirection: 'column',
         gap: '4px',

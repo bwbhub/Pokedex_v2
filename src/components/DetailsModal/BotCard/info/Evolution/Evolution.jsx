@@ -1,17 +1,18 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Grid, Typography, useTheme } from '@mui/material';
+import { useSelector } from 'react-redux';
 
 import { urlConvert } from '../../../../../utils/textConvert';
 import useEvolutionChainWithTranslation from './useEvolutionChainWithTranslation';
 import LocalLoading from '../../../../Loaders/LocalLoading';
-import { Grid, Typography } from '@mui/material';
 import { languageSelector } from '../../../../../redux/features/languageSlice';
-import { useSelector } from 'react-redux';
 
 const Evolution = ({ pokeDetails, color, loading: externalLoading }) => {
   const { evolDetails, isLoading } =
     useEvolutionChainWithTranslation(pokeDetails);
   const activeLanguage = useSelector(languageSelector);
+  const theme = useTheme();
 
   // Messages traduits pour l'absence de données d'évolution
   const noDataMessages = {
@@ -37,7 +38,7 @@ const Evolution = ({ pokeDetails, color, loading: externalLoading }) => {
           alignItems: 'center',
         }}
       >
-        <Typography sx={{ color: 'white', fontSize: '16px' }}>
+        <Typography sx={{ color: theme.palette.text.primary, fontSize: '16px' }}>
           {noDataMessage}
         </Typography>
       </Grid>
@@ -105,7 +106,7 @@ const Evolution = ({ pokeDetails, color, loading: externalLoading }) => {
                   fontSize: '16px',
                   fontWeight: 'bold',
                   textTransform: 'capitalize',
-                  color: 'white',
+                  color: theme.palette.text.primary,
                 }}
               >
                 {detail.name}
@@ -115,7 +116,7 @@ const Evolution = ({ pokeDetails, color, loading: externalLoading }) => {
                 <Typography
                   sx={{
                     fontSize: '12px',
-                    color: 'rgba(255,255,255,0.8)',
+                    color: theme.palette.text.secondary,
                     textAlign: 'center',
                     padding: '0 4px',
                   }}
@@ -132,7 +133,7 @@ const Evolution = ({ pokeDetails, color, loading: externalLoading }) => {
                   alignItems: 'center',
                 }}
               >
-                <ArrowRight size={20} color={'#fff'} />
+                <ArrowRight size={20} color={theme.palette.text.primary} />
               </Grid>
             )}
           </Grid>

@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { Button, Grid, useTheme } from '@mui/material';
 
 import Stats from './info/Stats/Stats';
 import Evolution from './info/Evolution/Evolution';
 import About from './info/About/About';
 import { setLocalLoading } from '../../../redux/features/localLoadingSlice';
-import { Button, Grid } from '@mui/material';
 
 const BotCard = ({ selectedPokeInfos, pokeDetails, color }) => {
   const [activeComp, setActiveComp] = useState('about');
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const modalComponent = () => {
     switch (activeComp) {
@@ -72,7 +73,10 @@ const BotCard = ({ selectedPokeInfos, pokeDetails, color }) => {
       id="bot-panel"
       container
       sx={{
-        height: '400px',
+        // height: '400px',
+        height: '100%',
+        backgroundColor: theme.palette.background.paper,
+        borderRadius: ' 24px 24px 0 0',
       }}
     >
       <Grid
@@ -92,7 +96,7 @@ const BotCard = ({ selectedPokeInfos, pokeDetails, color }) => {
           <Button
             sx={{
               textTransform: 'capitalize',
-              color: '#fff',
+              color: theme.palette.text.primary,
               fontWeight: activeComp === 'about' ? 'bold' : 'Thin',
             }}
             onClick={() => setActiveComp('about')}
@@ -102,7 +106,7 @@ const BotCard = ({ selectedPokeInfos, pokeDetails, color }) => {
           <Button
             sx={{
               textTransform: 'capitalize',
-              color: '#fff',
+              color: theme.palette.text.primary,
               fontWeight: activeComp === 'stats' ? 'bold' : 'Thin',
             }}
             onClick={() => setActiveComp('stats')}
@@ -112,7 +116,7 @@ const BotCard = ({ selectedPokeInfos, pokeDetails, color }) => {
           <Button
             sx={{
               textTransform: 'capitalize',
-              color: '#fff',
+              color: theme.palette.text.primary,
               fontWeight: activeComp === 'evolution' ? 'bold' : 'Thin',
             }}
             onClick={() => setActiveComp('evolution')}

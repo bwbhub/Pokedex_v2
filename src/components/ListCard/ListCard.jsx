@@ -1,11 +1,10 @@
 import React from 'react';
-import { Card, Grid, Typography, Box } from '@mui/material';
+import { Card, Grid, Typography, Box, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import useListCard from './ListCardHooks';
 import pokeball from '../../assets/pokeball.png';
 import dots from '../../assets/dot.svg';
-import { bgColors, textColors } from '../../utils/color';
 import { formatId } from '../../utils/textConvert';
 import { typeListSvg } from '../../utils/svgs';
 
@@ -15,10 +14,11 @@ const ListCard = ({ pokemonId, setOpenModal }) => {
     setOpenModal,
   });
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const imgUrl = pokeInfo?.sprites?.other?.['official-artwork']?.front_default;
   const mainType = pokeInfo?.types[0].type.name;
-  const color = bgColors[mainType];
+  const color = theme.palette.pokemon.background[mainType];
 
   console.log('species', species);
 
@@ -116,7 +116,7 @@ const ListCard = ({ pokemonId, setOpenModal }) => {
                 gap: '4px',
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: textColors[type?.type?.name],
+                backgroundColor: theme.palette.pokemon.type[type?.type?.name],
                 color: '#f3f4f6',
               }}
             >

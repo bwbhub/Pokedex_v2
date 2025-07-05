@@ -14,6 +14,7 @@ import {
   Divider,
   useTheme as useMuiTheme,
 } from '@mui/material';
+import LocalLoading from '../Loaders/LocalLoading';
 import logo from '../../assets/logo.png';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
@@ -32,8 +33,9 @@ const Header = ({ openModal, setPokeModal }) => {
     openFilterModal,
     closeFilterModal,
     handleSetPokedetails,
+    isLoading,
   } = useHeader({ openModal, setPokeModal });
-  
+
   const muiTheme = useMuiTheme();
 
   return (
@@ -42,10 +44,13 @@ const Header = ({ openModal, setPokeModal }) => {
       direction="row"
       spacing={2}
       alignItems="center"
-      sx={{ color: muiTheme.palette.text.secondary, width: '100%', justifyContent: 'center', zIndex:1 }}
+      sx={{
+        color: muiTheme.palette.text.secondary,
+        width: '100%',
+        justifyContent: 'center',
+        zIndex: 1,
+      }}
     >
-      {/* Sélecteur de langue */}
-      <LanguageSelector />
       <Box component="img" src={logo} alt="pokedex" sx={{ width: 240 }} />
 
       <Box sx={{ position: 'relative' }}>
@@ -79,14 +84,29 @@ const Header = ({ openModal, setPokeModal }) => {
               bgcolor: muiTheme.palette.background.paper,
               color: muiTheme.palette.text.primary,
               borderRadius: '8px',
-              maxHeight: "300px",
-              overflowY: "scroll",
+              maxHeight: '300px',
+              overflowY: 'scroll',
               zIndex: 10000,
-              boxShadow: 3
+              boxShadow: 3,
             }}
           >
-            <List dense>
-              {searchList.map((poke) => (
+            {isLoading && query.length > 0 ? (
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: 2,
+                  height: '100px'
+                }}
+              >
+                <Box sx={{ width: '40px', height: '40px' }}>
+                  <LocalLoading color={muiTheme.palette.primary.main} />
+                </Box>
+              </Box>
+            ) : (
+              <List dense>
+                {searchList.map((poke) => (
                   <ListItemButton
                     key={poke.name}
                     onClick={() => handleSetPokedetails(poke)}
@@ -98,10 +118,11 @@ const Header = ({ openModal, setPokeModal }) => {
                       },
                     }}
                   >
-                    <ListItemText primary={poke.name} />
+                    <ListItemText primary={poke.displayName || poke.name} />
                   </ListItemButton>
                 ))}
-            </List>
+              </List>
+            )}
           </Paper>
         )}
       </Box>
@@ -123,7 +144,7 @@ const Header = ({ openModal, setPokeModal }) => {
           sx: {
             p: 3,
             borderRadius: '12px',
-          }
+          },
         }}
       >
         <Grid container direction="column" spacing={2}>
@@ -132,30 +153,26 @@ const Header = ({ openModal, setPokeModal }) => {
               Settings
             </Typography>
             <Box sx={{ mt: 2 }}>
-              <Typography variant="subtitle1">
-                Theme
-              </Typography>
+              <Typography variant="subtitle1">Theme</Typography>
               <Box sx={{ mt: 1, mb: 2 }}>
                 <ThemeToggle />
               </Box>
             </Box>
           </Grid>
-          
+
           <Divider />
-          
+
           <Grid item>
             <Box sx={{ mt: 2 }}>
-              <Typography variant="subtitle1">
-                Language
-              </Typography>
+              <Typography variant="subtitle1">Language</Typography>
               <Box sx={{ mt: 1, mb: 2 }}>
                 <LanguageSelector />
               </Box>
             </Box>
           </Grid>
-          
+
           <Divider />
-          
+
           <Grid item>
             <Typography id="filter-modal-title" variant="h6" component="h2">
               Filters

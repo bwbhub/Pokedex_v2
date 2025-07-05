@@ -1,57 +1,73 @@
-import { bgColors, textColors } from '../utils/color';
+import {
+  bgColorsLight,
+  textColorsLight,
+  bgColorsDark,
+  textColorsDark,
+  typeColorsLight,
+} from '../utils/color';
 
-// Définition des thèmes light et dark
 export const getDesignTokens = (mode) => ({
   palette: {
     mode,
     ...(mode === 'light'
       ? {
-          // Palette pour le mode clair
           primary: {
-            main: 'hsl(0, 0%, 23%)', // #3b3b3b
+            main: '#1D1D1D',
           },
           secondary: {
-            main: 'hsl(0, 0%, 17%)', // #2b2b2b
+            main: '#FBFBFB',
+          },
+          tertiary: {
+            main: '#DEDEDE',
           },
           background: {
-            default: 'hsl(0, 0%, 86%)', // Inverse de #242424
-            paper: 'hsl(0, 0%, 77%)', // Inverse de #3b3b3b
+            default: '#FDFDFD',
+            paper: '#F2F2F2',
           },
           text: {
-            primary: 'hsla(0, 0%, 0%, 0.87)', // Inverse de rgba(255, 255, 255, 0.87)
-            secondary: 'hsla(0, 0%, 0%, 0.6)',
+            primary: '#191919',
+            secondary: '#333333',
+          },
+          accent: {
+            main: '#6C4BA3',
           },
         }
       : {
-          // Palette pour le mode sombre
           primary: {
-            main: 'hsl(0, 0%, 23%)', // #3b3b3b
+            main: '#FBFBFB',
           },
           secondary: {
-            main: 'hsl(0, 0%, 17%)', // #2b2b2b
+            main: '#1D1D1D',
+          },
+          tertiary: {
+            main: '#212121',
           },
           background: {
-            default: 'hsl(0, 0%, 14%)', // #242424
-            paper: 'hsl(0, 0%, 23%)', // #3b3b3b
+            default: '#191919',
+            paper: '#262626',
           },
           text: {
-            primary: 'hsla(0, 0%, 100%, 0.87)', // rgba(255, 255, 255, 0.87)
-            secondary: 'hsla(0, 0%, 100%, 0.6)',
+            primary: '#FDFDFD',
+            secondary: '#E0E0E0',
+          },
+          accent: {
+            main: '#8A63CF',
           },
         }),
-    // Couleurs des types de Pokémon
     pokemon: {
-      // Couleurs de texte pour les types
-      text: textColors,
-      // Couleurs d'arrière-plan pour les types
-      background: bgColors
-    }
+      background: mode === 'light' ? bgColorsLight : bgColorsDark,
+      text: mode === 'light' ? textColorsLight : textColorsDark,
+      type: mode === 'light' ? typeColorsLight : textColorsDark,
+    },
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          scrollbarColor: mode === 'dark' ? 'hsl(0, 0%, 17%) hsl(0, 0%, 23%)' : 'hsl(0, 0%, 83%) hsl(0, 0%, 77%)',
+          scrollbarColor:
+            mode === 'dark'
+              ? 'hsl(0, 0%, 17%) hsl(0, 0%, 23%)'
+              : 'hsl(0, 0%, 83%) hsl(0, 0%, 77%)',
           '&::-webkit-scrollbar, & *::-webkit-scrollbar': {
             width: '10px',
           },
@@ -59,7 +75,8 @@ export const getDesignTokens = (mode) => ({
             background: mode === 'dark' ? 'hsl(0, 0%, 23%)' : 'hsl(0, 0%, 77%)',
           },
           '&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb': {
-            backgroundColor: mode === 'dark' ? 'hsl(0, 0%, 17%)' : 'hsl(0, 0%, 83%)',
+            backgroundColor:
+              mode === 'dark' ? 'hsl(0, 0%, 17%)' : 'hsl(0, 0%, 83%)',
             borderRadius: '6px',
           },
         },

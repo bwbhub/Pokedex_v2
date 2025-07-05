@@ -1,37 +1,39 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography, useTheme } from '@mui/material';
 
 import pokeball from '../../../assets/pokeball.png';
-import { textColors, hexToRgba } from '../../../utils/color';
+import { hexToRgba } from '../../../utils/color';
 import { typeListSvg } from '../../../utils/svgs';
 import { formatId } from '../../../utils/textConvert';
 import { useSelector } from 'react-redux';
 import './TopCard.css';
+import { useTranslation } from 'react-i18next';
 
 const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
-  const formatedId = formatId(pokeInfo?.id);
-  const activeLanguage = useSelector((state) => state.language.activeLanguage);
-  const containerRef = useRef(null);
   const textRef = useRef(null);
+  const containerRef = useRef(null);
+  const { t } = useTranslation();
+  const theme = useTheme();
+  const activeLanguage = useSelector((state) => state.language.activeLanguage);
   const [animationDistance, setAnimationDistance] = useState(0);
+
+  const formatedId = formatId(pokeInfo?.id);
 
   const filteredName = species?.names?.find(
     (name) => name.language.name === activeLanguage,
   )?.name;
-  
+
   useEffect(() => {
     if (containerRef.current && textRef.current) {
       const containerWidth = containerRef.current.offsetWidth;
       const textWidth = textRef.current.offsetWidth;
       const distance = textWidth - containerWidth;
       setAnimationDistance(distance > 0 ? distance : 0);
-      
-      // Définir la variable CSS personnalisée
+
       if (textRef.current) {
         textRef.current.style.setProperty('--slide-distance', `-${distance}px`);
       }
     }
-
   }, [filteredName]);
 
   return (
@@ -41,11 +43,10 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
       sx={{
         backgroundColor: color,
         width: '100%',
-        height: '235px',
+        minHeight: '235px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: '0 0 24px 24px',
         overflow: 'hidden',
         marginBottom: '12px',
         position: 'relative',
@@ -68,7 +69,8 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
             fontWeight: 'bold',
             textTransform: 'uppercase',
             top: '1px',
-            animation: animationDistance > 0 ? 'sliding 10s infinite linear' : 'none',
+            animation:
+              animationDistance > 0 ? 'sliding 10s infinite linear' : 'none',
             left: '0',
             // Assurez-vous que le texte est initialement visible
             position: 'absolute',
@@ -92,8 +94,8 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
       <Grid
         sx={{
           position: 'absolute',
-          width: '33.33%',
-          left: '40px',
+          width: '45%',
+          left: 0,
           bottom: '16px',
           opacity: '0.3',
         }}
@@ -175,7 +177,7 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
                 gap: '4px',
                 justifyContent: 'center',
                 alignItems: 'center',
-                backgroundColor: textColors[type?.type?.name],
+                backgroundColor: theme.palette.pokemon.type[type?.type?.name],
                 color: '#f3f4f6',
               }}
             >
@@ -191,7 +193,7 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
                   fontWeight: 'medium',
                 }}
               >
-                {type?.type?.name}
+                {t(`types.${type?.type?.name}`)}
               </Typography>
             </Box>
           ))}

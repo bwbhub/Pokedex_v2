@@ -15,8 +15,12 @@ const ThemeToggle = () => {
           bgcolor: theme.palette.secondary.main,
           color: theme.palette.text.primary,
           '&:hover': {
-            bgcolor: theme.palette.primary.main,
+            transform: 'scale(1.1)',
           },
+          width: '40px',
+          height: '40px',
+          borderRadius: '50%',
+          transition: 'all 0.3s ease',
         }}
       >
         {mode === 'dark' ? <Sun size={20} /> : <Moon size={20} />}

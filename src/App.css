@@ -15,26 +15,26 @@ html {
 
 main {
   height: 100%;
-  margin: 0; 
+  margin: 0;
   display: flex;
   flex-direction: column;
 }
 
 #root {
-  flex: 1; 
+  flex: 1;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
 }
 
 * {
   margin: 0;
-  padding: 0;  
+  padding: 0;
   min-width: 0;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-  
+
 .bg-title {
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: white;
@@ -43,7 +43,3 @@ main {
 ::-webkit-scrollbar {
   width: 10px;
 }
-
-/* Les styles de scrollbar sont maintenant gérés par MUI */
-
-/* Les styles de scrollbar sont maintenant gérés par MUI */

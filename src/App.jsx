@@ -46,8 +46,15 @@ function App() {
         // Stocker les langues disponibles dans Redux
         dispatch(setLanguages(response.results));
         
-        // Si une langue active est déjà définie, on la conserve
-        if (activeLanguage) {
+        // Récupérer la langue sauvegardée dans localStorage
+        const savedLanguage = localStorage.getItem('user-language');
+        
+        // Si une langue est sauvegardée dans localStorage, l'utiliser
+        if (savedLanguage) {
+          dispatch(setActiveLanguage(savedLanguage));
+        }
+        // Sinon, si une langue active est déjà définie, on la conserve
+        else if (activeLanguage) {
           dispatch(setActiveLanguage(activeLanguage));
         }
       } else {
