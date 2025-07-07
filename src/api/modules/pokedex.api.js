@@ -11,6 +11,9 @@ const pokedexEndpoints = {
   type: ({ typeName }) => `/type/${typeName}`,
   generation: '/generation',
   generationId: ({ genId }) => `/generation/${genId}`,
+  item: ({ itemName }) => `/item/${itemName}`,
+  move: ({ moveName }) => `/move/${moveName}`,
+  location: ({ location }) => `/location/${location}`,
 };
 
 const pokeApi = {
@@ -74,17 +77,6 @@ const pokeApi = {
       return { err };
     }
   },
-  // getDetails: async ({ pokeId }) => {
-  //   try {
-  //     const response = await publicClient.get(
-  //       pokedexEndpoints.species({ pokeId }),
-  //     );
-
-  //     return { response };
-  //   } catch (err) {
-  //     return { err };
-  //   }
-  // },
   getSpecies: async ({ pokeId }) => {
     try {
       const response = await publicClient.get(
@@ -111,6 +103,39 @@ const pokeApi = {
       const response = await publicClient.get(
         pokedexEndpoints.type({ typeName }),
       );
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  getItem: async ({ itemName }) => {
+    try {
+      const response = await publicClient.get(
+        pokedexEndpoints.item({ itemName }),
+      );
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  getMove: async ({ moveName }) => {
+    try {
+      const response = await publicClient.get(
+        pokedexEndpoints.move({ moveName }),
+      );
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  getLocation: async ({ location }) => {
+    try {
+      const response = await publicClient.get(
+        pokedexEndpoints.location({ location }),
+      );
+
       return { response };
     } catch (err) {
       return { err };

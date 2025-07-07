@@ -64,17 +64,40 @@
   },
   "botCard": {
     "about": "Über",
-    "stats": "Statuswerte",
+    "stats": "Statistiken",
     "evolution": "Entwicklung",
+    "noEvolutionData": "Keine Evolutionsdaten verfügbar",
     "pokemonData": "Pokémon-Daten",
     "height": "Größe:",
     "weight": "Gewicht:",
     "captureRate": "Fangrate:",
-    "baseHappiness": "Basis-Freundschaft:",
-    "baseExp": "Basis-Erfahrung:",
+    "baseHappiness": "Basisfreude:",
+    "baseExp": "Basis-Exp:",
     "growthRate": "Wachstumsrate:",
     "takesNoDamageFrom": "Nimmt keinen Schaden von:",
     "takesHalfDamageFrom": "Nimmt halben Schaden von:",
     "takesDoubleDamageFrom": "Nimmt doppelten Schaden von:"
+  },
+  "stats": {
+    "hp": "KP",
+    "attack": "Angriff",
+    "defense": "Verteidigung",
+    "s-attack": "Sp-Angriff",
+    "s-defense": "Sp-Verteid.",
+    "speed": "Initiative"
+  },
+  "gender": {
+    "title": "Geschlecht",
+    "male": "Männlich",
+    "female": "Weiblich",
+    "genderless": "Geschlechtslos",
+    "ratio": "Geschlechtsverhältnis"
+  },
+  "about": {
+    "species": "Spezies:",
+    "height": "Größe:",
+    "weight": "Gewicht:",
+    "weaknesses": "Schwächen:",
+    "gender": "Geschlecht:"
   }
 }

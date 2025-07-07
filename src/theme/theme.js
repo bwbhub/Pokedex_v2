@@ -27,6 +27,7 @@ export const getDesignTokens = (mode) => ({
           text: {
             primary: '#191919',
             secondary: '#333333',
+            tertiary: '#5D5D5D',
           },
           accent: {
             main: '#6C4BA3',
@@ -49,6 +50,7 @@ export const getDesignTokens = (mode) => ({
           text: {
             primary: '#FDFDFD',
             secondary: '#E0E0E0',
+            tertiary: '#A1A1A1',
           },
           accent: {
             main: '#8A63CF',
@@ -64,21 +66,19 @@ export const getDesignTokens = (mode) => ({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          scrollbarColor:
-            mode === 'dark'
-              ? 'hsl(0, 0%, 17%) hsl(0, 0%, 23%)'
-              : 'hsl(0, 0%, 83%) hsl(0, 0%, 77%)',
           '&::-webkit-scrollbar, & *::-webkit-scrollbar': {
             width: '10px',
           },
           '&::-webkit-scrollbar-track, & *::-webkit-scrollbar-track': {
-            background: mode === 'dark' ? 'hsl(0, 0%, 23%)' : 'hsl(0, 0%, 77%)',
+            background: 'transparent',
           },
           '&::-webkit-scrollbar-thumb, & *::-webkit-scrollbar-thumb': {
             backgroundColor:
-              mode === 'dark' ? 'hsl(0, 0%, 17%)' : 'hsl(0, 0%, 83%)',
-            borderRadius: '6px',
-          },
+              mode === 'dark' ? '#A1A1A1' : '#5D5D5D',
+              borderRadius: '6px',
+              border: 'none',
+            },
+
         },
       },
     },

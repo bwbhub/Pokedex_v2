@@ -100,7 +100,7 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
           left: '50%',
           bottom: '50%',
           transform: 'translate(-50%, 50%)',
-          opacity: '0.08',
+          opacity: '0.15',
         }}
       >
         <img
@@ -175,7 +175,7 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
             alt={filteredName}
             onClick={playPokemonCry}
             sx={{
-              width: '83.3333%',
+              width: '95%',
               zIndex: 100,
               filter: 'brightness(1.05) saturate(1.5)',
               cursor: 'pointer',

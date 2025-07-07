@@ -20,7 +20,7 @@ const DetailsModal = ({ closeModal, openModal }) => {
       onClose={() => closeModal(false)}
       sx={{
         '& .MuiDialog-paper': {
-          height: '830px',
+          height: '820px',
           width: '100%',
           maxHeight: 'none',
           borderRadius: '24px',

@@ -2,7 +2,11 @@ import { useEffect, useState, useCallback } from 'react';
 import { usePokedetails } from '../../context/Pokedetails';
 import { useSelector } from 'react-redux';
 import pokeApi from '../../api/modules/pokedex.api';
-import { searchPokemonByName, addPokemonToCache, getPokemonNameByLang } from '../../utils/pokemonNameCache';
+import {
+  searchPokemonByName,
+  addPokemonToCache,
+  getPokemonNameByLang,
+} from '../../utils/pokemonNameCache';
 
 const useHeader = ({ openModal, setPokeModal }) => {
   const [modalFilterOpen, setModalFilterOpen] = useState(false);
@@ -28,43 +32,47 @@ const useHeader = ({ openModal, setPokeModal }) => {
 
   const loadPokemonNames = useCallback(async (pokemonList) => {
     setIsLoading(true);
-    
+
     const batchSize = 20;
     const supportedLanguages = ['en', 'fr', 'es', 'de', 'ja'];
-    
+
     try {
       for (let i = 0; i < pokemonList.length; i += batchSize) {
         const batch = pokemonList.slice(i, i + batchSize);
-        
-        await Promise.all(batch.map(async (pokemon) => {
-          try {
-            const id = pokemon.url.split('/').filter(Boolean).pop();
-            
-            const { response } = await pokeApi.getSpecies({ pokeId: id });
-            
-            if (response?.names) {
-              const names = response.names.reduce((acc, nameObj) => {
-                const langCode = nameObj.language.name;
-                if (supportedLanguages.includes(langCode)) {
-                  acc[langCode] = nameObj.name;
-                }
-                return acc;
-              }, {});
-              
-              addPokemonToCache(id, names);
-              pokemon.id = id;
+
+        await Promise.all(
+          batch.map(async (pokemon) => {
+            try {
+              const id = pokemon.url.split('/').filter(Boolean).pop();
+
+              if (id > 9999) return;
+
+              const { response } = await pokeApi.getSpecies({ pokeId: id });
+
+              if (response?.names) {
+                const names = response.names.reduce((acc, nameObj) => {
+                  const langCode = nameObj.language.name;
+                  if (supportedLanguages.includes(langCode)) {
+                    acc[langCode] = nameObj.name;
+                  }
+                  return acc;
+                }, {});
+
+                addPokemonToCache(id, names);
+                pokemon.id = id;
+              }
+            } catch (error) {
+              console.error(`Erreur pour ${pokemon.name}:`, error);
             }
-          } catch (error) {
-            console.error(`Erreur pour ${pokemon.name}:`, error);
-          }
-        }));
-        
+          }),
+        );
+
         if (i + batchSize < pokemonList.length) {
-          await new Promise(resolve => setTimeout(resolve, 50));
+          await new Promise((resolve) => setTimeout(resolve, 50));
         }
       }
     } catch (error) {
-      console.error("Erreur lors du chargement des noms:", error);
+      console.error('Erreur lors du chargement des noms:', error);
     } finally {
       setIsLoading(false);
       setInitialLoadComplete(true);
@@ -79,7 +87,7 @@ const useHeader = ({ openModal, setPokeModal }) => {
         setAllPokemon(response.results);
         loadPokemonNames(response.results);
       } else {
-        console.error("Erreur lors de la récupération des Pokémon:", err);
+        console.error('Erreur lors de la récupération des Pokémon:', err);
       }
     };
     getList();
@@ -91,48 +99,49 @@ const useHeader = ({ openModal, setPokeModal }) => {
       setIsLoading(false);
       return;
     }
-    
+
     setIsLoading(true);
-    
+
     const searchTimeout = setTimeout(() => {
       const normalizedQuery = query.toLowerCase();
-      
+
       if (!initialLoadComplete) {
-        const filtered = allPokemon.filter(pokemon => 
-          pokemon.name.toLowerCase().includes(normalizedQuery)
+        const filtered = allPokemon.filter((pokemon) =>
+          pokemon.name.toLowerCase().includes(normalizedQuery),
         );
         setSearchResults(filtered);
         setIsLoading(false);
         return;
       }
-      
+
       const matchingIds = searchPokemonByName(normalizedQuery);
-      
+
       const pokemonMap = new Map();
-      allPokemon.forEach(pokemon => {
+      allPokemon.forEach((pokemon) => {
         if (pokemon.id) {
           pokemonMap.set(pokemon.id, pokemon);
         }
       });
-      
+
       const results = matchingIds
-        .map(id => {
+        .map((id) => {
           const pokemon = pokemonMap.get(id);
           if (pokemon) {
-            const translatedName = getPokemonNameByLang(id, activeLanguage) || pokemon.name;
+            const translatedName =
+              getPokemonNameByLang(id, activeLanguage) || pokemon.name;
             return {
               ...pokemon,
-              displayName: translatedName
+              displayName: translatedName,
             };
           }
           return null;
         })
         .filter(Boolean);
-      
+
       setSearchResults(results);
       setIsLoading(false);
     }, 300);
-    
+
     return () => clearTimeout(searchTimeout);
   }, [query, allPokemon, initialLoadComplete, activeLanguage]);
 

@@ -81,7 +81,6 @@ const BotCard = ({ selectedPokeInfos, pokeDetails, color }) => {
     <Grid
       sx={{
         backgroundColor: theme.palette.background.paper,
-        borderRadius: '24px',
         height: '100%',
         padding: '0',
         marginTop: '12px',
@@ -98,7 +97,6 @@ const BotCard = ({ selectedPokeInfos, pokeDetails, color }) => {
           alignItems: 'flex-end',
           height: '44px',
           backgroundColor: color,
-          borderRadius: '24px 24px 0 0',
           position: 'relative',
           zIndex: 1,
         }}
@@ -107,7 +105,7 @@ const BotCard = ({ selectedPokeInfos, pokeDetails, color }) => {
         <Box
           className="tab-indicator"
           sx={{
-            width: '33%',
+            width: '33.333%',
             left:
               activeComp === 'about'
                 ? '0%'
@@ -132,7 +130,7 @@ const BotCard = ({ selectedPokeInfos, pokeDetails, color }) => {
             zIndex: 2,
             border: 'none',
             cursor: 'pointer',
-            padding: '8px 16px',
+            padding: '12px 16px',
             outline: 'none',
             '&:focus': {
               outline: 'none',
@@ -156,7 +154,7 @@ const BotCard = ({ selectedPokeInfos, pokeDetails, color }) => {
             zIndex: 2,
             border: 'none',
             cursor: 'pointer',
-            padding: '8px 16px',
+            padding: '12px 16px',
             outline: 'none',
             '&:focus': {
               outline: 'none',
@@ -181,7 +179,7 @@ const BotCard = ({ selectedPokeInfos, pokeDetails, color }) => {
             zIndex: 2,
             border: 'none',
             cursor: 'pointer',
-            padding: '8px 16px',
+            padding: '12px 16px',
             outline: 'none',
             '&:focus': {
               outline: 'none',

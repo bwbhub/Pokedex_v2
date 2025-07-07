@@ -8,6 +8,8 @@ import {
   formatDesc,
 } from '../../../../../utils/textConvert';
 import LocalLoading from '../../../../Loaders/LocalLoading';
+import TypeStats from '../Stats/TypeStats';
+import { Mars, Venus } from 'lucide-react';
 
 const About = ({ selectedPokeInfos, pokeDetails, loading, color }) => {
   const activeLanguage = useSelector((state) => state.language.activeLanguage);
@@ -22,6 +24,86 @@ const About = ({ selectedPokeInfos, pokeDetails, loading, color }) => {
 
   const okDesc = formatDesc(filteredDesc[0]?.flavor_text);
   const useableDesc = capitalizeUppercase(okDesc);
+
+  const getGender = (genderRate) => {
+    if (genderRate === -1) {
+      return (
+        <Typography
+          sx={{
+            color: theme.palette.text.primary,
+            fontSize: '18px',
+            fontWeight: 600,
+          }}
+        >
+          {t('gender.genderless')}
+        </Typography>
+      );
+    } else {
+      const femalePercentage = (genderRate / 8) * 100;
+      const malePercentage = 100 - femalePercentage;
+
+      return (
+        <Grid sx={{ display: 'flex', gap: '12px' }}>
+          <Typography
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '4px',
+              color: '#F293C5',
+              fontSize: '16px',
+              fontWeight: 600,
+            }}
+          >
+            <Venus /> {femalePercentage.toFixed(1)}%
+          </Typography>
+          <Typography
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '4px',
+              color: '#64B6F3',
+              fontWeight: 600,
+              fontSize: '16px',
+            }}
+          >
+            <Mars /> {malePercentage.toFixed(1)}%
+          </Typography>
+        </Grid>
+      );
+    }
+  };
+
+  const aboutData = [
+    {
+      label: 'species',
+      value: pokeDetails?.genera?.find(
+        (genus) => genus.language.name === activeLanguage,
+      )?.genus,
+      display: false,
+    },
+    {
+      label: 'height',
+      value: `${selectedPokeInfos?.height / 10}m`,
+      display: false,
+    },
+    {
+      label: 'weight',
+      value: `${selectedPokeInfos?.weight / 10}kg (${((selectedPokeInfos?.weight / 10) * 2.204).toFixed(1)}lbs)`,
+      display: false,
+    },
+    {
+      label: 'weaknesses',
+      value: <TypeStats selectedPokeInfos={selectedPokeInfos} onlyDouble />,
+      display: true,
+    },
+    {
+      label: 'gender',
+      value: getGender(pokeDetails?.gender_rate),
+      display: true,
+    },
+  ];
 
   return (
     <Grid
@@ -52,59 +134,50 @@ const About = ({ selectedPokeInfos, pokeDetails, loading, color }) => {
           </Grid>
         </Grid>
       ) : (
-        <Grid container sx={{ flexDirection: 'column' }}>
+        <Grid container sx={{ flexDirection: 'column', gap: '12px' }}>
+          {aboutData?.map((data, index) => (
+            <Grid
+              sx={{
+                display: 'flex',
+                gap: '12px',
+                // justifyContent: 'space-between',
+              }}
+              key={index}
+            >
+              <Typography
+                sx={{
+                  color: theme.palette.text.tertiary,
+                  fontSize: '18px',
+                  fontWeight: 500,
+                  width: '120px',
+                }}
+              >
+                {t(`about.${data.label}`)}
+              </Typography>
+              {data.display ? (
+                data.value
+              ) : (
+                <Typography
+                  sx={{
+                    color: theme.palette.text.primary,
+                    fontSize: '18px',
+                    fontWeight: 600,
+                  }}
+                >
+                  {data.value}
+                </Typography>
+              )}
+            </Grid>
+          ))}
           <Typography
             sx={{
               fontSize: '18px',
               color: theme.palette.text.secondary,
-              mb: '16px',
+              mt: '16px',
             }}
           >
             {useableDesc}
           </Typography>
-          <Typography
-            sx={{
-              fontSize: '18px',
-              fontWeight: 'bold',
-              mb: '4px',
-              color: theme.palette.text.primary,
-              width: '100%',
-              textAlign: 'center',
-            }}
-          >
-            {t('botCard.pokemonData')}
-          </Typography>
-          <Grid container sx={{ mb: '16px' }}>
-            <Grid style={{ color: theme.palette.text.primary }}>
-              <Typography>{t('botCard.height')}</Typography>
-              <Typography>{t('botCard.weight')}</Typography>
-            </Grid>
-            <Grid sx={{ ml: '24px' }}>
-              <Grid style={{ color: theme.palette.text.secondary }}>
-                <Typography>{selectedPokeInfos?.height / 10 + 'm'}</Typography>
-                <Typography>
-                  {selectedPokeInfos?.weight / 10 +
-                    'kg (' +
-                    ((selectedPokeInfos?.weight / 10) * 2.204).toFixed(1) +
-                    'lbs)'}
-                </Typography>
-              </Grid>
-            </Grid>
-          </Grid>
-          <Grid container sx={{ gap: '16px', display: 'flex' }}>
-            <Grid style={{ color: theme.palette.text.primary }}>
-              <Typography>{t('botCard.captureRate')}</Typography>
-              <Typography>{t('botCard.baseHappiness')}</Typography>
-              <Typography>{t('botCard.baseExp')}</Typography>
-              <Typography>{t('botCard.growthRate')}</Typography>
-            </Grid>
-            <Grid style={{ color: theme.palette.text.secondary }}>
-              <Typography>{pokeDetails?.capture_rate} / 255</Typography>
-              <Typography>{pokeDetails?.base_happiness} / 255</Typography>
-              <Typography>{selectedPokeInfos?.base_experience}</Typography>
-              <Typography>{pokeDetails?.growth_rate?.name}</Typography>
-            </Grid>
-          </Grid>
         </Grid>
       )}
     </Grid>

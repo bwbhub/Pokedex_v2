@@ -66,6 +66,7 @@
     "about": "About",
     "stats": "Stats",
     "evolution": "Evolution",
+    "noEvolutionData": "No evolution data available",
     "pokemonData": "Pokémon's data",
     "height": "Height:",
     "weight": "Weight:",
@@ -76,5 +77,27 @@
     "takesNoDamageFrom": "Takes no damages from:",
     "takesHalfDamageFrom": "Takes half damages from:",
     "takesDoubleDamageFrom": "Takes double damages from:"
+  },
+  "stats": {
+    "hp": "HP",
+    "attack": "Attack",
+    "defense": "Defense",
+    "s-attack": "Sp. Attack",
+    "s-defense": "Sp. Defense",
+    "speed": "Speed"
+  },
+  "gender": {
+    "title": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "genderless": "Genderless",
+    "ratio": "Gender ratio"
+  },
+  "about": {
+    "species": "Species:",
+    "height": "Height:",
+    "weight": "Weight:",
+    "weaknesses": "Weaknesses:",
+    "gender": "Gender:"
   }
 }

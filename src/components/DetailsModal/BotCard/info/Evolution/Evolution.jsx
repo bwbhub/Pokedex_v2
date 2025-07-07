@@ -1,33 +1,18 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Grid, Typography, useTheme } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
-import { urlConvert } from '../../../../../utils/textConvert';
-import useEvolutionChainWithTranslation from './useEvolutionChainWithTranslation';
+import { formatId, urlConvert } from '../../../../../utils/textConvert';
+import useEvolutionChain from './useEvolutionChain';
 import LocalLoading from '../../../../Loaders/LocalLoading';
-import { languageSelector } from '../../../../../redux/features/languageSlice';
 
-const Evolution = ({ pokeDetails, color, loading: externalLoading }) => {
-  const { evolDetails, isLoading } =
-    useEvolutionChainWithTranslation(pokeDetails);
-  const activeLanguage = useSelector(languageSelector);
+const Evolution = ({ pokeDetails, color }) => {
+  const { evolDetails, isLoading } = useEvolutionChain(pokeDetails);
   const theme = useTheme();
+  const { t } = useTranslation();
 
-  // Messages traduits pour l'absence de données d'évolution
-  const noDataMessages = {
-    fr: "Pas de données d'évolution disponibles",
-    en: 'No evolution data available',
-    es: 'No hay datos de evolución disponibles',
-    de: 'Keine Evolutionsdaten verfügbar',
-    it: 'Nessun dato di evoluzione disponibile',
-    ja: '進化データがありません',
-  };
-
-  const noDataMessage = noDataMessages[activeLanguage] || noDataMessages.en;
-
-  const loading = externalLoading || isLoading;
-  if (!loading && !evolDetails) {
+  if (!isLoading && !evolDetails) {
     return (
       <Grid
         sx={{
@@ -36,12 +21,13 @@ const Evolution = ({ pokeDetails, color, loading: externalLoading }) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          overflowY: 'auto',
         }}
       >
         <Typography
           sx={{ color: theme.palette.text.primary, fontSize: '16px' }}
         >
-          {noDataMessage}
+          {t('botCard.noEvolutionData')}
         </Typography>
       </Grid>
     );
@@ -53,16 +39,17 @@ const Evolution = ({ pokeDetails, color, loading: externalLoading }) => {
       sx={{
         height: '90%',
         width: '100%',
-        display: 'flex',
-        gap: '3px',
-        justifyContent: 'center',
-        alignItems: 'center',
-        textTransform: 'capitalize',
         overflowY: 'auto',
+        overflowX: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        gap: '6px',
+        padding: '8px',
       }}
-      container
     >
-      {loading ? (
+      {isLoading ? (
         <Grid
           sx={{
             height: '100%',
@@ -78,67 +65,86 @@ const Evolution = ({ pokeDetails, color, loading: externalLoading }) => {
           </Grid>
         </Grid>
       ) : (
-        evolDetails.map((detail, idx) => (
-          <Grid
-            sx={{
-              width: '25%',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '4px',
-            }}
-            key={detail.name + idx}
-            xs={4}
-          >
+        evolDetails.map((levelPokemon, levelIndex) => (
+          <React.Fragment key={`level-${levelIndex}`}>
             <Grid
+              container
               sx={{
+                width: '100%',
                 display: 'flex',
-                alignItems: 'center',
                 justifyContent: 'center',
-                flexDirection: 'column',
-                gap: '4px',
+                alignItems: 'flex-start',
+                flexWrap: 'wrap',
+                position: 'relative',
               }}
             >
-              <img
-                src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${urlConvert({ ...detail, name: detail.originalName || detail.name })}.png`}
-                alt={detail.name}
-                style={{ width: '100%', height: '100%' }}
-              />
-              <Typography
-                sx={{
-                  fontSize: '16px',
-                  fontWeight: 'bold',
-                  textTransform: 'capitalize',
-                  color: theme.palette.text.primary,
-                }}
-              >
-                {detail.name}
-              </Typography>
-
-              {detail.evolutionDetails && (
-                <Typography
-                  sx={{
-                    fontSize: '12px',
-                    color: theme.palette.text.secondary,
-                    textAlign: 'center',
-                    padding: '0 4px',
-                  }}
-                >
-                  {detail.evolutionDetails.condition}
-                </Typography>
-              )}
+              {levelPokemon.map((pokemon, pokemonIndex) => {
+                const id = urlConvert(pokemon);
+                return (
+                  <Grid
+                    item
+                    key={`${pokemon.name}-${pokemonIndex}`}
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      textAlign: 'center',
+                      minWidth: '100px',
+                      maxWidth: '120px',
+                      flex: '0 0 auto',
+                      position: 'relative',
+                      mt: '-2px',
+                    }}
+                  >
+                    {pokemon?.evolutionDetails && (
+                      <Typography
+                        sx={{
+                          fontSize: '12px',
+                          color: theme.palette.text.secondary,
+                          minHeight: '30px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          width: '100px',
+                          mb: '4px',
+                        }}
+                      >
+                        {pokemon?.evolutionDetails?.condition}
+                      </Typography>
+                    )}
+                    <img
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${urlConvert({ ...pokemon, name: pokemon.originalName || pokemon.name })}.png`}
+                      alt={pokemon.name}
+                      style={{ height: '80px' }}
+                    />
+                    <Typography
+                      sx={{
+                        fontSize: '16px',
+                        fontWeight: 'bold',
+                        textTransform: 'capitalize',
+                        lineHeight: '16px',
+                        color: theme.palette.text.primary,
+                      }}
+                    >
+                      {pokemon?.name}
+                    </Typography>
+                    {id && (
+                      <Typography
+                        sx={{
+                          fontSize: '12px',
+                          fontWeight: 'bold',
+                          textTransform: 'capitalize',
+                          color: theme.palette.text.tertiary,
+                        }}
+                      >
+                        {formatId(id)}
+                      </Typography>
+                    )}
+                  </Grid>
+                );
+              })}
             </Grid>
-            {idx < evolDetails.length - 1 && (
-              <Grid
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                }}
-              >
-                <ArrowRight size={20} color={theme.palette.text.primary} />
-              </Grid>
-            )}
-          </Grid>
+          </React.Fragment>
         ))
       )}
     </Grid>

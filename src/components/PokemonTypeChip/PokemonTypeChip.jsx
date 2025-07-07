@@ -9,11 +9,12 @@ const PokemonTypeChip = ({ type, sx = {} }) => {
 
   // Utiliser le nom du type si c'est un objet (comme dans TopCard et ListCard)
   const typeName = typeof type === 'object' ? type?.type?.name : type;
-  
+
   return (
     <Box
       sx={{
-        padding: '5px',
+        paddingX: '8px',
+        paddingY: '5px',
         borderRadius: '8px',
         display: 'flex',
         gap: '4px',
@@ -21,7 +22,7 @@ const PokemonTypeChip = ({ type, sx = {} }) => {
         alignItems: 'center',
         backgroundColor: theme.palette.pokemon.type[typeName],
         color: '#f3f4f6',
-        ...sx
+        ...sx,
       }}
     >
       <img

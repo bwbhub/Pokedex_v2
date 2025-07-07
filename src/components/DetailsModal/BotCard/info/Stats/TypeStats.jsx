@@ -6,7 +6,7 @@ import pokeApi from '../../../../../api/modules/pokedex.api';
 import { typeListSvg } from '../../../../../utils/svgs';
 import { textColors } from '../../../../../utils/color';
 
-const TypeStats = ({ selectedPokeInfos }) => {
+const TypeStats = ({ selectedPokeInfos, onlyDouble = false }) => {
   const [mainTypeIs, setMainTypeIs] = useState(null);
   const [secondTypeIs, setSecondTypeIs] = useState(null);
   const { t } = useTranslation();
@@ -72,6 +72,7 @@ const TypeStats = ({ selectedPokeInfos }) => {
         console.error(err);
       }
     };
+
     const getSecondType = async (typeName) => {
       const { response, err } = await pokeApi.getType({ typeName: typeName });
 
@@ -89,7 +90,38 @@ const TypeStats = ({ selectedPokeInfos }) => {
     }
   }, [mainType, secondType]);
 
-  return (
+  return onlyDouble ? (
+    <>
+      <Grid
+        sx={{
+          display: 'flex',
+          gap: '8px',
+        }}
+      >
+        {doubleDmg.map((type, idx) => (
+          <Grid
+            key={type + idx}
+            sx={{
+              backgroundColor: textColors[type],
+              padding: '5px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '4px',
+              borderRadius: '4px',
+              width: '28px',
+            }}
+          >
+            <img
+              src={typeListSvg[type]}
+              alt={`${type}`}
+              style={{ width: '100%' }}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </>
+  ) : (
     <Grid
       container
       sx={{
@@ -109,7 +141,7 @@ const TypeStats = ({ selectedPokeInfos }) => {
               fontSize: '16px',
             }}
           >
-            {t("botCard.takesNoDamageFrom")}
+            {t('botCard.takesNoDamageFrom')}
           </Typography>
           <Grid
             sx={{
@@ -148,7 +180,7 @@ const TypeStats = ({ selectedPokeInfos }) => {
               fontSize: '16px',
             }}
           >
-            {t("botCard.takesHalfDamageFrom")}
+            {t('botCard.takesHalfDamageFrom')}
           </Typography>
           <Grid
             sx={{
@@ -188,7 +220,7 @@ const TypeStats = ({ selectedPokeInfos }) => {
               fontSize: '16px',
             }}
           >
-            {t("botCard.takesDoubleDamageFrom")}
+            {t('botCard.takesDoubleDamageFrom')}
           </Typography>
           <Grid
             sx={{

@@ -18,8 +18,8 @@
     "hp": "PV",
     "attack": "Attaque",
     "defense": "Défense",
-    "specialAttack": "Attaque Spéciale",
-    "specialDefense": "Défense Spéciale",
+    "specialAttack": "Attaque Spé.",
+    "specialDefense": "Défense Spé.",
     "speed": "Vitesse",
     "evolution": "Évolution",
     "moves": "Capacités"
@@ -66,6 +66,7 @@
     "about": "À propos",
     "stats": "Statistiques",
     "evolution": "Évolution",
+    "noEvolutionData": "Pas de données d'évolution disponibles",
     "pokemonData": "Données du Pokémon",
     "height": "Taille :",
     "weight": "Poids :",
@@ -76,5 +77,27 @@
     "takesNoDamageFrom": "Ne subit aucun dégât de :",
     "takesHalfDamageFrom": "Subit la moitié des dégâts de :",
     "takesDoubleDamageFrom": "Subit le double de dégâts de :"
+  },
+  "stats": {
+    "hp": "PV",
+    "attack": "Attaque",
+    "defense": "Défense",
+    "s-attack": "Attaque spé.",
+    "s-defense": "Défense spé.",
+    "speed": "Vitesse"
+  },
+  "gender": {
+    "title": "Genre",
+    "male": "Mâle",
+    "female": "Femelle",
+    "genderless": "Sans genre",
+    "ratio": "Ratio de genre"
+  },
+  "about": {
+    "species": "Espèce :",
+    "height": "Taille :",
+    "weight": "Poids :",
+    "weaknesses": "Faiblesses :",
+    "gender": "Genre :"
   }
 }
