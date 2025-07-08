@@ -18,6 +18,7 @@ main {
   margin: 0;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 #root {
@@ -40,6 +41,4 @@ main {
   -webkit-text-stroke-color: white;
 }
 
-::-webkit-scrollbar {
-  width: 10px;
-}
+

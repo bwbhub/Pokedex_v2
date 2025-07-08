@@ -1,27 +1,20 @@
 import React from 'react';
 import { ResponsiveRadar } from '@nivo/radar';
-import { Grid, useTheme } from '@mui/material';
+import { Grid, LinearProgress, Typography, useTheme } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import LocalLoading from '../../../../Loaders/LocalLoading';
 import TypeStats from './TypeStats';
 
 const Stats = ({ selectedPokeInfos, color, loading }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const generalStats = selectedPokeInfos?.stats;
 
   const stats = generalStats.map((statObj) => ({
     stat: statObj?.stat?.name.replace(/special/i, 's'),
     value: statObj?.base_stat,
   }));
-
-  const maxValuecheck = (stats) => {
-    for (let i = 0; i < stats?.length; i++) {
-      const value = stats[i]?.value;
-      if (value > 150) return true;
-    }
-  };
-
-  const bitImg = selectedPokeInfos?.sprites?.front_default;
 
   return (
     <Grid
@@ -59,19 +52,11 @@ const Stats = ({ selectedPokeInfos, color, loading }) => {
             width: '100%',
             display: 'flex',
             flexDirection: 'column',
+            gap: '16px',
             mt: '12px',
-            gap: '8px',
           }}
         >
-          <Grid
-            container
-            sx={{
-              height: '60%',
-              width: '100%',
-              position: 'relative',
-            }}
-          >
-            <img
+          {/* <img
               src={bitImg}
               alt="bit-version"
               style={{
@@ -117,9 +102,65 @@ const Stats = ({ selectedPokeInfos, color, loading }) => {
                   },
                 },
               }}
-            />
-          </Grid>
-          <TypeStats selectedPokeInfos={selectedPokeInfos} color={color} />
+            /> */}
+          {stats?.map((stat, index) => (
+            <Grid
+              xs={12}
+              key={index}
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                width: '100%',
+                gap: '8px',
+              }}
+            >
+              <Grid
+                sx={{
+                  display: 'flex',
+                  gap: '8px',
+                  // justifyContent: 'space-between',
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: theme.palette.text.tertiary,
+                    fontSize: '16px',
+                    fontWeight: 500,
+                    textTransform: 'capitalize',
+                  }}
+                >
+                  {t(`stats.${stat.stat}`)}
+                </Typography>
+                <Typography
+                  sx={{
+                    color: theme.palette.text.primary,
+                    fontSize: '16px',
+                    fontWeight: 600,
+                    width: '40px',
+                    textAlign: 'center',
+                  }}
+                >
+                  {stat.value}
+                </Typography>
+              </Grid>
+              <LinearProgress
+                variant="determinate"
+                value={(stat.value / 255) * 100}
+                sx={{
+                  width: '100%',
+                  height: '8px',
+                  borderRadius: '5px',
+                  backgroundColor: theme.palette.tertiary.main,
+                  '& .MuiLinearProgress-bar': {
+                    backgroundColor: color,
+                  },
+
+                  '--LinearProgress-progressRadius': '12px',
+                  '--LinearProgress-radius': '12px',
+                }}
+              />
+            </Grid>
+          ))}
         </Grid>
       )}
     </Grid>

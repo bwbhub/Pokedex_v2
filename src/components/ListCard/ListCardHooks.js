@@ -45,7 +45,9 @@ const useListCard = ({ id, setOpenModal }) => {
 
   useEffect(() => {
     getPoke(id);
-    getSpecies(id);
+    if (id < 9999) {
+      getSpecies(id);
+    }
   }, [id]);
 
   return { pokeInfo, handleOpenModal, species, filteredName };

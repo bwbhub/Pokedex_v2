@@ -66,6 +66,7 @@
     "about": "Acerca de",
     "stats": "Estadísticas",
     "evolution": "Evolución",
+    "noEvolutionData": "No hay datos de evolución disponibles",
     "pokemonData": "Datos del Pokémon",
     "height": "Altura:",
     "weight": "Peso:",
@@ -76,5 +77,52 @@
     "takesNoDamageFrom": "No recibe daño de:",
     "takesHalfDamageFrom": "Recibe la mitad de daño de:",
     "takesDoubleDamageFrom": "Recibe el doble de daño de:"
+  },
+  "stats": {
+    "hp": "PS",
+    "attack": "Ataque",
+    "defense": "Defensa",
+    "s-attack": "At. Esp.",
+    "s-defense": "Def. Esp.",
+    "speed": "Velocidad"
+  },
+  "gender": {
+    "title": "Género",
+    "male": "Macho",
+    "female": "Hembra",
+    "genderless": "Sin género",
+    "ratio": "Proporción de género"
+  },
+  "about": {
+    "species": "Especie:",
+    "height": "Altura:",
+    "weight": "Peso:",
+    "weaknesses": "Debilidades:",
+    "gender": "Género:"
+  },
+  "evolution": {
+    "level": "Nivel",
+    "happiness": "Felicidad",
+    "knowsMove": "Conoce el movimiento",
+    "knowsType": "Conoce un movimiento de tipo",
+    "typeMove": "",
+    "atLocation": "En la ubicación",
+    "timeOfDay": "Momento del día",
+    "whileRaining": "Mientras llueve",
+    "stats": "Stats",
+    "equal": "iguales",
+    "attackGreater": "ataque > defensa",
+    "defenseGreater": "defensa > ataque",
+    "turnUpside": "Dar la vuelta al dispositivo",
+    "trade": "Intercambio",
+    "holding": "sosteniendo",
+    "with": "con",
+    "use": "Usar",
+    "specialEvolution": "Evolución especial (Nincada → Shedinja)",
+    "specialCondition": "Condición especial",
+    "female": "Hembra",
+    "male": "Macho",
+    "only": "solamente",
+    "inParty": "en el equipo"
   }
 }

@@ -63,18 +63,66 @@
     "fairy": "フェアリー"
   },
   "botCard": {
-    "about": "詳細",
+    "about": "概要",
     "stats": "能力値",
     "evolution": "進化",
+    "noEvolutionData": "進化データがありません",
     "pokemonData": "ポケモンデータ",
     "height": "高さ：",
     "weight": "重さ：",
     "captureRate": "捕獲率：",
     "baseHappiness": "基本なつき度：",
     "baseExp": "基礎経験値：",
-    "growthRate": "成長速度：",
-    "takesNoDamageFrom": "無効なタイプ：",
-    "takesHalfDamageFrom": "半減するタイプ：",
-    "takesDoubleDamageFrom": "弱点タイプ："
+    "growthRate": "成長率：",
+    "takesNoDamageFrom": "無効：",
+    "takesHalfDamageFrom": "半減：",
+    "takesDoubleDamageFrom": "弱点："
+  },
+  "stats": {
+    "hp": "HP",
+    "attack": "こうげき",
+    "defense": "ぼうぎょ",
+    "s-attack": "とくこう",
+    "s-defense": "とくぼう",
+    "speed": "すばやさ"
+  },
+  "gender": {
+    "title": "性別",
+    "male": "オス",
+    "female": "メス",
+    "genderless": "性別不明",
+    "ratio": "性別比"
+  },
+  "about": {
+    "species": "種類:",
+    "height": "高さ:",
+    "weight": "重さ:",
+    "weaknesses": "弱点:",
+    "gender": "性別:"
+  },
+  "evolution": {
+    "level": "レベル",
+    "happiness": "なつき度",
+    "knowsMove": "技を覚えている",
+    "knowsType": "タイプの技を覚えている",
+    "typeMove": "",
+    "atLocation": "場所",
+    "timeOfDay": "時間帯",
+    "whileRaining": "雨の時",
+    "stats": "ステータス",
+    "equal": "同じ",
+    "attackGreater": "攻撃 > 防御",
+    "defenseGreater": "防御 > 攻撃",
+    "turnUpside": "デバイスを逆さまにする",
+    "trade": "交換",
+    "holding": "持っている",
+    "with": "と",
+    "use": "使用",
+    "specialEvolution": "特殊進化 (ツチニン → ヌケニン)",
+    "specialCondition": "特殊条件",
+    "female": "メス",
+    "male": "オス",
+    "only": "のみ",
+    "inParty": "手持ちに"
   }
 }
