@@ -11,9 +11,13 @@ import {
   Typography,
   Dialog,
   Grid,
+  Divider,
+  useTheme as useMuiTheme,
 } from '@mui/material';
+import LocalLoading from '../Loaders/LocalLoading';
 import logo from '../../assets/logo.png';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 
 // import TypeFilter from '../filters/TypeFilter';
 // import RegionFilter from '../filters/RegionFilter';
@@ -29,7 +33,10 @@ const Header = ({ openModal, setPokeModal }) => {
     openFilterModal,
     closeFilterModal,
     handleSetPokedetails,
+    isLoading,
   } = useHeader({ openModal, setPokeModal });
+
+  const muiTheme = useMuiTheme();
 
   return (
     <Stack
@@ -37,10 +44,13 @@ const Header = ({ openModal, setPokeModal }) => {
       direction="row"
       spacing={2}
       alignItems="center"
-      sx={{ color: '#ACACAC', width: '100%', justifyContent: 'center', zIndex:1 }}
+      sx={{
+        color: muiTheme.palette.text.secondary,
+        width: '100%',
+        justifyContent: 'center',
+        zIndex: 1,
+      }}
     >
-      {/* Sélecteur de langue */}
-      <LanguageSelector />
       <Box component="img" src={logo} alt="pokedex" sx={{ width: 240 }} />
 
       <Box sx={{ position: 'relative' }}>
@@ -50,7 +60,7 @@ const Header = ({ openModal, setPokeModal }) => {
           sx={{
             p: '2px 4px',
             width: 384,
-            border: '2px solid #ACACAC',
+            border: `2px solid ${muiTheme.palette.text.secondary}`,
             borderRadius: '8px',
           }}
         >
@@ -71,17 +81,32 @@ const Header = ({ openModal, setPokeModal }) => {
             sx={{
               position: 'absolute',
               width: '100%',
-              bgcolor: '#2b2b2b',
-              color: 'inherit',
+              bgcolor: muiTheme.palette.background.paper,
+              color: muiTheme.palette.text.primary,
               borderRadius: '8px',
-              maxHeight: "300px",
-              overflowY: "scroll",
+              maxHeight: '300px',
+              overflowY: 'scroll',
               zIndex: 10000,
-              boxShadow: 3
+              boxShadow: 3,
             }}
           >
-            <List dense>
-              {searchList.map((poke) => (
+            {isLoading && query.length > 0 ? (
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  padding: 2,
+                  height: '100px'
+                }}
+              >
+                <Box sx={{ width: '40px', height: '40px' }}>
+                  <LocalLoading color={muiTheme.palette.primary.main} />
+                </Box>
+              </Box>
+            ) : (
+              <List dense>
+                {searchList.map((poke) => (
                   <ListItemButton
                     key={poke.name}
                     onClick={() => handleSetPokedetails(poke)}
@@ -89,14 +114,15 @@ const Header = ({ openModal, setPokeModal }) => {
                       textTransform: 'capitalize',
                       '&:hover': {
                         fontWeight: 'bold',
-                        backgroundColor: 'rgba(255, 255, 255, 0.08)',
+                        backgroundColor: muiTheme.palette.action.hover,
                       },
                     }}
                   >
-                    <ListItemText primary={poke.name} />
+                    <ListItemText primary={poke.displayName || poke.name} />
                   </ListItemButton>
                 ))}
-            </List>
+              </List>
+            )}
           </Paper>
         )}
       </Box>
@@ -114,13 +140,46 @@ const Header = ({ openModal, setPokeModal }) => {
         open={modalFilterOpen}
         onClose={closeFilterModal}
         aria-labelledby="filter-modal-title"
+        PaperProps={{
+          sx: {
+            p: 3,
+            borderRadius: '12px',
+          },
+        }}
       >
-        <Grid >
-          <Typography id="filter-modal-title" variant="h6" component="h2">
-            Filters
-          </Typography>
-          {/* <TypeFilter closeFilterModal={closeFilterModal} /> */}
-          {/* <RegionFilter closeFilterModal={closeFilterModal} /> */}
+        <Grid container direction="column" spacing={2}>
+          <Grid item>
+            <Typography variant="h6" component="h2">
+              Settings
+            </Typography>
+            <Box sx={{ mt: 2 }}>
+              <Typography variant="subtitle1">Theme</Typography>
+              <Box sx={{ mt: 1, mb: 2 }}>
+                <ThemeToggle />
+              </Box>
+            </Box>
+          </Grid>
+
+          <Divider />
+
+          <Grid item>
+            <Box sx={{ mt: 2 }}>
+              <Typography variant="subtitle1">Language</Typography>
+              <Box sx={{ mt: 1, mb: 2 }}>
+                <LanguageSelector />
+              </Box>
+            </Box>
+          </Grid>
+
+          <Divider />
+
+          <Grid item>
+            <Typography id="filter-modal-title" variant="h6" component="h2">
+              Filters
+            </Typography>
+            {/* <TypeFilter closeFilterModal={closeFilterModal} /> */}
+            {/* <RegionFilter closeFilterModal={closeFilterModal} /> */}
+          </Grid>
         </Grid>
       </Dialog>
     </Stack>

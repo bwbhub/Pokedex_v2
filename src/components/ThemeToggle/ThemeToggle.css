@@ -1,0 +1,11 @@
+.theme-toggle-button {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 50% !important;
+  transition: all 0.3s ease !important;
+}
+
+.theme-toggle-button:hover {
+  transform: scale(1.1) !important;
+}
+

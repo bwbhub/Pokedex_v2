@@ -1,18 +1,18 @@
-import { Dialog, IconButton } from '@mui/material';
+import { Dialog, IconButton, useTheme } from '@mui/material';
 import { X } from 'lucide-react';
 
-import { bgColors } from '../../utils/color';
 import { usePokedetails } from '../../context/Pokedetails';
 import TopCard from './TopCard/TopCard';
 import BotCard from './BotCard/BotCard';
 
 const DetailsModal = ({ closeModal, openModal }) => {
   const { pokeDetails, pokeSpecies } = usePokedetails();
+  const theme = useTheme();
 
   const imgUrl =
     pokeDetails?.sprites?.other?.['official-artwork']?.front_default;
   const mainType = pokeDetails?.types[0]?.type?.name;
-  const color = bgColors[mainType];
+  const color = theme.palette.pokemon.background[mainType];
 
   return (
     <Dialog
@@ -27,7 +27,7 @@ const DetailsModal = ({ closeModal, openModal }) => {
           borderRadius: '24px',
           overflow: 'hidden',
           position: 'relative',
-          backgroundColor: '#363636',
+          backgroundColor: color,
         },
       }}
     >
@@ -37,7 +37,7 @@ const DetailsModal = ({ closeModal, openModal }) => {
           position: 'absolute',
           right: '16px',
           top: '16px',
-          color: '#fff',
+          color: theme.palette.text.primary,
         }}
       >
         <X />
