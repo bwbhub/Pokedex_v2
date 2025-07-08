@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Typography, useTheme } from '@mui/material';
+import { Grid, Tooltip, Typography, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 import pokeApi from '../../../../../api/modules/pokedex.api';
@@ -99,25 +99,27 @@ const TypeStats = ({ selectedPokeInfos, onlyDouble = false }) => {
         }}
       >
         {doubleDmg.map((type, idx) => (
-          <Grid
-            key={type + idx}
-            sx={{
-              backgroundColor: textColors[type],
-              padding: '5px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '4px',
-              borderRadius: '4px',
-              width: '28px',
-            }}
-          >
-            <img
-              src={typeListSvg[type]}
-              alt={`${type}`}
-              style={{ width: '100%' }}
-            />
-          </Grid>
+          <Tooltip title={t(`types.${type}`)} arrow>
+            <Grid
+              key={type + idx}
+              sx={{
+                backgroundColor: textColors[type],
+                padding: '5px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '4px',
+                borderRadius: '4px',
+                width: '28px',
+              }}
+            >
+              <img
+                src={typeListSvg[type]}
+                alt={`${type}`}
+                style={{ width: '100%' }}
+              />
+            </Grid>
+          </Tooltip>
         ))}
       </Grid>
     </>

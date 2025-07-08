@@ -99,5 +99,30 @@
     "weight": "Gewicht:",
     "weaknesses": "Schwächen:",
     "gender": "Geschlecht:"
+  },
+  "evolution": {
+    "level": "Level",
+    "happiness": "Zuneigung",
+    "knowsMove": "Kennt Attacke",
+    "knowsType": "Kennt",
+    "typeMove": "Typ-Attacke",
+    "atLocation": "An Ort",
+    "timeOfDay": "Tageszeit",
+    "whileRaining": "Bei Regen",
+    "stats": "Stats",
+    "equal": "gleich",
+    "attackGreater": "Angriff > Verteidigung",
+    "defenseGreater": "Verteidigung > Angriff",
+    "turnUpside": "Gerät umdrehen",
+    "trade": "Tausch",
+    "holding": "trägt",
+    "with": "mit",
+    "use": "Verwende",
+    "specialEvolution": "Spezielle Entwicklung (Nincada → Ninjask)",
+    "specialCondition": "Spezielle Bedingung",
+    "female": "Weiblich",
+    "male": "Männlich",
+    "only": "nur",
+    "inParty": "im Team"
   }
 }

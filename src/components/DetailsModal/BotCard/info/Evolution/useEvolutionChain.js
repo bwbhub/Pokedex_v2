@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import pokeApi from '../../../../../api/modules/pokedex.api';
 import { processEvolutionChain } from '../../../../../utils/evolutionChainFuncs';
 import { languageSelector } from '../../../../../redux/features/languageSlice';
@@ -7,11 +8,11 @@ import { useSelector } from 'react-redux';
 const useEvolutionChain = (pokeDetails) => {
   const [rawEvolDetails, setRawEvolDetails] = useState(null);
   const [evolDetails, setEvolDetails] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Récupérer la langue active
+  // Récupérer la langue active et les traductions
   const activeLanguage = useSelector(languageSelector);
+  const { t } = useTranslation();
 
   // Extraire l'ID du Pokémon originel pour éviter un appel API redondant
   const originalPokemonId = pokeDetails?.id ? String(pokeDetails.id) : null;
@@ -21,11 +22,9 @@ const useEvolutionChain = (pokeDetails) => {
   useEffect(() => {
     const fetchEvolutionChain = async () => {
       if (!pokeDetails?.evolution_chain?.url) {
-        setIsLoading(false);
         return;
       }
 
-      setIsLoading(true);
       setError(null);
 
       try {
@@ -37,7 +36,39 @@ const useEvolutionChain = (pokeDetails) => {
 
         if (response) {
           const evolChain = response.chain;
-          const evolList = await processEvolutionChain(evolChain, activeLanguage);
+          // Créer un objet de traductions pour les évolutions
+          const evolutionTranslations = {
+            evolution: {
+              level: t('evolution.level'),
+              happiness: t('evolution.happiness'),
+              knowsMove: t('evolution.knowsMove'),
+              knowsType: t('evolution.knowsType'),
+              typeMove: t('evolution.typeMove'),
+              atLocation: t('evolution.atLocation'),
+              timeOfDay: t('evolution.timeOfDay'),
+              whileRaining: t('evolution.whileRaining'),
+              stats: t('evolution.stats'),
+              equal: t('evolution.equal'),
+              attackGreater: t('evolution.attackGreater'),
+              defenseGreater: t('evolution.defenseGreater'),
+              turnUpside: t('evolution.turnUpside'),
+              trade: t('evolution.trade'),
+              holding: t('evolution.holding'),
+              with: t('evolution.with'),
+              use: t('evolution.use'),
+              specialEvolution: t('evolution.specialEvolution'),
+              specialCondition: t('evolution.specialCondition'),
+              female: t('evolution.female'),
+              male: t('evolution.male'),
+              only: t('evolution.only'),
+              inParty: t('evolution.inParty'),
+            },
+          };
+          const evolList = await processEvolutionChain(
+            evolChain,
+            activeLanguage,
+            evolutionTranslations,
+          );
           setRawEvolDetails(evolList);
         } else {
           setError(err);
@@ -46,8 +77,6 @@ const useEvolutionChain = (pokeDetails) => {
       } catch (err) {
         setError(err);
         console.error('Error fetching evolution chain:', err);
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -106,8 +135,6 @@ const useEvolutionChain = (pokeDetails) => {
         return;
       }
 
-      setIsLoading(true);
-
       try {
         const evolutionLevels = buildLevel(rawEvolDetails);
 
@@ -159,8 +186,6 @@ const useEvolutionChain = (pokeDetails) => {
       } catch (err) {
         console.error('Erreur lors de la récupération des évolutions:', err);
         setEvolDetails(buildLevel(rawEvolDetails)); // Fallback avec les données brutes structurées
-      } finally {
-        setIsLoading(false);
       }
     };
 
@@ -173,7 +198,7 @@ const useEvolutionChain = (pokeDetails) => {
     pokeDetails,
   ]);
 
-  return { evolDetails, isLoading, error };
+  return { evolDetails, error };
 };
 
 export default useEvolutionChain;

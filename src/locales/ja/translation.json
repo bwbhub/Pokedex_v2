@@ -99,5 +99,30 @@
     "weight": "重さ:",
     "weaknesses": "弱点:",
     "gender": "性別:"
+  },
+  "evolution": {
+    "level": "レベル",
+    "happiness": "なつき度",
+    "knowsMove": "技を覚えている",
+    "knowsType": "タイプの技を覚えている",
+    "typeMove": "",
+    "atLocation": "場所",
+    "timeOfDay": "時間帯",
+    "whileRaining": "雨の時",
+    "stats": "ステータス",
+    "equal": "同じ",
+    "attackGreater": "攻撃 > 防御",
+    "defenseGreater": "防御 > 攻撃",
+    "turnUpside": "デバイスを逆さまにする",
+    "trade": "交換",
+    "holding": "持っている",
+    "with": "と",
+    "use": "使用",
+    "specialEvolution": "特殊進化 (ツチニン → ヌケニン)",
+    "specialCondition": "特殊条件",
+    "female": "メス",
+    "male": "オス",
+    "only": "のみ",
+    "inParty": "手持ちに"
   }
 }

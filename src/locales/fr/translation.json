@@ -99,5 +99,30 @@
     "weight": "Poids :",
     "weaknesses": "Faiblesses :",
     "gender": "Genre :"
+  },
+  "evolution": {
+    "level": "Niveau",
+    "happiness": "Bonheur",
+    "knowsMove": "Connaît l'attaque",
+    "knowsType": "Connaît une attaque de type",
+    "typeMove": "",
+    "atLocation": "À l'emplacement",
+    "timeOfDay": "Moment de la journée",
+    "whileRaining": "Sous la pluie",
+    "stats": "Stats",
+    "equal": "égales",
+    "attackGreater": "attaque > défense",
+    "defenseGreater": "défense > attaque",
+    "turnUpside": "Retourner l'appareil",
+    "trade": "Échange",
+    "holding": "en tenant",
+    "with": "avec",
+    "use": "Utiliser",
+    "specialEvolution": "Évolution spéciale (Nincada → Munja)",
+    "specialCondition": "Condition spéciale",
+    "female": "Femelle",
+    "male": "Mâle",
+    "only": "uniquement",
+    "inParty": "dans l'équipe"
   }
 }

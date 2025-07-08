@@ -99,5 +99,30 @@
     "weight": "Weight:",
     "weaknesses": "Weaknesses:",
     "gender": "Gender:"
+  },
+  "evolution": {
+    "level": "Level",
+    "happiness": "Happiness",
+    "knowsMove": "Knows move",
+    "knowsType": "Knows",
+    "typeMove": "type move",
+    "atLocation": "At location",
+    "timeOfDay": "Time of day",
+    "whileRaining": "While raining",
+    "stats": "Stats",
+    "equal": "equal",
+    "attackGreater": "attack > defense",
+    "defenseGreater": "defense > attack",
+    "turnUpside": "Turn device upside down",
+    "trade": "Trade",
+    "holding": "holding",
+    "with": "with",
+    "use": "Use",
+    "specialEvolution": "Special evolution (Nincada → Shedinja)",
+    "specialCondition": "Special condition",
+    "female": "Female",
+    "male": "Male",
+    "only": "only",
+    "inParty": "in party"
   }
 }

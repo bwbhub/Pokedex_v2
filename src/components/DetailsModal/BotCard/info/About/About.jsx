@@ -85,7 +85,7 @@ const About = ({ selectedPokeInfos, pokeDetails, loading, color }) => {
     },
     {
       label: 'height',
-      value: `${selectedPokeInfos?.height / 10}m`,
+      value: `${selectedPokeInfos?.height / 10}m (${((selectedPokeInfos?.height / 10) * 3.281).toFixed(1)}ft)`,
       display: false,
     },
     {
@@ -115,7 +115,7 @@ const About = ({ selectedPokeInfos, pokeDetails, loading, color }) => {
         display: 'flex',
         flexDirection: 'column',
         px: '24px',
-        pt: '12px',
+        mt: '24px',
       }}
     >
       {loading ? (
@@ -134,12 +134,12 @@ const About = ({ selectedPokeInfos, pokeDetails, loading, color }) => {
           </Grid>
         </Grid>
       ) : (
-        <Grid container sx={{ flexDirection: 'column', gap: '12px' }}>
+        <Grid container sx={{ flexDirection: 'column', gap: '16px' }}>
           {aboutData?.map((data, index) => (
             <Grid
               sx={{
                 display: 'flex',
-                gap: '12px',
+                gap: '18px',
                 // justifyContent: 'space-between',
               }}
               key={index}
@@ -160,7 +160,7 @@ const About = ({ selectedPokeInfos, pokeDetails, loading, color }) => {
                 <Typography
                   sx={{
                     color: theme.palette.text.primary,
-                    fontSize: '18px',
+                    fontSize: '17px',
                     fontWeight: 600,
                   }}
                 >
@@ -171,8 +171,9 @@ const About = ({ selectedPokeInfos, pokeDetails, loading, color }) => {
           ))}
           <Typography
             sx={{
-              fontSize: '18px',
+              fontSize: '19px',
               color: theme.palette.text.secondary,
+              fontWeight: 500,
               mt: '16px',
             }}
           >

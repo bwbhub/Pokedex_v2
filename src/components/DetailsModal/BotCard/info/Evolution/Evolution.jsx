@@ -1,37 +1,13 @@
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
 import { Grid, Typography, useTheme } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 import { formatId, urlConvert } from '../../../../../utils/textConvert';
 import useEvolutionChain from './useEvolutionChain';
 import LocalLoading from '../../../../Loaders/LocalLoading';
 
-const Evolution = ({ pokeDetails, color }) => {
-  const { evolDetails, isLoading } = useEvolutionChain(pokeDetails);
+const Evolution = ({ pokeDetails, color, loading }) => {
+  const { evolDetails } = useEvolutionChain(pokeDetails);
   const theme = useTheme();
-  const { t } = useTranslation();
-
-  if (!isLoading && !evolDetails) {
-    return (
-      <Grid
-        sx={{
-          height: '100%',
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          overflowY: 'auto',
-        }}
-      >
-        <Typography
-          sx={{ color: theme.palette.text.primary, fontSize: '16px' }}
-        >
-          {t('botCard.noEvolutionData')}
-        </Typography>
-      </Grid>
-    );
-  }
 
   return evolDetails ? (
     <Grid
@@ -49,7 +25,7 @@ const Evolution = ({ pokeDetails, color }) => {
         padding: '8px',
       }}
     >
-      {isLoading ? (
+      {loading ? (
         <Grid
           sx={{
             height: '100%',

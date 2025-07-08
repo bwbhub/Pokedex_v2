@@ -1,160 +1,6 @@
 import pokeApi from '../api/modules/pokedex.api';
 
-// Traductions pour les conditions d'évolution
-const evolutionTranslations = {
-  en: {
-    level: 'Level',
-    happiness: 'Happiness',
-    knowsMove: 'Knows move',
-    knowsType: 'Knows',
-    typeMove: 'type move',
-    atLocation: 'At location',
-    timeOfDay: 'Time of day',
-    whileRaining: 'While raining',
-    stats: 'Stats',
-    equal: 'equal',
-    attackGreater: 'attack > defense',
-    defenseGreater: 'defense > attack',
-    turnUpside: 'Turn device upside down',
-    trade: 'Trade',
-    holding: 'holding',
-    with: 'with',
-    use: 'Use',
-    specialEvolution: 'Special evolution (Nincada → Shedinja)',
-    specialCondition: 'Special condition',
-    female: 'Female',
-    male: 'Male',
-    only: 'only',
-    inParty: 'in party'
-  },
-  fr: {
-    level: 'Niveau',
-    happiness: 'Bonheur',
-    knowsMove: 'Connaît l\'attaque',
-    knowsType: 'Connaît une attaque de type',
-    typeMove: '',
-    atLocation: 'À l\'emplacement',
-    timeOfDay: 'Moment de la journée',
-    whileRaining: 'Sous la pluie',
-    stats: 'Stats',
-    equal: 'égales',
-    attackGreater: 'attaque > défense',
-    defenseGreater: 'défense > attaque',
-    turnUpside: 'Retourner l\'appareil',
-    trade: 'Échange',
-    holding: 'en tenant',
-    with: 'avec',
-    use: 'Utiliser',
-    specialEvolution: 'Évolution spéciale (Nincada → Munja)',
-    specialCondition: 'Condition spéciale',
-    female: 'Femelle',
-    male: 'Mâle',
-    only: 'uniquement',
-    inParty: 'dans l\'équipe'
-  },
-  es: {
-    level: 'Nivel',
-    happiness: 'Felicidad',
-    knowsMove: 'Conoce el movimiento',
-    knowsType: 'Conoce un movimiento de tipo',
-    typeMove: '',
-    atLocation: 'En la ubicación',
-    timeOfDay: 'Momento del día',
-    whileRaining: 'Mientras llueve',
-    stats: 'Stats',
-    equal: 'iguales',
-    attackGreater: 'ataque > defensa',
-    defenseGreater: 'defensa > ataque',
-    turnUpside: 'Dar la vuelta al dispositivo',
-    trade: 'Intercambio',
-    holding: 'sosteniendo',
-    with: 'con',
-    use: 'Usar',
-    specialEvolution: 'Evolución especial (Nincada → Shedinja)',
-    specialCondition: 'Condición especial',
-    female: 'Hembra',
-    male: 'Macho',
-    only: 'solamente',
-    inParty: 'en el equipo'
-  },
-  de: {
-    level: 'Level',
-    happiness: 'Zuneigung',
-    knowsMove: 'Kennt Attacke',
-    knowsType: 'Kennt',
-    typeMove: 'Typ-Attacke',
-    atLocation: 'An Ort',
-    timeOfDay: 'Tageszeit',
-    whileRaining: 'Bei Regen',
-    stats: 'Stats',
-    equal: 'gleich',
-    attackGreater: 'Angriff > Verteidigung',
-    defenseGreater: 'Verteidigung > Angriff',
-    turnUpside: 'Gerät umdrehen',
-    trade: 'Tausch',
-    holding: 'trägt',
-    with: 'mit',
-    use: 'Verwende',
-    specialEvolution: 'Spezielle Entwicklung (Nincada → Ninjask)',
-    specialCondition: 'Spezielle Bedingung',
-    female: 'Weiblich',
-    male: 'Männlich',
-    only: 'nur',
-    inParty: 'im Team'
-  },
-  it: {
-    level: 'Livello',
-    happiness: 'Felicità',
-    knowsMove: 'Conosce la mossa',
-    knowsType: 'Conosce una mossa di tipo',
-    typeMove: '',
-    atLocation: 'Nella posizione',
-    timeOfDay: 'Momento del giorno',
-    whileRaining: 'Mentre piove',
-    stats: 'Statistiche',
-    equal: 'uguali',
-    attackGreater: 'attacco > difesa',
-    defenseGreater: 'difesa > attacco',
-    turnUpside: 'Capovolgere il dispositivo',
-    trade: 'Scambio',
-    holding: 'tenendo',
-    with: 'con',
-    use: 'Usa',
-    specialEvolution: 'Evoluzione speciale (Nincada → Shedinja)',
-    specialCondition: 'Condizione speciale',
-    female: 'Femmina',
-    male: 'Maschio',
-    only: 'solo',
-    inParty: 'nella squadra'
-  },
-  ja: {
-    level: 'レベル',
-    happiness: 'なつき度',
-    knowsMove: '技を覚えている',
-    knowsType: 'タイプの技を覚えている',
-    typeMove: '',
-    atLocation: '場所',
-    timeOfDay: '時間帯',
-    whileRaining: '雨の時',
-    stats: 'ステータス',
-    equal: '同じ',
-    attackGreater: '攻撃 > 防御',
-    defenseGreater: '防御 > 攻撃',
-    turnUpside: '本体を逆さまにする',
-    trade: '通信交換',
-    holding: 'を持たせて',
-    with: 'と',
-    use: '使用',
-    specialEvolution: '特殊進化 (ツチニン → ヌケニン)',
-    specialCondition: '特殊条件',
-    female: 'メス',
-    male: 'オス',
-    only: 'のみ',
-    inParty: '手持ちに'
-  }
-};
-
-export const extractEvolutionInfo = async (evolutionDetails, language = 'en') => {
+export const extractEvolutionInfo = async (evolutionDetails, language = 'en', translations) => {
   if (!evolutionDetails || evolutionDetails.length === 0) return null;
 
   const detail = evolutionDetails[0];
@@ -173,8 +19,8 @@ export const extractEvolutionInfo = async (evolutionDetails, language = 'en') =>
 
   // Helper function to get translated text
   const getTranslatedText = (key) => {
-    const translations = evolutionTranslations[language] || evolutionTranslations['en'];
-    return translations[key] || evolutionTranslations['en'][key] || key;
+    if (!translations || !translations.evolution) return key;
+    return translations.evolution[key] || key;
   };
 
   switch (detail.trigger?.name) {
@@ -302,7 +148,7 @@ export const extractEvolutionInfo = async (evolutionDetails, language = 'en') =>
   return evolutionInfo;
 };
 
-export const processEvolutionChain = async (evolutionChain, language = 'en') => {
+export const processEvolutionChain = async (evolutionChain, language = 'en', translations) => {
   const speciesList = [];
 
   const traverseEvolutions = async (evolution, previousSpecies = null) => {
@@ -316,7 +162,8 @@ export const processEvolutionChain = async (evolutionChain, language = 'en') => 
     if (previousSpecies) {
       speciesInfo.evolutionDetails = await extractEvolutionInfo(
         evolution.evolution_details,
-        language
+        language,
+        translations
       );
     }
 

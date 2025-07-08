@@ -1,0 +1,129 @@
+{
+  "common": {
+    "search": "Cerca",
+    "loading": "Caricamento...",
+    "error": "Errore",
+    "notFound": "Non trovato",
+    "back": "Indietro",
+    "close": "Chiudi"
+  },
+  "pokemon": {
+    "id": "ID",
+    "name": "Nome",
+    "type": "Tipo",
+    "height": "Altezza",
+    "weight": "Peso",
+    "abilities": "Abilità",
+    "stats": "Statistiche",
+    "hp": "PS",
+    "attack": "Attacco",
+    "defense": "Difesa",
+    "specialAttack": "Attacco Speciale",
+    "specialDefense": "Difesa Speciale",
+    "speed": "Velocità",
+    "evolution": "Evoluzione",
+    "moves": "Mosse"
+  },
+  "filters": {
+    "title": "Filtri",
+    "type": "Tipo",
+    "generation": "Generazione",
+    "sort": "Ordina",
+    "reset": "Reimposta",
+    "apply": "Applica"
+  },
+  "language": {
+    "select": "Seleziona lingua",
+    "languages": {
+      "en": "Inglese",
+      "fr": "Francese",
+      "es": "Spagnolo",
+      "de": "Tedesco",
+      "it": "Italiano",
+      "ja": "Giapponese"
+    }
+  },
+  "types": {
+    "normal": "Normale",
+    "fire": "Fuoco",
+    "water": "Acqua",
+    "electric": "Elettro",
+    "grass": "Erba",
+    "ice": "Ghiaccio",
+    "fighting": "Lotta",
+    "poison": "Veleno",
+    "ground": "Terra",
+    "flying": "Volante",
+    "psychic": "Psico",
+    "bug": "Coleottero",
+    "rock": "Roccia",
+    "ghost": "Spettro",
+    "dragon": "Drago",
+    "dark": "Buio",
+    "steel": "Acciaio",
+    "fairy": "Fata"
+  },
+  "botCard": {
+    "about": "Informazioni",
+    "stats": "Statistiche",
+    "evolution": "Evoluzione",
+    "noEvolutionData": "Nessun dato di evoluzione disponibile",
+    "pokemonData": "Dati del Pokémon",
+    "height": "Altezza:",
+    "weight": "Peso:",
+    "captureRate": "Tasso di cattura:",
+    "baseHappiness": "Felicità base:",
+    "baseExp": "Exp. base:",
+    "growthRate": "Tasso di crescita:",
+    "takesNoDamageFrom": "Non subisce danni da:",
+    "takesHalfDamageFrom": "Subisce metà danni da:",
+    "takesDoubleDamageFrom": "Subisce doppi danni da:"
+  },
+  "stats": {
+    "hp": "PS",
+    "attack": "Attacco",
+    "defense": "Difesa",
+    "s-attack": "Att. Sp.",
+    "s-defense": "Dif. Sp.",
+    "speed": "Velocità"
+  },
+  "gender": {
+    "title": "Genere",
+    "male": "Maschio",
+    "female": "Femmina",
+    "genderless": "Senza genere",
+    "ratio": "Rapporto di genere"
+  },
+  "about": {
+    "species": "Specie:",
+    "height": "Altezza:",
+    "weight": "Peso:",
+    "weaknesses": "Debolezze:",
+    "gender": "Genere:"
+  },
+  "evolution": {
+    "level": "Livello",
+    "happiness": "Felicità",
+    "knowsMove": "Conosce la mossa",
+    "knowsType": "Conosce una mossa di tipo",
+    "typeMove": "",
+    "atLocation": "Nella posizione",
+    "timeOfDay": "Momento del giorno",
+    "whileRaining": "Mentre piove",
+    "stats": "Statistiche",
+    "equal": "uguali",
+    "attackGreater": "attacco > difesa",
+    "defenseGreater": "difesa > attacco",
+    "turnUpside": "Capovolgere il dispositivo",
+    "trade": "Scambio",
+    "holding": "tenendo",
+    "with": "con",
+    "use": "Usa",
+    "specialEvolution": "Evoluzione speciale (Nincada → Shedinja)",
+    "specialCondition": "Condizione speciale",
+    "female": "Femmina",
+    "male": "Maschio",
+    "only": "solo",
+    "inParty": "nella squadra"
+  }
+}
