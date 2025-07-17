@@ -4,8 +4,9 @@
     "loading": "Cargando...",
     "error": "Error",
     "notFound": "No encontrado",
-    "back": "Volver",
-    "close": "Cerrar"
+    "back": "Atrás",
+    "close": "Cerrar",
+    "clear": "Limpiar"
   },
   "pokemon": {
     "id": "ID",

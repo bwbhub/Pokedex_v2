@@ -1,21 +1,31 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Grid, Typography, Box, useTheme } from '@mui/material';
+import { Grid, Typography, Box, useTheme, IconButton } from '@mui/material';
 import { useSelector } from 'react-redux';
 
 import { formatId } from '../../../utils/textConvert';
 import pokeball from '../../../assets/pokeball.png';
 import PokemonTypeChip from '../../PokemonTypeChip/PokemonTypeChip';
+import { usePokedetails } from '../../../context/Pokedetails';
 import './TopCard.css';
+import { Volume2 } from 'lucide-react';
 
 const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
   // const textRef = useRef(null);
   // const containerRef = useRef(null);
   const theme = useTheme();
   const activeLanguage = useSelector((state) => state.language.activeLanguage);
+  const { regionDex } = usePokedetails();
+
   // const [animationDistance, setAnimationDistance] = useState(0);
   const audioRef = useRef(null);
 
-  const formatedId = formatId(pokeInfo?.id);
+  const formatedId = formatId(
+    regionDex
+      ? species?.pokedex_numbers.find(
+          (number) => number?.pokedex?.name === regionDex?.name,
+        )?.entry_number
+      : pokeInfo?.id,
+  );
 
   const filteredName = species?.names?.find(
     (name) => name.language.name === activeLanguage,
@@ -142,8 +152,8 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
       >
         <Box
           sx={{
-            width: '30px',
-            height: '30px',
+            width: '36px',
+            height: '36px',
             maskImage: `url(${imgUrl})`,
             WebkitMaskImage: `url(${imgUrl})`,
             maskSize: 'contain',
@@ -152,6 +162,9 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
             zIndex: 100,
           }}
         />
+        <IconButton onClick={playPokemonCry} sx={{ padding: 1, mt: 1 }}>
+          <Volume2 color="#F3F4F6" size={26} strokeWidth={4} />
+        </IconButton>
       </Grid>
       <Grid
         sx={{
@@ -173,7 +186,6 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
             component="img"
             src={imgUrl}
             alt={filteredName}
-            onClick={playPokemonCry}
             sx={{
               width: '95%',
               zIndex: 100,

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Grid, Typography, Box, useTheme } from '@mui/material';
-import { useTranslation } from 'react-i18next';
 
 import useListCard from './ListCardHooks';
 import pokeball from '../../assets/pokeball.png';
@@ -10,11 +9,10 @@ import PokemonTypeChip from '../PokemonTypeChip/PokemonTypeChip';
 import './ListCard.css';
 
 const ListCard = ({ pokemonId, setOpenModal }) => {
-  const { pokeInfo, species, handleOpenModal, filteredName } = useListCard({
+  const { pokeInfo, handleOpenModal, filteredName, shownId } = useListCard({
     id: pokemonId,
     setOpenModal,
   });
-  const { t } = useTranslation();
   const theme = useTheme();
 
   const imgUrl = pokeInfo?.sprites?.other?.['official-artwork']?.front_default;
@@ -91,7 +89,7 @@ const ListCard = ({ pokemonId, setOpenModal }) => {
           <Typography
             style={{ fontSize: '12px', fontWeight: 'medium', color: '#f3f4f6' }}
           >
-            {formatId(pokemonId)}
+            {formatId(shownId)}
           </Typography>
           <Typography
             style={{

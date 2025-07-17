@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setActiveLanguage } from '../../redux/features/languageSlice';
-import { Box, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Box, FormControl, Select, MenuItem, Tooltip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
+import { setActiveLanguage } from '../../../redux/features/languageSlice';
+import { supportedLanguages, langListSvg } from '../../../utils/svgs';
 
 const LanguageSelector = () => {
   const dispatch = useDispatch();
-  const { activeLanguage, availableLanguages } = useSelector(state => state.language);
+  const { activeLanguage, availableLanguages } = useSelector(
+    (state) => state.language,
+  );
   const { t, i18n } = useTranslation();
 
-  // Langues supportées par l'application
-  const supportedLanguages = ['en', 'fr', 'es', 'de', 'ja'];
-  
   // Synchroniser la langue i18n avec Redux au chargement du composant
   useEffect(() => {
     // S'assurer que i18n utilise la même langue que celle dans Redux
@@ -38,21 +38,46 @@ const LanguageSelector = () => {
   }
 
   return (
-    <Box sx={{ minWidth: 120, maxWidth: 200, ml: 'auto', mr: 2 }}>
+    <Box
+      sx={{ minWidth: 0, maxWidth: 70, display: 'flex', alignItems: 'center' }}
+    >
       <FormControl fullWidth size="small">
-        <InputLabel id="language-select-label">{t('language.select')}</InputLabel>
         <Select
           labelId="language-select-label"
           id="language-select"
           value={activeLanguage}
           label={t('language.select')}
           onChange={handleLanguageChange}
+          sx={{
+            width: '65px',
+            padding: 0,
+            '& .MuiSelect-select': {
+              padding: 0,
+              display: 'flex',
+              alignItems: 'center',
+            },
+            '& .MuiOutlinedInput-notchedOutline': {
+              border: 'none',
+            },
+            '&.MuiOutlinedInput-root': {
+              padding: 0,
+            },
+          }}
         >
           {availableLanguages
-            .filter(lang => supportedLanguages.includes(lang.name))
+            .filter((lang) => supportedLanguages.includes(lang.name))
             .map((lang) => (
-              <MenuItem key={lang.name} value={lang.name}>
-                {t(`language.languages.${lang.name}`)}
+              <MenuItem
+                key={lang.name}
+                value={lang.name}
+                sx={{ minWidth: '65px' }}
+              >
+                <Tooltip
+                  title={t(`language.languages.${lang.name}`)}
+                  placement="right"
+                >
+                  <img src={langListSvg[lang.name]} alt={`${lang.name} flag`} />
+                </Tooltip>
               </MenuItem>
             ))}
         </Select>

@@ -5,7 +5,8 @@
     "error": "Erreur",
     "notFound": "Non trouvé",
     "back": "Retour",
-    "close": "Fermer"
+    "close": "Fermer",
+    "clear": "Effacer"
   },
   "pokemon": {
     "id": "ID",

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 const useListCard = ({ id, setOpenModal }) => {
   const [pokeInfo, setPokeInfo] = useState(null);
   const [species, setSpecies] = useState(null);
-  const { setPokeDetails, setPokeSpecies } = usePokedetails();
+  const { setPokeDetails, setPokeSpecies, regionDex } = usePokedetails();
 
   const activeLanguage = useSelector((state) => state.language.activeLanguage);
 
@@ -43,6 +43,12 @@ const useListCard = ({ id, setOpenModal }) => {
     return name?.name;
   }, [species, activeLanguage]);
 
+  const shownId = regionDex
+    ? species?.pokedex_numbers.find(
+        (number) => number?.pokedex?.name === regionDex?.name,
+      )?.entry_number
+    : id;
+
   useEffect(() => {
     getPoke(id);
     if (id < 9999) {
@@ -50,7 +56,7 @@ const useListCard = ({ id, setOpenModal }) => {
     }
   }, [id]);
 
-  return { pokeInfo, handleOpenModal, species, filteredName };
+  return { pokeInfo, handleOpenModal, species, filteredName, shownId };
 };
 
 export default useListCard;

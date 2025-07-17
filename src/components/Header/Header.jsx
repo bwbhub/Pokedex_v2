@@ -12,15 +12,15 @@ import {
   Dialog,
   Grid,
   Divider,
-  useTheme as useMuiTheme,
+  useTheme,
 } from '@mui/material';
 import LocalLoading from '../Loaders/LocalLoading';
 import logo from '../../assets/logo.png';
-import LanguageSelector from '../LanguageSelector/LanguageSelector';
-import ThemeToggle from '../ThemeToggle/ThemeToggle';
+import LanguageSelector from './LanguageSelector/LanguageSelector';
+import ThemeToggle from './ThemeToggle/ThemeToggle';
 
 // import TypeFilter from '../filters/TypeFilter';
-// import RegionFilter from '../filters/RegionFilter';
+import RegionFilter from './Filters/Region/RegionFilter';
 import useHeader from './HeaderHook';
 import { Search, SlidersHorizontal } from 'lucide-react';
 
@@ -36,7 +36,7 @@ const Header = ({ openModal, setPokeModal }) => {
     isLoading,
   } = useHeader({ openModal, setPokeModal });
 
-  const muiTheme = useMuiTheme();
+  const theme = useTheme();
 
   return (
     <Stack
@@ -45,7 +45,7 @@ const Header = ({ openModal, setPokeModal }) => {
       spacing={2}
       alignItems="center"
       sx={{
-        color: muiTheme.palette.text.secondary,
+        color: theme.palette.text.secondary,
         width: '100%',
         justifyContent: 'center',
         zIndex: 1,
@@ -60,7 +60,7 @@ const Header = ({ openModal, setPokeModal }) => {
           sx={{
             p: '2px 4px',
             width: 384,
-            border: `2px solid ${muiTheme.palette.text.secondary}`,
+            border: `2px solid ${theme.palette.text.secondary}`,
             borderRadius: '8px',
           }}
         >
@@ -76,13 +76,13 @@ const Header = ({ openModal, setPokeModal }) => {
           />
         </Stack>
 
-        {query.length > 0 && (
+        {query?.length > 0 && (
           <Paper
             sx={{
               position: 'absolute',
               width: '100%',
-              bgcolor: muiTheme.palette.background.paper,
-              color: muiTheme.palette.text.primary,
+              bgcolor: theme.palette.background.paper,
+              color: theme.palette.text.primary,
               borderRadius: '8px',
               maxHeight: '300px',
               overflowY: 'scroll',
@@ -90,18 +90,18 @@ const Header = ({ openModal, setPokeModal }) => {
               boxShadow: 3,
             }}
           >
-            {isLoading && query.length > 0 ? (
+            {isLoading && query?.length > 0 ? (
               <Box
                 sx={{
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center',
                   padding: 2,
-                  height: '100px'
+                  height: '100px',
                 }}
               >
                 <Box sx={{ width: '40px', height: '40px' }}>
-                  <LocalLoading color={muiTheme.palette.primary.main} />
+                  <LocalLoading color={theme.palette.primary.main} />
                 </Box>
               </Box>
             ) : (
@@ -114,7 +114,7 @@ const Header = ({ openModal, setPokeModal }) => {
                       textTransform: 'capitalize',
                       '&:hover': {
                         fontWeight: 'bold',
-                        backgroundColor: muiTheme.palette.action.hover,
+                        backgroundColor: theme.palette.action.hover,
                       },
                     }}
                   >
@@ -136,7 +136,7 @@ const Header = ({ openModal, setPokeModal }) => {
       </IconButton>
 
       <Dialog
-        maxWidth="xs"
+        maxWidth="sm"
         open={modalFilterOpen}
         onClose={closeFilterModal}
         aria-labelledby="filter-modal-title"
@@ -144,19 +144,27 @@ const Header = ({ openModal, setPokeModal }) => {
           sx: {
             p: 3,
             borderRadius: '12px',
+            width: '100%',
+            position: 'relative',
           },
         }}
       >
         <Grid container direction="column" spacing={2}>
-          <Grid item>
+          <Grid
+            item
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
             <Typography variant="h6" component="h2">
               Settings
             </Typography>
-            <Box sx={{ mt: 2 }}>
-              <Typography variant="subtitle1">Theme</Typography>
-              <Box sx={{ mt: 1, mb: 2 }}>
-                <ThemeToggle />
-              </Box>
+
+            <Box sx={{ display: 'flex' }}>
+              <LanguageSelector />
+              <ThemeToggle />
             </Box>
           </Grid>
 
@@ -164,10 +172,7 @@ const Header = ({ openModal, setPokeModal }) => {
 
           <Grid item>
             <Box sx={{ mt: 2 }}>
-              <Typography variant="subtitle1">Language</Typography>
-              <Box sx={{ mt: 1, mb: 2 }}>
-                <LanguageSelector />
-              </Box>
+              <RegionFilter closeFilterModal={closeFilterModal} />
             </Box>
           </Grid>
 
@@ -178,7 +183,6 @@ const Header = ({ openModal, setPokeModal }) => {
               Filters
             </Typography>
             {/* <TypeFilter closeFilterModal={closeFilterModal} /> */}
-            {/* <RegionFilter closeFilterModal={closeFilterModal} /> */}
           </Grid>
         </Grid>
       </Dialog>
