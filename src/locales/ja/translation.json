@@ -5,7 +5,8 @@
     "error": "エラー",
     "notFound": "見つかりません",
     "back": "戻る",
-    "close": "閉じる"
+    "close": "閉じる",
+    "clear": "クリア"
   },
   "pokemon": {
     "id": "ID",

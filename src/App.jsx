@@ -1,26 +1,28 @@
 import React, { createContext, useEffect, useMemo, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Layout from './components/Layout';
-import HomePage from './pages/Homepage/HomePage';
-import './App.css';
-import pokeApi from './api/modules/pokedex.api';
 import { useDispatch, useSelector } from 'react-redux';
-import { setLanguages, setActiveLanguage } from './redux/features/languageSlice';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { CssBaseline } from '@mui/material';
+
+import './App.css';
+import Layout from './components/Layout';
+import HomePage from './pages/Homepage/HomePage';
+import pokeApi from './api/modules/pokedex.api';
 import { getDesignTokens } from './theme/theme';
+import {
+  setLanguages,
+  setActiveLanguage,
+} from './redux/features/languageSlice';
 
 // Créer un contexte pour le mode de couleur
-export const ColorModeContext = createContext({ 
-  toggleColorMode: () => {}, 
-  mode: 'dark' 
+export const ColorModeContext = createContext({
+  toggleColorMode: () => {},
+  mode: 'dark',
 });
-
-
 
 function App() {
   const dispatch = useDispatch();
-  const activeLanguage = useSelector(state => state.language.activeLanguage);
+  const activeLanguage = useSelector((state) => state.language.activeLanguage);
   // État local pour le mode de thème (dark/light)
   const [mode, setMode] = useState(() => {
     // Récupérer le mode depuis localStorage ou utiliser 'dark' par défaut
@@ -45,10 +47,10 @@ function App() {
       if (response && response.results) {
         // Stocker les langues disponibles dans Redux
         dispatch(setLanguages(response.results));
-        
+
         // Récupérer la langue sauvegardée dans localStorage
         const savedLanguage = localStorage.getItem('user-language');
-        
+
         // Si une langue est sauvegardée dans localStorage, l'utiliser
         if (savedLanguage) {
           dispatch(setActiveLanguage(savedLanguage));
@@ -58,9 +60,9 @@ function App() {
           dispatch(setActiveLanguage(activeLanguage));
         }
       } else {
-        console.error("Erreur lors de la récupération des langues:", err);
+        console.error('Erreur lors de la récupération des langues:', err);
       }
-    }
+    };
     fetchLanguages();
   }, [dispatch, activeLanguage]);
 

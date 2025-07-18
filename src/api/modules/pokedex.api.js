@@ -1,7 +1,8 @@
 import publicClient from '../client/public.client';
 
 const pokedexEndpoints = {
-  pokedex: '/pokedex',
+  pokedexList: '/pokedex',
+  pokedexId: ({ pokedexId }) => `/pokedex/${pokedexId}`,
   pokeList: '/pokemon/?offset=0&limit=100000s',
   pokemon: ({ pokeId }) => `pokemon/${pokeId}`,
   languages: `/language`,
@@ -9,8 +10,8 @@ const pokedexEndpoints = {
   species: ({ pokeId }) => `/pokemon-species/${pokeId}`,
   evolution: ({ chainId }) => `/evolution-chain/${chainId}`,
   type: ({ typeName }) => `/type/${typeName}`,
-  generation: '/generation',
-  generationId: ({ genId }) => `/generation/${genId}`,
+  region: '/region',
+  regionId: ({ regionId }) => `/region/${regionId}`,
   item: ({ itemName }) => `/item/${itemName}`,
   move: ({ moveName }) => `/move/${moveName}`,
   location: ({ location }) => `/location/${location}`,
@@ -57,19 +58,19 @@ const pokeApi = {
       return { err };
     }
   },
-  getGen: async () => {
+  getRegion: async () => {
     try {
-      const response = await publicClient.get(pokedexEndpoints.generation);
+      const response = await publicClient.get(pokedexEndpoints.region);
 
       return { response };
     } catch (err) {
       return { err };
     }
   },
-  getGenId: async ({ genId }) => {
+  getRegiondId: async ({ regionId }) => {
     try {
       const response = await publicClient.get(
-        pokedexEndpoints.generationId({ genId }),
+        pokedexEndpoints.regionId({ regionId }),
       );
 
       return { response };
@@ -134,6 +135,26 @@ const pokeApi = {
     try {
       const response = await publicClient.get(
         pokedexEndpoints.location({ location }),
+      );
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  getPokedexList: async () => {
+    try {
+      const response = await publicClient.get(pokedexEndpoints.pokedexList());
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  getPokedexId: async ({ pokedexId }) => {
+    try {
+      const response = await publicClient.get(
+        pokedexEndpoints.pokedexId({ pokedexId }),
       );
 
       return { response };

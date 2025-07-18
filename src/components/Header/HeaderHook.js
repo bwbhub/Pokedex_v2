@@ -8,7 +8,7 @@ import {
   getPokemonNameByLang,
 } from '../../utils/pokemonNameCache';
 
-const useHeader = ({ openModal, setPokeModal }) => {
+const useHeader = ({ setPokeModal }) => {
   const [modalFilterOpen, setModalFilterOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [allPokemon, setAllPokemon] = useState([]);
@@ -28,6 +28,11 @@ const useHeader = ({ openModal, setPokeModal }) => {
 
   const closeFilterModal = () => {
     setModalFilterOpen(false);
+  };
+
+  const handleSetPokedetails = (pokemon) => {
+    setPokeDetails(pokemon);
+    setPokeModal(true);
   };
 
   const loadPokemonNames = useCallback(async (pokemonList) => {
@@ -144,11 +149,6 @@ const useHeader = ({ openModal, setPokeModal }) => {
 
     return () => clearTimeout(searchTimeout);
   }, [query, allPokemon, initialLoadComplete, activeLanguage]);
-
-  const handleSetPokedetails = (pokemon) => {
-    setPokeDetails(pokemon);
-    setPokeModal(true);
-  };
 
   return {
     modalFilterOpen,

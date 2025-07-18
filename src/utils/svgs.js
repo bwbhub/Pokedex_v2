@@ -1,21 +1,26 @@
-import bug from "../assets/Bug.svg"
-import dark from "../assets/Dark.svg"
-import dragon from "../assets/Dragon.svg"
-import electric from "../assets/Electric.svg"
-import fairy from "../assets/Fairy.svg"
-import fighting from "../assets/Fighting.svg"
-import fire from "../assets/Fire.svg"
-import flying from "../assets/Flying.svg"
-import ghost from "../assets/Ghost.svg"
-import grass from "../assets/Grass.svg"
-import ground from "../assets/Ground.svg"
-import ice from "../assets/Ice.svg"
-import normal from "../assets/Normal.svg"
-import poison from "../assets/Poison.svg"
-import psychic from "../assets/Psychic.svg"
-import rock from "../assets/Rock.svg"
-import steel from "../assets/Steel.svg"
-import water from "../assets/Water.svg"
+import bug from '../assets/Bug.svg';
+import dark from '../assets/Dark.svg';
+import dragon from '../assets/Dragon.svg';
+import electric from '../assets/Electric.svg';
+import fairy from '../assets/Fairy.svg';
+import fighting from '../assets/Fighting.svg';
+import fire from '../assets/Fire.svg';
+import flying from '../assets/Flying.svg';
+import ghost from '../assets/Ghost.svg';
+import grass from '../assets/Grass.svg';
+import ground from '../assets/Ground.svg';
+import ice from '../assets/Ice.svg';
+import normal from '../assets/Normal.svg';
+import poison from '../assets/Poison.svg';
+import psychic from '../assets/Psychic.svg';
+import rock from '../assets/Rock.svg';
+import steel from '../assets/Steel.svg';
+import water from '../assets/Water.svg';
+import en from '../assets/en.svg';
+import fr from '../assets/fr.svg';
+import de from '../assets/de.svg';
+import es from '../assets/es.svg';
+import ja from '../assets/ja.svg';
 
 const typeListSvg = {
   bug: bug,
@@ -35,28 +40,38 @@ const typeListSvg = {
   psychic: psychic,
   rock: rock,
   steel: steel,
-  water: water
-}
+  water: water,
+};
 
 const typeList = [
-  "bug",
-  "dark",
-  "dragon",
-  "electric",
-  "fairy",
-  "fighting",
-  "fire",
-  "flying",
-  "ghost",
-  "grass",
-  "ground",
-  "ice",
-  "normal",
-  "poison",
-  "psychic",
-  "rock",
-  "steel",
-  "water"
-]
+  'bug',
+  'dark',
+  'dragon',
+  'electric',
+  'fairy',
+  'fighting',
+  'fire',
+  'flying',
+  'ghost',
+  'grass',
+  'ground',
+  'ice',
+  'normal',
+  'poison',
+  'psychic',
+  'rock',
+  'steel',
+  'water',
+];
 
-export { typeListSvg, typeList }
+const langListSvg = {
+  en: en,
+  fr: fr,
+  de: de,
+  es: es,
+  ja: ja,
+};
+
+const supportedLanguages = ['en', 'fr', 'es', 'de', 'ja'];
+
+export { typeListSvg, typeList, supportedLanguages, langListSvg };
