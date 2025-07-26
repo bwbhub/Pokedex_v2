@@ -3,7 +3,7 @@ import { Box, Typography, useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { typeListSvg } from '../../utils/svgs';
 
-const PokemonTypeChip = ({ type, sx = {} }) => {
+const PokemonTypeChip = ({ type, sx = {}, fontSize = '12px' }) => {
   const theme = useTheme();
   const { t } = useTranslation();
 
@@ -32,7 +32,7 @@ const PokemonTypeChip = ({ type, sx = {} }) => {
       />
       <Typography
         sx={{
-          fontSize: '12px',
+          fontSize: fontSize,
           fontWeight: 'medium',
           textTransform: 'capitalize',
         }}

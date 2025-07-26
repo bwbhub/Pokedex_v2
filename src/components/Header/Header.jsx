@@ -24,7 +24,7 @@ import RegionFilter from './Filters/Region/RegionFilter';
 import useHeader from './HeaderHook';
 import { Search, SlidersHorizontal } from 'lucide-react';
 
-const Header = ({ openModal, setPokeModal }) => {
+const Header = ({ openModal, setPokeModal, showLogo = true, isMenuMode = false }) => {
   const {
     modalFilterOpen,
     query,
@@ -38,6 +38,154 @@ const Header = ({ openModal, setPokeModal }) => {
 
   const theme = useTheme();
 
+  if (isMenuMode) {
+    // Mode menu déroulant responsive
+    return (
+      <Stack
+        component="div"
+        direction="column"
+        spacing={{ xs: 2, sm: 3 }}
+        sx={{
+          color: theme.palette.text.secondary,
+          width: '100%',
+          minWidth: { xs: '280px', sm: '350px' },
+        }}
+      >
+        {/* Searchbar responsive */}
+        <Box sx={{ position: 'relative', width: '100%' }}>
+          <Stack
+            direction="row"
+            alignItems="center"
+            sx={{
+              p: { xs: '1px 2px', sm: '2px 4px' },
+              width: '100%',
+              border: `2px solid ${theme.palette.text.secondary}`,
+              borderRadius: '8px',
+            }}
+          >
+            <IconButton sx={{ p: { xs: '6px', sm: '10px' }, color: 'inherit' }} aria-label="search">
+              <Search size={20} />
+            </IconButton>
+            <InputBase
+              sx={{ 
+                ml: 1, 
+                flex: 1, 
+                color: 'inherit',
+                fontSize: { xs: '14px', sm: '16px' }
+              }}
+              placeholder="Search a specific Pokémon !"
+              value={query}
+              onChange={onQueryChange}
+              inputProps={{ 'aria-label': 'search a specific pokemon' }}
+            />
+          </Stack>
+
+          {/* Résultats de recherche */}
+          {query?.length > 0 && (
+            <Paper
+              sx={{
+                position: 'absolute',
+                width: '100%',
+                bgcolor: theme.palette.background.paper,
+                color: theme.palette.text.primary,
+                borderRadius: '8px',
+                maxHeight: { xs: '150px', sm: '200px' },
+                overflowY: 'scroll',
+                zIndex: 10000,
+                boxShadow: 3,
+                mt: 1,
+              }}
+            >
+              {isLoading && query?.length > 0 ? (
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    padding: { xs: 1, sm: 2 },
+                    height: { xs: '60px', sm: '80px' },
+                  }}
+                >
+                  <Box sx={{ width: { xs: '24px', sm: '30px' }, height: { xs: '24px', sm: '30px' } }}>
+                    <LocalLoading color={theme.palette.primary.main} />
+                  </Box>
+                </Box>
+              ) : (
+                <List dense>
+                  {searchList.map((poke) => (
+                    <ListItemButton
+                      key={poke.name}
+                      onClick={() => handleSetPokedetails(poke)}
+                      sx={{
+                        textTransform: 'capitalize',
+                        '&:hover': {
+                          fontWeight: 'bold',
+                          backgroundColor: theme.palette.action.hover,
+                        },
+                      }}
+                    >
+                      <ListItemText primary={poke.displayName || poke.name} />
+                    </ListItemButton>
+                  ))}
+                </List>
+              )}
+            </Paper>
+          )}
+        </Box>
+
+        {/* Filtres intégrés directement */}
+        <Stack direction="column" spacing={{ xs: 1.5, sm: 2 }}>
+          {/* Settings */}
+          <Box>
+            <Typography 
+              variant="h6" 
+              component="h3" 
+              sx={{ 
+                mb: { xs: 1, sm: 2 },
+                fontSize: { xs: '1.1rem', sm: '1.25rem' }
+              }}
+            >
+              Settings
+            </Typography>
+            <Box sx={{ 
+              display: 'flex', 
+              gap: { xs: 0.5, sm: 1 }, 
+              justifyContent: 'flex-start',
+              flexWrap: 'wrap'
+            }}>
+              <LanguageSelector />
+              <ThemeToggle />
+            </Box>
+          </Box>
+
+          <Divider sx={{ my: { xs: 1, sm: 1.5 } }} />
+
+          {/* Region Filter */}
+          <Box sx={{ px: { xs: 0, sm: 0 } }}>
+            <RegionFilter closeFilterModal={() => {}} />
+          </Box>
+
+          <Divider sx={{ my: { xs: 1, sm: 1.5 } }} />
+
+          {/* Filters */}
+          <Box>
+            <Typography 
+              variant="h6" 
+              component="h3"
+              sx={{
+                fontSize: { xs: '1.1rem', sm: '1.25rem' }
+              }}
+            >
+              Filters
+            </Typography>
+            {/* <TypeFilter closeFilterModal={() => {}} /> */}
+          </Box>
+        </Stack>
+      </Stack>
+    );
+  }
+
+  // Mode header classique
   return (
     <Stack
       component="header"
@@ -51,7 +199,9 @@ const Header = ({ openModal, setPokeModal }) => {
         zIndex: 1,
       }}
     >
-      <Box component="img" src={logo} alt="pokedex" sx={{ width: 240 }} />
+      {showLogo && (
+        <Box component="img" src={logo} alt="pokedex" sx={{ width: 240 }} />
+      )}
 
       <Box sx={{ position: 'relative' }}>
         <Stack

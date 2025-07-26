@@ -1,10 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import GlobalHeader from './GlobalHeader/GlobalHeader';
 
 const Layout = () => {
   return (
     <div>
-      {/* On pourra ajouter une barre de navigation ici */}
+      <GlobalHeader />
       <main>
         <Outlet />
       </main>

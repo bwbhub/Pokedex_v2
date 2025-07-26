@@ -2,14 +2,12 @@ import React, { useRef } from 'react';
 import { Grid } from '@mui/material';
 
 import PokeSvg from '../../components/SVG/PokeSvg';
-import Header from '../../components/Header/Header';
 import ListCard from '../../components/ListCard/ListCard';
 import { urlConvert } from '../../utils/textConvert';
 import useHomePage from './HomePageHooks';
-import DetailsModal from '../../components/DetailsModal/DetailsModal';
 
 const HomePage = () => {
-  const { pokeList, modalOpen, openModal, setModalOpen } = useHomePage();
+  const { pokeList } = useHomePage();
   const scrollRef = useRef(null);
 
   return (
@@ -22,7 +20,8 @@ const HomePage = () => {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        my: 8,
+        pt: 16, // Padding top augmenté pour éviter que les ListCards passent sous le header transparent
+        pb: 8,
         maxWidth: "7xl",
         position: "relative",
         minHeight: "100vh" 
@@ -37,7 +36,6 @@ const HomePage = () => {
         }}>
           <PokeSvg />
         </Grid>
-      <Header openModal={openModal} setPokeModal={setModalOpen} />
       
       <Grid 
         container 
@@ -51,17 +49,11 @@ const HomePage = () => {
         >
         {pokeList.map((pokemon) => (
           <Grid key={pokemon.name} xs={12} sm={6} md={4} lg={3} xl={2}>
-            <ListCard pokemonId={urlConvert(pokemon)} setOpenModal={setModalOpen} />
+            <ListCard pokemonId={urlConvert(pokemon)} />
           </Grid>
         ))}
       </Grid>
     </Grid>
-    {modalOpen && (
-      <DetailsModal
-        openModal={modalOpen}
-        closeModal={setModalOpen}
-      />
-    )}
     </>
   );
 };

@@ -33,6 +33,7 @@ const RegionFilter = ({ closeFilterModal }) => {
               border: 'none',
               width: '100%',
               cursor: 'pointer',
+              backgroundColor: 'transparent',
             }}
             className={regionFilter === region?.name ? 'bounce' : ''}
           >

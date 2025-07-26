@@ -7,6 +7,7 @@ import {
   addPokemonToCache,
   getPokemonNameByLang,
 } from '../../utils/pokemonNameCache';
+import { useNavigate } from 'react-router-dom';
 
 const useHeader = ({ setPokeModal }) => {
   const [modalFilterOpen, setModalFilterOpen] = useState(false);
@@ -17,6 +18,7 @@ const useHeader = ({ setPokeModal }) => {
   const [initialLoadComplete, setInitialLoadComplete] = useState(false);
   const { setPokeDetails } = usePokedetails();
   const { activeLanguage } = useSelector((state) => state.language);
+  const navigate = useNavigate();
 
   const onQueryChange = (e) => {
     setQuery(e.target.value);
@@ -28,11 +30,13 @@ const useHeader = ({ setPokeModal }) => {
 
   const closeFilterModal = () => {
     setModalFilterOpen(false);
+    setQuery(''); // Réinitialiser la recherche à la fermeture
   };
 
   const handleSetPokedetails = (pokemon) => {
     setPokeDetails(pokemon);
-    setPokeModal(true);
+    navigate(`/${pokemon?.id}`);
+    setQuery(''); // Réinitialiser la recherche après la sélection
   };
 
   const loadPokemonNames = useCallback(async (pokemonList) => {
