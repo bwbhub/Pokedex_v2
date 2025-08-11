@@ -15,6 +15,9 @@ const pokedexEndpoints = {
   item: ({ itemName }) => `/item/${itemName}`,
   move: ({ moveName }) => `/move/${moveName}`,
   location: ({ location }) => `/location/${location}`,
+  encounters: ({ pokeId }) => `/pokemon/${pokeId}/encounters`,
+  nature: '/nature',
+  natureId: ({ natureId }) => `/nature/${natureId}`,
 };
 
 const pokeApi = {
@@ -142,6 +145,17 @@ const pokeApi = {
       return { err };
     }
   },
+  getEncounters: async ({ pokeId }) => {
+    try {
+      const response = await publicClient.get(
+        pokedexEndpoints.encounters({ pokeId }),
+      );
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
   getPokedexList: async () => {
     try {
       const response = await publicClient.get(pokedexEndpoints.pokedexList());
@@ -155,6 +169,26 @@ const pokeApi = {
     try {
       const response = await publicClient.get(
         pokedexEndpoints.pokedexId({ pokedexId }),
+      );
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  getNatureList: async () => {
+    try {
+      const response = await publicClient.get(pokedexEndpoints.nature());
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  getNatureId: async ({ natureId }) => {
+    try {
+      const response = await publicClient.get(
+        pokedexEndpoints.natureId({ natureId }),
       );
 
       return { response };

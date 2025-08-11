@@ -52,9 +52,11 @@ const useGenerationFilter = ({ closeFilterModal }) => {
     const { response, err } = await pokeApi.getPokedexId({ pokedexId });
 
     if (response) {
-      setPokedexesList((prev) => [...prev, response]);
+      // Return the response; caller will aggregate and set state once
+      return response;
     } else {
       console.error('Erreur lors de la récupération du pokedex', err);
+      return null;
     }
   };
 
@@ -70,10 +72,41 @@ const useGenerationFilter = ({ closeFilterModal }) => {
   }, [regionFilter]);
 
   useEffect(() => {
-    if (pokedexesList?.length > 0) setPokedexesList([]);
-    regionInfo?.pokedexes?.forEach((pokedex) =>
-      getPokedexId({ pokedexId: pokedex.name }),
-    );
+    let cancelled = false;
+
+    const fetchPokedexes = async () => {
+      if (!regionInfo?.pokedexes) {
+        setPokedexesList([]);
+        return;
+      }
+
+      // Fetch all pokedex details in parallel
+      const results = await Promise.all(
+        regionInfo.pokedexes.map((pokedex) =>
+          getPokedexId({ pokedexId: pokedex.name }),
+        ),
+      );
+
+      // Deduplicate by pokedex name and filter nulls
+      const seen = new Set();
+      const unique = [];
+      for (const res of results) {
+        if (res && !seen.has(res.name)) {
+          seen.add(res.name);
+          unique.push(res);
+        }
+      }
+
+      if (!cancelled) {
+        setPokedexesList(unique);
+      }
+    };
+
+    fetchPokedexes();
+
+    return () => {
+      cancelled = true;
+    };
   }, [regionInfo]);
 
   return {

@@ -1,5 +1,17 @@
-import React, { useEffect, useRef } from 'react';
-import { Box, Button, Grid, Typography, useMediaQuery } from '@mui/material';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+  Box,
+  Button,
+  Grid,
+  Typography,
+  useMediaQuery,
+  Tabs,
+  Tab,
+  Select,
+  MenuItem,
+  FormControl,
+} from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 import './PokemonPage.css';
 import usePokemonPage from './PokemonPageHooks';
@@ -7,9 +19,24 @@ import { hexToRgba } from '../../utils/color';
 import pokeball from '../../assets/pokeball.png';
 import PokemonTypeChip from '../../components/PokemonTypeChip/PokemonTypeChip';
 import { formatId } from '../../utils/textConvert';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight, ChevronsUpDown } from 'lucide-react';
+
+import GeneralInfoTab from '../../components/PokemonTabs/GeneralInfoTab/GeneralInfoTab';
+import StatisticsTab from '../../components/PokemonTabs/StatisticsTab/StatisticsTab';
+import AbilitiesTab from '../../components/PokemonTabs/AbilitiesTab/AbilitiesTab';
+import LocationTab from '../../components/PokemonTabs/LocationTab/LocationTab';
+import EvolutionTab from '../../components/PokemonTabs/EvolutionTab/EvolutionTab';
 
 const PokemonPage = () => {
+  const { t } = useTranslation();
+
+  const [tabValue, setTabValue] = useState(0);
+
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+  };
+
   const {
     species,
     pokeInfo,
@@ -27,9 +54,7 @@ const PokemonPage = () => {
   } = usePokemonPage();
   const textRef = useRef(null);
   const containerRef = useRef(null);
-  const navigate = useNavigate();
 
-  // Nouveau: détection du breakpoint mobile
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
@@ -64,26 +89,93 @@ const PokemonPage = () => {
             justifyContent: 'space-between',
           }}
         >
-          <Grid sx={{ width: '40%', px: '12px' }}>
+          <Grid
+            sx={{
+              width: '40%',
+              p: '12px',
+              display: 'flex',
+              justifyContent: 'start',
+              gap: '8px',
+            }}
+          >
             {isMobile ? (
-              <Link to={`/${Number(id) - 1}`}>{formatId(shownId - 1)}</Link>
+              <Link
+                to={`/${Number(id) - 1}`}
+                style={{
+                  textDecoration: 'none',
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  color: '#F3F4F6',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <ChevronLeft size={20} />
+                {formatId(shownId - 1)}
+              </Link>
             ) : (
-              Array.from({ length: 4 })
+              Array.from({ length: 2 })
                 .map((_, index) => (
-                  <Link to={`/${Number(id) - (index + 1)}`} key={index}>
+                  <Link
+                    to={`/${Number(id) - (index + 1)}`}
+                    key={index}
+                    style={{
+                      textDecoration: 'none',
+                      fontSize: '1rem',
+                      fontWeight: '600',
+                      color: '#F3F4F6',
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <ChevronLeft size={20} />
+
                     {formatId(shownId - (index + 1))}
                   </Link>
                 ))
                 .reverse()
             )}
           </Grid>
-          <Grid sx={{ width: '40%', textAlign: 'end', px: '12px' }}>
+          <Grid
+            sx={{
+              width: '40%',
+              p: '12px',
+              display: 'flex',
+              justifyContent: 'end',
+              gap: '12px',
+            }}
+          >
             {isMobile ? (
-              <Link to={`/${Number(id) + 1}`}>{formatId(shownId + 1)}</Link>
+              <Link
+                to={`/${Number(id) + 1}`}
+                style={{
+                  textDecoration: 'none',
+                  fontSize: '1rem',
+                  fontWeight: '600',
+                  color: '#F3F4F6',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                {formatId(Number(shownId) + 1)}
+                <ChevronRight size={20} />
+              </Link>
             ) : (
-              Array.from({ length: 4 }).map((_, index) => (
-                <Link to={`/${Number(id) + (index + 1)}`} key={index}>
-                  {formatId(shownId + (index + 1))}
+              Array.from({ length: 2 }).map((_, index) => (
+                <Link
+                  to={`/${Number(id) + (index + 1)}`}
+                  key={index}
+                  style={{
+                    textDecoration: 'none',
+                    fontSize: '1rem',
+                    fontWeight: '600',
+                    color: '#F3F4F6',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  {formatId(Number(shownId) + (index + 1))}
+                  <ChevronRight size={20} />
                 </Link>
               ))
             )}
@@ -276,14 +368,309 @@ const PokemonPage = () => {
       {/* Section 2: Chaîne d'évolution */}
       <Grid
         sx={{
-          width: isMobile ? '100%' : '60%',
+          width: isMobile ? '100%' : 'calc(60% - 12px)',
           height: '100%',
-          minHeight: '100vh',
+          minHeight: isMobile ? '100vh' : 'calc(100vh - 62px)',
+          backgroundColor: theme.palette.background.paper,
+          ...(isMobile
+            ? {}
+            : {
+                marginTop: '62px',
+                marginLeft: '12px',
+              }),
+          borderRadius: isMobile ? '32px 32px 0 0' : '32px 0 0 0',
+          overflow: 'hidden',
         }}
         xs={12}
         sm={7}
       >
-        {/* ... (votre contenu pour la chaîne d'évolution ici) ... */}
+        {/** Section 3 - Tabs */}
+        <Box sx={{ width: '100%', p: 2 }}>
+          {/* Navigation : Tabs pour desktop, Select pour mobile */}
+          {isMobile ? (
+            // Version mobile : Menu déroulant
+            <FormControl sx={{ mb: 2, width: '80%' }}>
+              <Select
+                value={tabValue}
+                onChange={(event) => setTabValue(event.target.value)}
+                variant="standard"
+                disableUnderline
+                sx={{
+                  fontSize: '1rem',
+                  fontWeight: 500,
+                  color: theme.palette.text.primary,
+                  '& .MuiSelect-select': {
+                    paddingTop: 1,
+                    paddingBottom: 1,
+                    paddingLeft: 0,
+                    paddingRight: '24px !important',
+                  },
+                  '& .MuiSelect-icon': {
+                    color: theme.palette.text.primary,
+                    display: 'none',
+                  },
+                }}
+                endAdornment={<ChevronsUpDown />}
+              >
+                <MenuItem value={0}>
+                  {t('pokemonTabs.tabs.generalInfo')}
+                </MenuItem>
+                <MenuItem value={1}>
+                  {t('pokemonTabs.tabs.statistics')}
+                </MenuItem>
+                <MenuItem value={2}>{t('pokemonTabs.tabs.abilities')}</MenuItem>
+                <MenuItem value={3}>{t('pokemonTabs.tabs.location')}</MenuItem>
+                <MenuItem value={4}>{t('pokemonTabs.tabs.evolution')}</MenuItem>
+              </Select>
+            </FormControl>
+          ) : (
+            // Version desktop : Tabs classiques
+            <Tabs
+              value={tabValue}
+              onChange={handleTabChange}
+              variant="scrollable"
+              scrollButtons="auto"
+              aria-label="pokemon information tabs"
+              sx={{
+                mb: 2,
+                '& .MuiTabs-indicator': {
+                  backgroundColor: color,
+                },
+                '& .MuiTab-root.Mui-selected': {
+                  color: color,
+                },
+              }}
+            >
+              <Tab
+                label={t('pokemonTabs.tabs.generalInfo')}
+                id="tab-0"
+                aria-controls="tabpanel-0"
+              />
+              <Tab
+                label={t('pokemonTabs.tabs.statistics')}
+                id="tab-1"
+                aria-controls="tabpanel-1"
+              />
+              <Tab
+                label={t('pokemonTabs.tabs.abilities')}
+                id="tab-2"
+                aria-controls="tabpanel-2"
+              />
+              <Tab
+                label={t('pokemonTabs.tabs.location')}
+                id="tab-3"
+                aria-controls="tabpanel-3"
+              />
+              <Tab
+                label={t('pokemonTabs.tabs.evolution')}
+                id="tab-4"
+                aria-controls="tabpanel-4"
+              />
+            </Tabs>
+          )}
+
+          {/* Container pour l'affichage des contenus */}
+          {isMobile ? (
+            // Version mobile : Animation d'opacité
+            <Box sx={{ position: 'relative', height: 'calc(100vh - 62px - 56px)' }}> {/* 100vh - section offset - select height */}
+              {/* Tab 0 - Informations générales */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  opacity: tabValue === 0 ? 1 : 0,
+                  visibility: tabValue === 0 ? 'visible' : 'hidden',
+                  transition:
+                    'opacity 500ms ease-in-out, visibility 500ms ease-in-out',
+                  pointerEvents: tabValue === 0 ? 'auto' : 'none',
+                }}
+              >
+                <GeneralInfoTab
+                  species={species}
+                  pokeInfo={pokeInfo}
+                  activeLanguage={activeLanguage}
+                  isMobile={isMobile}
+                />
+              </Box>
+
+              {/* Tab 1 - Statistiques */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  opacity: tabValue === 1 ? 1 : 0,
+                  visibility: tabValue === 1 ? 'visible' : 'hidden',
+                  transition:
+                    'opacity 500ms ease-in-out, visibility 500ms ease-in-out',
+                  pointerEvents: tabValue === 1 ? 'auto' : 'none',
+                }}
+              >
+                <StatisticsTab
+                  pokeInfo={pokeInfo}
+                  color={color}
+                  theme={theme}
+                  isMobile={isMobile}
+                />
+              </Box>
+
+              {/* Tab 2 - Capacités */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  opacity: tabValue === 2 ? 1 : 0,
+                  visibility: tabValue === 2 ? 'visible' : 'hidden',
+                  transition:
+                    'opacity 500ms ease-in-out, visibility 500ms ease-in-out',
+                  pointerEvents: tabValue === 2 ? 'auto' : 'none',
+                }}
+              >
+                <AbilitiesTab pokeInfo={pokeInfo} isMobile={isMobile} />
+              </Box>
+
+              {/* Tab 3 - Localisation */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  opacity: tabValue === 3 ? 1 : 0,
+                  visibility: tabValue === 3 ? 'visible' : 'hidden',
+                  transition:
+                    'opacity 500ms ease-in-out, visibility 500ms ease-in-out',
+                  pointerEvents: tabValue === 3 ? 'auto' : 'none',
+                  height: '400px',
+                  overflowY: 'auto',
+                  '&::-webkit-scrollbar': {
+                    width: '6px',
+                  },
+                  '&::-webkit-scrollbar-track': {
+                    background: 'rgba(0,0,0,0.1)',
+                    borderRadius: '3px',
+                  },
+                  '&::-webkit-scrollbar-thumb': {
+                    background: 'rgba(0,0,0,0.3)',
+                    borderRadius: '3px',
+                    '&:hover': {
+                      background: 'rgba(0,0,0,0.5)',
+                    },
+                  },
+                }}
+              >
+                <LocationTab id={id} isMobile={isMobile} />
+              </Box>
+
+              {/* Tab 4 - Évolutions */}
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  opacity: tabValue === 4 ? 1 : 0,
+                  visibility: tabValue === 4 ? 'visible' : 'hidden',
+                  transition:
+                    'opacity 500ms ease-in-out, visibility 500ms ease-in-out',
+                  pointerEvents: tabValue === 4 ? 'auto' : 'none',
+                }}
+              >
+                <EvolutionTab
+                  id={id}
+                  species={species}
+                  activeLanguage={activeLanguage}
+                  isMobile={isMobile}
+                />
+              </Box>
+            </Box>
+          ) : (
+            // Version desktop : animation carousel
+            <Box
+              sx={{
+                width: '100%',
+                overflowY: 'scroll',
+                overflowX: 'hidden',
+                position: 'relative',
+                height: 'calc(100vh - 180px)', // Simple calculation: viewport - estimated space for header, tabs, paddings
+              }}
+            >
+              <Box
+                sx={{
+                  width: '500%', // 5 tabs × 100%
+                  display: 'flex',
+                  transition:
+                    'margin-left 800ms cubic-bezier(0.770, 0.000, 0.175, 1.000)',
+                  marginLeft: `${-tabValue * 100}%`, // Décalage basé sur l'index du tab
+                }}
+              >
+                {/* Tab 0 - Informations générales */}
+                <Box sx={{ width: '20%', flexShrink: 0, px: 1 }}>
+                  <GeneralInfoTab
+                    species={species}
+                    pokeInfo={pokeInfo}
+                    activeLanguage={activeLanguage}
+                  />
+                </Box>
+
+                {/* Tab 1 - Statistiques */}
+                <Box sx={{ width: '20%', flexShrink: 0, px: 1 }}>
+                  <StatisticsTab
+                    pokeInfo={pokeInfo}
+                    color={color}
+                    theme={theme}
+                  />
+                </Box>
+
+                {/* Tab 2 - Capacités */}
+                <Box sx={{ width: '20%', flexShrink: 0, px: 1 }}>
+                  <AbilitiesTab pokeInfo={pokeInfo} />
+                </Box>
+
+                {/* Tab 3 - Localisation */}
+                <Box
+                  sx={{
+                    width: '20%',
+                    flexShrink: 0,
+                    px: 1,
+                    height: '100%',
+                    overflowY: 'auto',
+                    '&::-webkit-scrollbar': {
+                      width: '6px',
+                    },
+                    '&::-webkit-scrollbar-track': {
+                      background: 'rgba(0,0,0,0.1)',
+                      borderRadius: '3px',
+                    },
+                    '&::-webkit-scrollbar-thumb': {
+                      background: 'rgba(0,0,0,0.3)',
+                      borderRadius: '3px',
+                      '&:hover': {
+                        background: 'rgba(0,0,0,0.5)',
+                      },
+                    },
+                  }}
+                >
+                  <LocationTab id={id} />
+                </Box>
+
+                {/* Tab 4 - Évolutions */}
+                <Box sx={{ width: '20%', flexShrink: 0, px: 1 }}>
+                  <EvolutionTab
+                    id={id}
+                    species={species}
+                    activeLanguage={activeLanguage}
+                  />
+                </Box>
+              </Box>
+            </Box>
+          )}
+        </Box>
       </Grid>
     </Grid>
   );

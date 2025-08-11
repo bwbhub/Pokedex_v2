@@ -8,6 +8,16 @@
     "close": "Schließen",
     "clear": "Löschen"
   },
+  "pokemonTabs": {
+    "statistics": {
+      "legend": {
+        "order": "Reihenfolge:",
+        "base": "Basis",
+        "level50": "Level 50",
+        "level100": "Level 100"
+      }
+    }
+  },
   "pokemon": {
     "id": "ID",
     "name": "Name",
@@ -66,15 +76,29 @@
   "botCard": {
     "about": "Über",
     "stats": "Statistiken",
-    "evolution": "Entwicklung",
-    "noEvolutionData": "Keine Evolutionsdaten verfügbar",
+    "location": {
+      "title": "Standort",
+      "location": "standort",
+      "locations": "standorte",
+      "noLocations": "Keine Standortinformationen verfügbar",
+      "disclaimer": "Standortdaten sind für Generation 8 und 9 Pokémon nicht verfügbar.",
+      "encounterMethods": "Begegnungsmethoden",
+      "levels": "Level",
+      "chance": "Chance",
+      "maxChance": "max",
+      "version": "Version",
+      "versions": "Versionen",
+      "method": "Methode",
+      "unknown": "Unbekannt"
+    },
     "pokemonData": "Pokémon-Daten",
     "height": "Größe:",
     "weight": "Gewicht:",
     "captureRate": "Fangrate:",
     "baseHappiness": "Basisfreude:",
     "baseExp": "Basis-Exp:",
-    "growthRate": "Wachstumsrate:",
+    "evolution": "Entwicklung",
+    "noEvolutionData": "Keine Evolutionsdaten verfügbar",
     "takesNoDamageFrom": "Nimmt keinen Schaden von:",
     "takesHalfDamageFrom": "Nimmt halben Schaden von:",
     "takesDoubleDamageFrom": "Nimmt doppelten Schaden von:"

@@ -8,6 +8,31 @@
     "close": "閉じる",
     "clear": "クリア"
   },
+  "location": {
+    "title": "場所",
+    "location": "場所",
+    "locations": "場所",
+    "noLocations": "場所情報がありません",
+    "disclaimer": "第8世代と第9世代のポケモンの場所データは利用できません。",
+    "encounterMethods": "出現方法",
+    "levels": "レベル",
+    "chance": "確率",
+    "maxChance": "最大",
+    "version": "バージョン",
+    "versions": "バージョン",
+    "method": "方法",
+    "unknown": "不明"
+  },
+  "pokemonTabs": {
+    "statistics": {
+      "legend": {
+        "order": "順番：",
+        "base": "種族値",
+        "level50": "レベル50",
+        "level100": "レベル100"
+      }
+    }
+  },
   "pokemon": {
     "id": "ID",
     "name": "名前",

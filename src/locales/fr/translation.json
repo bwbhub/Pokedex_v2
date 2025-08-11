@@ -8,6 +8,144 @@
     "close": "Fermer",
     "clear": "Effacer"
   },
+  "pokemonTabs": {
+    "selectTab": "Sélectionner une section",
+    "tabs": {
+      "generalInfo": "Informations",
+      "statistics": "Statistiques",
+      "abilities": "Capacités",
+      "location": "Localisation",
+      "evolution": "Évolutions"
+    },
+    "generalInfo": {
+      "title": "Informations générales",
+      "category": "Catégorie",
+      "height": "Taille",
+      "weight": "Poids",
+      "eggGroups": "Groupe d'œufs",
+      "habitat": "Habitat",
+      "shape": "Forme",
+      "color": "Couleur",
+      "captureRate": "Taux de capture",
+      "eggGroupTypes": {
+        "monster": "Monstre",
+        "water1": "Eau 1",
+        "water2": "Eau 2",
+        "water3": "Eau 3",
+        "bug": "Insecte",
+        "flying": "Volant",
+        "ground": "Terrestre",
+        "fairy": "Féérique",
+        "plant": "Végétal",
+        "humanshape": "Humanoïde",
+        "mineral": "Minéral",
+        "amorphous": "Amorphe",
+        "ditto": "Métamorph",
+        "dragon": "Dragon",
+        "no-eggs": "Sans œuf"
+      },
+      "habitatTypes": {
+        "cave": "Grotte",
+        "forest": "Forêt",
+        "grassland": "Prairie",
+        "mountain": "Montagne",
+        "rare": "Rare",
+        "rough-terrain": "Terrain accidenté",
+        "sea": "Mer",
+        "urban": "Urbain",
+        "waters-edge": "Bord de l'eau"
+      },
+      "shapeTypes": {
+        "ball": "Sphérique",
+        "squiggle": "Serpentin",
+        "fish": "Poisson",
+        "arms": "Avec bras",
+        "blob": "Amorphe",
+        "upright": "Bipède",
+        "legs": "Quadrupède",
+        "quadruped": "Quadrupède",
+        "wings": "Ailé",
+        "tentacles": "Tentaculaire",
+        "heads": "Plusieurs têtes",
+        "humanoid": "Humanoïde",
+        "bug-wings": "Insectoïde",
+        "armor": "Blindé"
+      },
+      "colorTypes": {
+        "black": "Noir",
+        "blue": "Bleu",
+        "brown": "Marron",
+        "gray": "Gris",
+        "green": "Vert",
+        "pink": "Rose",
+        "purple": "Violet",
+        "red": "Rouge",
+        "white": "Blanc",
+        "yellow": "Jaune"
+      }
+    },
+    "statistics": {
+      "title": "Statistiques",
+      "hp": "PV",
+      "attack": "Attaque",
+      "defense": "Défense",
+      "specialAttack": "Attaque Spé.",
+      "specialDefense": "Défense Spé.",
+      "speed": "Vitesse",
+      "total": "Total",
+      "legend": {
+        "order": "Ordre :",
+        "base": "Base",
+        "level50": "Niveau 50",
+        "level100": "Niveau 100"
+      }
+    },
+    "abilities": {
+      "title": "Capacités",
+      "normalAbilities": "Capacités normales",
+      "hiddenAbility": "Capacité cachée",
+      "none": "Aucune capacité",
+      "noHidden": "Aucune capacité cachée"
+    },
+    "location": {
+      "title": "Localisation",
+      "location": "localisation",
+      "locations": "localisations",
+      "noLocations": "Aucune information de localisation disponible",
+      "disclaimer": "Les données de localisation ne sont pas disponibles pour les Pokémon de Génération 8 et 9.",
+      "encounterMethods": "Méthodes de rencontre",
+      "levels": "Niveaux",
+      "chance": "Chance",
+      "maxChance": "max",
+      "version": "version",
+      "versions": "versions",
+      "method": "Méthode",
+      "unknown": "Inconnu"
+    },
+    "evolution": {
+      "title": "Chaîne d'évolution",
+      "noEvolutions": "Ce Pokémon n'évolue pas",
+      "level": "Niveau {{level}}",
+      "item": "{{item}}",
+      "trade": "Échange",
+      "heldItem": " + {{item}}",
+      "useItem": "{{item}}",
+      "happiness": "Bonheur {{value}}",
+      "unknown": "Méthode inconnue",
+      "items": {
+        "fire-stone": "Pierre Feu",
+        "water-stone": "Pierre Eau",
+        "thunder-stone": "Pierre Foudre",
+        "leaf-stone": "Pierre Plante",
+        "moon-stone": "Pierre Lune",
+        "sun-stone": "Pierre Soleil",
+        "shiny-stone": "Pierre Éclat",
+        "dusk-stone": "Pierre Nuit",
+        "dawn-stone": "Pierre Aube",
+        "ice-stone": "Pierre Glace"
+      }
+    }
+  },
   "pokemon": {
     "id": "ID",
     "name": "Nom",

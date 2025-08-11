@@ -8,6 +8,16 @@
     "close": "Cerrar",
     "clear": "Limpiar"
   },
+  "pokemonTabs": {
+    "statistics": {
+      "legend": {
+        "order": "Orden:",
+        "base": "Base",
+        "level50": "Nivel 50",
+        "level100": "Nivel 100"
+      }
+    }
+  },
   "pokemon": {
     "id": "ID",
     "name": "Nombre",
@@ -66,8 +76,21 @@
   "botCard": {
     "about": "Acerca de",
     "stats": "Estadísticas",
-    "evolution": "Evolución",
-    "noEvolutionData": "No hay datos de evolución disponibles",
+    "location": {
+      "title": "Ubicación",
+      "location": "ubicación",
+      "locations": "ubicaciones",
+      "noLocations": "No hay información de ubicación disponible",
+      "disclaimer": "Los datos de ubicación no están disponibles para los Pokémon de Generación 8 y 9.",
+      "encounterMethods": "Métodos de encuentro",
+      "levels": "Niveles",
+      "chance": "Probabilidad",
+      "maxChance": "máx",
+      "version": "versión",
+      "versions": "versiones",
+      "method": "Método",
+      "unknown": "Desconocido"
+    },
     "pokemonData": "Datos del Pokémon",
     "height": "Altura:",
     "weight": "Peso:",
