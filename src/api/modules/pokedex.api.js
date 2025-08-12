@@ -15,6 +15,7 @@ const pokedexEndpoints = {
   item: ({ itemName }) => `/item/${itemName}`,
   move: ({ moveName }) => `/move/${moveName}`,
   location: ({ location }) => `/location/${location}`,
+  locationArea: ({ locationAreaId }) => `/location-area/${locationAreaId}`,
   encounters: ({ pokeId }) => `/pokemon/${pokeId}/encounters`,
   nature: '/nature',
   natureId: ({ natureId }) => `/nature/${natureId}`,
@@ -138,6 +139,17 @@ const pokeApi = {
     try {
       const response = await publicClient.get(
         pokedexEndpoints.location({ location }),
+      );
+
+      return { response };
+    } catch (err) {
+      return { err };
+    }
+  },
+  getLocationArea: async ({ locationAreaId }) => {
+    try {
+      const response = await publicClient.get(
+        pokedexEndpoints.locationArea({ locationAreaId }),
       );
 
       return { response };

@@ -37,6 +37,46 @@ const usePokemonPage = () => {
       : id;
   }, [regionDex, species]);
 
+  // Navigation logic based on current Pokedex
+  const navigationInfo = useMemo(() => {
+    if (!regionDex || !regionDex.pokemon_entries) {
+      // Default navigation for national dex (simple id +/- 1)
+      return {
+        prevId: Number(id) > 1 ? Number(id) - 1 : null,
+        nextId: Number(id) < 1010 ? Number(id) + 1 : null, // Assuming max 1010 Pokemon
+        prevShownId: Number(id) > 1 ? Number(id) - 1 : null,
+        nextShownId: Number(id) < 1010 ? Number(id) + 1 : null,
+        hasNavigation: true
+      };
+    }
+
+    // Regional dex navigation
+    const pokemonList = regionDex.pokemon_entries;
+    const currentIndex = pokemonList.findIndex(
+      entry => entry.pokemon_species.name === species?.name
+    );
+
+    if (currentIndex === -1) {
+      return { prevId: null, nextId: null, prevShownId: null, nextShownId: null, hasNavigation: false };
+    }
+
+    const prevEntry = currentIndex > 0 ? pokemonList[currentIndex - 1] : null;
+    const nextEntry = currentIndex < pokemonList.length - 1 ? pokemonList[currentIndex + 1] : null;
+
+    // Extract Pokemon ID from URL (e.g., "https://pokeapi.co/api/v2/pokemon-species/1/" -> "1")
+    const getPokemonIdFromUrl = (url) => {
+      return url.split('/').filter(Boolean).pop();
+    };
+
+    return {
+      prevId: prevEntry ? getPokemonIdFromUrl(prevEntry.pokemon_species.url) : null,
+      nextId: nextEntry ? getPokemonIdFromUrl(nextEntry.pokemon_species.url) : null,
+      prevShownId: prevEntry ? prevEntry.entry_number : null,
+      nextShownId: nextEntry ? nextEntry.entry_number : null,
+      hasNavigation: true
+    };
+  }, [regionDex, species, id]);
+
   const getPoke = async () => {
     const { response, err } = await pokeApi.getPoke({
       pokeId: id,
@@ -83,6 +123,7 @@ const usePokemonPage = () => {
     theme,
     activeLanguage,
     id,
+    navigationInfo,
   };
 };
 

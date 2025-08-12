@@ -51,6 +51,7 @@ const PokemonPage = () => {
     theme,
     activeLanguage,
     id,
+    navigationInfo,
   } = usePokemonPage();
   const textRef = useRef(null);
   const containerRef = useRef(null);
@@ -99,26 +100,27 @@ const PokemonPage = () => {
             }}
           >
             {isMobile ? (
-              <Link
-                to={`/${Number(id) - 1}`}
-                style={{
-                  textDecoration: 'none',
-                  fontSize: '1rem',
-                  fontWeight: '600',
-                  color: '#F3F4F6',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                <ChevronLeft size={20} />
-                {formatId(shownId - 1)}
-              </Link>
+              navigationInfo?.prevId ? (
+                <Link
+                  to={`/${navigationInfo.prevId}`}
+                  style={{
+                    textDecoration: 'none',
+                    fontSize: '1rem',
+                    fontWeight: '600',
+                    color: '#F3F4F6',
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <ChevronLeft size={20} />
+                  {formatId(navigationInfo.prevShownId)}
+                </Link>
+              ) : null
             ) : (
-              Array.from({ length: 2 })
-                .map((_, index) => (
+              <>
+                {navigationInfo?.prevId && (
                   <Link
-                    to={`/${Number(id) - (index + 1)}`}
-                    key={index}
+                    to={`/${navigationInfo.prevId}`}
                     style={{
                       textDecoration: 'none',
                       fontSize: '1rem',
@@ -129,11 +131,10 @@ const PokemonPage = () => {
                     }}
                   >
                     <ChevronLeft size={20} />
-
-                    {formatId(shownId - (index + 1))}
+                    {formatId(navigationInfo.prevShownId)}
                   </Link>
-                ))
-                .reverse()
+                )}
+              </>
             )}
           </Grid>
           <Grid
@@ -146,25 +147,9 @@ const PokemonPage = () => {
             }}
           >
             {isMobile ? (
-              <Link
-                to={`/${Number(id) + 1}`}
-                style={{
-                  textDecoration: 'none',
-                  fontSize: '1rem',
-                  fontWeight: '600',
-                  color: '#F3F4F6',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                {formatId(Number(shownId) + 1)}
-                <ChevronRight size={20} />
-              </Link>
-            ) : (
-              Array.from({ length: 2 }).map((_, index) => (
+              navigationInfo?.nextId ? (
                 <Link
-                  to={`/${Number(id) + (index + 1)}`}
-                  key={index}
+                  to={`/${navigationInfo.nextId}`}
                   style={{
                     textDecoration: 'none',
                     fontSize: '1rem',
@@ -174,10 +159,29 @@ const PokemonPage = () => {
                     alignItems: 'center',
                   }}
                 >
-                  {formatId(Number(shownId) + (index + 1))}
+                  {formatId(navigationInfo.nextShownId)}
                   <ChevronRight size={20} />
                 </Link>
-              ))
+              ) : null
+            ) : (
+              <>
+                {navigationInfo?.nextId && (
+                  <Link
+                    to={`/${navigationInfo.nextId}`}
+                    style={{
+                      textDecoration: 'none',
+                      fontSize: '1rem',
+                      fontWeight: '600',
+                      color: '#F3F4F6',
+                      display: 'flex',
+                      alignItems: 'center',
+                    }}
+                  >
+                    {formatId(navigationInfo.nextShownId)}
+                    <ChevronRight size={20} />
+                  </Link>
+                )}
+              </>
             )}
           </Grid>
         </Grid>
@@ -472,7 +476,7 @@ const PokemonPage = () => {
           {/* Container pour l'affichage des contenus */}
           {isMobile ? (
             // Version mobile : Animation d'opacité
-            <Box sx={{ position: 'relative', height: 'calc(100vh - 62px - 56px)' }}> {/* 100vh - section offset - select height */}
+            <Box sx={{ position: 'relative', height: 'calc(100vh - 62px - 56px)' }}>
               {/* Tab 0 - Informations générales */}
               <Box
                 sx={{
@@ -542,11 +546,11 @@ const PokemonPage = () => {
                   left: 0,
                   right: 0,
                   opacity: tabValue === 3 ? 1 : 0,
+                  height: '100%',
                   visibility: tabValue === 3 ? 'visible' : 'hidden',
                   transition:
                     'opacity 500ms ease-in-out, visibility 500ms ease-in-out',
                   pointerEvents: tabValue === 3 ? 'auto' : 'none',
-                  height: '400px',
                   overflowY: 'auto',
                   '&::-webkit-scrollbar': {
                     width: '6px',

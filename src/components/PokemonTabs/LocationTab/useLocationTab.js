@@ -2,96 +2,40 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import pokeApi from '../../../api/modules/pokedex.api';
 
-/**
- * Hook pour récupérer et traiter les informations de localisation d'un Pokémon
- * @param {Object} props - Les propriétés du hook
- * @param {number} props.id - L'identifiant du Pokémon
- * @returns {Object} Les données de localisation formatées pour l'affichage
- */
+
 const useLocationTab = ({ id }) => {
   const [locations, setLocations] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const activeLanguage = useSelector((state) => state.language.activeLanguage);
 
-  // Helper function to get location area details with translations
-  const getLocationAreaDetails = async (locationAreaUrl) => {
-    try {
-      // Extract location area ID from URL
-      const locationAreaId = locationAreaUrl.split('/').slice(-2, -1)[0];
-      const { response } = await pokeApi.getLocation({ location: locationAreaId });
-      return response;
-    } catch (error) {
-      console.error('Error fetching location area details:', error);
-      return null;
-    }
+  // Get translated name from API response
+  const getTranslatedName = (locationDetails, language) => {
+    if (!locationDetails?.names) return null;
+    
+    const translated = locationDetails.names.find(n => n.language?.name === language);
+    if (translated) return translated.name;
+    
+    const english = locationDetails.names.find(n => n.language?.name === 'en');
+    return english?.name || null;
   };
 
-  // Helper function to get translated location name
-  const getTranslatedLocationName = (locationDetails, language) => {
-    if (!locationDetails?.names) {
-      return null;
-    }
-    
-    // Try to find name in the requested language
-    const translatedName = locationDetails.names.find(
-      name => name.language?.name === language
-    );
-    
-    if (translatedName) {
-      return translatedName.name;
-    }
-    
-    // Fallback to English if available
-    const englishName = locationDetails.names.find(
-      name => name.language?.name === 'en'
-    );
-    
-    return englishName?.name || null;
-  };
-
-  // Helper function to get formatted version name
-  const getFormattedVersionName = (versionName) => {
-    const versionNames = {
-      'red': 'Rouge',
-      'blue': 'Bleu',
-      'yellow': 'Jaune',
-      'gold': 'Or',
-      'silver': 'Argent',
-      'crystal': 'Cristal',
-      'ruby': 'Rubis',
-      'sapphire': 'Saphir',
-      'emerald': 'Émeraude',
-      'firered': 'Rouge Feu',
-      'leafgreen': 'Vert Feuille',
-      'diamond': 'Diamant',
-      'pearl': 'Perle',
-      'platinum': 'Platine',
-      'heartgold': 'HeartGold',
-      'soulsilver': 'SoulSilver',
-      'black': 'Noir',
-      'white': 'Blanc',
-      'black-2': 'Noir 2',
-      'white-2': 'Blanc 2',
-      'x': 'X',
-      'y': 'Y',
-      'omega-ruby': 'Rubis Oméga',
-      'alpha-sapphire': 'Saphir Alpha',
-      'sun': 'Soleil',
-      'moon': 'Lune',
-      'ultra-sun': 'Ultra-Soleil',
-      'ultra-moon': 'Ultra-Lune',
-      'lets-go-pikachu': "Let's Go Pikachu",
-      'lets-go-eevee': "Let's Go Évoli",
-      'sword': 'Épée',
-      'shield': 'Bouclier',
-      'brilliant-diamond': 'Diamant Étincelant',
-      'shining-pearl': 'Perle Scintillante',
-      'legends-arceus': 'Légendes Arceus',
-      'scarlet': 'Écarlate',
-      'violet': 'Violet'
+  // Simple version grouping - returns translation key
+  const getVersionGroupKey = (versionName) => {
+    const groups = {
+      'black': 'blackWhite', 'white': 'blackWhite',
+      'black-2': 'black2White2', 'white-2': 'black2White2',
+      'x': 'xy', 'y': 'xy',
+      'red': 'redBlue', 'blue': 'redBlue',
+      'gold': 'goldSilver', 'silver': 'goldSilver',
+      'ruby': 'rubySapphire', 'sapphire': 'rubySapphire',
+      'diamond': 'diamondPearl', 'pearl': 'diamondPearl',
+      'sun': 'sunMoon', 'moon': 'sunMoon',
+      'ultra-sun': 'ultraSunMoon', 'ultra-moon': 'ultraSunMoon',
+      'sword': 'swordShield', 'shield': 'swordShield',
+      'scarlet': 'scarletViolet', 'violet': 'scarletViolet'
     };
-    return versionNames[versionName] || versionName.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+    return groups[versionName] || null;
   };
 
   useEffect(() => {
@@ -100,59 +44,54 @@ const useLocationTab = ({ id }) => {
       setError(null);
 
       try {
-        // Appel à l'API pour récupérer les données d'encounters
-        const { response, err } = await pokeApi.getEncounters({
-          pokeId: id,
-        });
+        const { response, err } = await pokeApi.getEncounters({ pokeId: id });
+        if (err) throw new Error(err);
+        if (!response?.length) return setLocations([]);
 
-        if (err) {
-          throw new Error(err);
-        }
+        const groups = {};
+        const translations = new Map();
 
-        if (response && response.length > 0) {
-          // Transformation des données pour l'affichage avec traductions
-          const encountersData = response;
-          const versions = {};
-          
-          for (const encounter of encountersData) {
-            const locationAreaUrl = encounter.location_area.url;
-            const locationAreaName = encounter.location_area.name;
-            
-            // Get location area details with translations
-            const locationAreaDetails = await getLocationAreaDetails(locationAreaUrl);
-            
-            // Get translated name
-            const translatedName = getTranslatedLocationName(locationAreaDetails, activeLanguage);
-            
-            // Process version details
-            for (const versionDetail of encounter.version_details) {
-              const versionName = versionDetail.version.name;
-              const formattedVersionName = getFormattedVersionName(versionName);
-              
-              // Initialize version if not exists
-              if (!versions[versionName]) {
-                versions[versionName] = {
-                  name: formattedVersionName,
-                  originalName: versionName,
-                  locations: new Set() // Use Set to avoid duplicates
-                };
-              }
-              
-              // Add location to this version
-              versions[versionName].locations.add(translatedName || locationAreaName);
+        // Process each encounter
+        for (const encounter of response) {
+          const locationName = encounter.location_area.name;
+          const locationId = encounter.location_area.url.split('/').filter(Boolean).pop();
+
+          // Get translation if not cached
+          if (!translations.has(locationName)) {
+            try {
+              const { response: details } = await pokeApi.getLocationArea({ locationAreaId: locationId });
+              const translated = getTranslatedName(details, activeLanguage);
+              translations.set(locationName, translated || locationName);
+            } catch (error) {
+              translations.set(locationName, locationName);
             }
           }
-          
-          // Convert Sets to Arrays and sort
-          const processedVersions = Object.values(versions).map(version => ({
-            ...version,
-            locations: Array.from(version.locations).sort()
-          }));
-          
-          setLocations(processedVersions);
-        } else {
-          setLocations([]);
+
+          // Group by versions
+          for (const versionDetail of encounter.version_details) {
+            const versionName = versionDetail.version.name;
+            const groupKey = getVersionGroupKey(versionName);
+            const groupName = groupKey || versionName.replace(/-/g, ' ');
+
+            if (!groups[groupName]) {
+              groups[groupName] = { 
+                name: groupName, 
+                translationKey: groupKey,
+                locations: new Set() 
+              };
+            }
+            groups[groupName].locations.add(translations.get(locationName));
+          }
         }
+
+        // Convert to final format
+        const result = Object.values(groups).map(group => ({
+          name: group.name,
+          translationKey: group.translationKey,
+          locations: Array.from(group.locations).sort()
+        }));
+
+        setLocations(result);
       } catch (error) {
         console.error('Error fetching location data:', error);
         setError(error.message);
@@ -162,12 +101,10 @@ const useLocationTab = ({ id }) => {
       }
     };
 
-    if (id) {
-      fetchLocations();
-    }
-  }, [id]);
+    if (id) fetchLocations();
+  }, [id, activeLanguage]);
 
-  return { locations, isLoading, error };
+  return { locations, isLoading, error, activeLanguage };
 };
 
 export default useLocationTab;

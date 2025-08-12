@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Chip, Accordion, AccordionSummary, AccordionDetails, Alert } from '@mui/material';
+import { Box, Typography, Chip, Accordion, AccordionSummary, AccordionDetails, Alert, Grid } from '@mui/material';
 import { ChevronDown, Info } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import useLocationTab from './useLocationTab';
@@ -19,7 +19,7 @@ const LocationTab = ({ id }) => {
   };
 
   return (
-    <>
+    <Grid>
       <Typography variant="h6" sx={{ mb: 2 }}>
         {t('pokemonTabs.location.title')}
       </Typography>
@@ -49,7 +49,7 @@ const LocationTab = ({ id }) => {
 
       {!isLoading && !error && locations?.length > 0 && (
         <Box>
-          {locations?.map((generation, index) => {
+          {locations?.map((versionGroup, index) => {
             const panelId = `panel-${index}`;
             return (
               <Accordion 
@@ -61,19 +61,13 @@ const LocationTab = ({ id }) => {
                 <AccordionSummary expandIcon={<ChevronDown />}>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                     <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
-                      {generation.name}
+                      {versionGroup.translationKey ? t(`pokemonTabs.location.versionGroups.${versionGroup.translationKey}`) : versionGroup.name}
                     </Typography>
-                    <Chip 
-                      label={`${generation.locations.length} ${generation.locations.length === 1 ? t('pokemonTabs.location.location') : t('pokemonTabs.location.locations')}`}
-                      size="small" 
-                      color="primary" 
-                      variant="outlined"
-                    />
                   </Box>
                 </AccordionSummary>
                 <AccordionDetails>
                   <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-                    {generation.locations.map((location, locationIndex) => (
+                    {versionGroup.locations.map((location, locationIndex) => (
                       <Typography 
                         key={locationIndex} 
                         variant="body2" 
@@ -94,7 +88,7 @@ const LocationTab = ({ id }) => {
           })}
         </Box>
       )}
-    </>
+    </Grid>
   );
 };
 
