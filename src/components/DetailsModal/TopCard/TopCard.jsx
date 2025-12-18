@@ -7,9 +7,13 @@ import { formatId } from '../../../utils/textConvert';
 import pokeball from '../../../assets/pokeball.png';
 import PokemonTypeChip from '../../PokemonTypeChip/PokemonTypeChip';
 import { usePokedetails } from '../../../context/Pokedetails';
+import { Link, useNavigate } from 'react-router-dom';
+import { useModal } from '../../../contexts/ModalContext';
 
 const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const { closeModal } = useModal();
   const activeLanguage = useSelector((state) => state.language.activeLanguage);
   const { regionDex } = usePokedetails();
 
@@ -31,6 +35,16 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
     if (pokeInfo?.cries?.latest && audioRef.current) {
       audioRef.current.play();
     }
+  };
+  
+  const handleNavigateToDetails = () => {
+    closeModal();
+    navigate(`/${pokeInfo?.id}`);
+  };
+  
+  const handleImageClick = () => {
+    closeModal();
+    navigate(`/${pokeInfo?.id}`);
   };
 
   return (
@@ -55,20 +69,32 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
           opacity: '0.15',
         }}
       >
-        <img
-          src={pokeball}
-          alt="Pokeball"
-          style={{
-            position: 'relative',
+        <Box
+          onClick={handleNavigateToDetails}
+          sx={{
+            cursor: 'pointer',
             width: '100%',
-            rotate: '35deg',
-            maskImage: `url(${pokeball})`,
-            WebkitMaskImage: `url(${pokeball})`,
-            maskSize: 'contain',
-            WebkitMaskSize: 'contain',
-            backgroundColor: theme.palette.text.secondary,
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
           }}
-        />
+        >
+          <img
+            src={pokeball}
+            alt="Pokeball"
+            style={{
+              position: 'relative',
+              width: '100%',
+              rotate: '35deg',
+              maskImage: `url(${pokeball})`,
+              WebkitMaskImage: `url(${pokeball})`,
+              maskSize: 'contain',
+              WebkitMaskSize: 'contain',
+              backgroundColor: theme.palette.text.secondary,
+            }}
+          />
+        </Box>
       </Grid>
       <Grid
         sx={{
@@ -129,6 +155,7 @@ const TopCard = ({ pokeInfo, color, imgUrl, species }) => {
             component="img"
             src={imgUrl}
             alt={filteredName}
+            onClick={handleImageClick}
             sx={{
               width: '95%',
               zIndex: 100,

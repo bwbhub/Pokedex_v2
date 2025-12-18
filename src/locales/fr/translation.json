@@ -184,6 +184,17 @@
     "reset": "Réinitialiser",
     "apply": "Appliquer"
   },
+  "generations": {
+    "generation1": "Génération I",
+    "generation2": "Génération II",
+    "generation3": "Génération III",
+    "generation4": "Génération IV",
+    "generation5": "Génération V",
+    "generation6": "Génération VI",
+    "generation7": "Génération VII",
+    "generation8": "Génération VIII",
+    "generation9": "Génération IX"
+  },
   "language": {
     "select": "Sélectionner la langue",
     "languages": {

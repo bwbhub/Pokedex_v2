@@ -1,7 +1,10 @@
 import React, { useMemo } from 'react';
-import { Grid, Typography, useTheme } from '@mui/material';
+import { Grid, Typography, useTheme, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { useModal } from '../../../../../contexts/ModalContext';
 
 import {
   capitalizeUppercase,
@@ -15,6 +18,13 @@ const About = ({ selectedPokeInfos, pokeDetails, loading, color }) => {
   const activeLanguage = useSelector((state) => state.language.activeLanguage);
   const { t } = useTranslation();
   const theme = useTheme();
+  const navigate = useNavigate();
+  const { closeModal } = useModal();
+  
+  const handleNavigateToDetails = () => {
+    closeModal();
+    navigate(`/${selectedPokeInfos?.id}`);
+  };
 
   const filteredDesc = useMemo(() => {
     return pokeDetails?.flavor_text_entries?.filter(
@@ -125,10 +135,56 @@ const About = ({ selectedPokeInfos, pokeDetails, loading, color }) => {
               color: theme.palette.text.secondary,
               fontWeight: 500,
               mt: '16px',
+              mb: '20px'
             }}
           >
             {useableDesc}
           </Typography>
+          
+          {/* Plus d'infos link */}
+          <Box
+            onClick={handleNavigateToDetails}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              cursor: 'pointer',
+              mt: '16px',
+              padding: '8px 12px',
+              borderRadius: '8px',
+              backgroundColor: 'transparent',
+              border: `1px solid ${theme.palette.primary.main}`,
+              transition: 'all 0.2s ease-in-out',
+              width: 'fit-content',
+              '&:hover': {
+                backgroundColor: theme.palette.primary.main,
+                '& .link-text': {
+                  color: theme.palette.primary.contrastText
+                },
+                '& .link-icon': {
+                  color: theme.palette.primary.contrastText
+                }
+              }
+            }}
+          >
+            <Typography
+              className="link-text"
+              sx={{
+                fontSize: '16px',
+                fontWeight: 600,
+                color: theme.palette.primary.main,
+                transition: 'color 0.2s ease-in-out'
+              }}
+            >
+              Plus d'infos
+            </Typography>
+            <ArrowRight 
+              className="link-icon"
+              size={18} 
+              color={theme.palette.primary.main}
+              style={{ transition: 'color 0.2s ease-in-out' }}
+            />
+          </Box>
         </Grid>
       )}
     </Grid>

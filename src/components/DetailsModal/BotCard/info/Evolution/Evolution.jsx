@@ -13,7 +13,7 @@ const Evolution = ({ pokeDetails, color, loading }) => {
     <Grid
       id="evolution"
       sx={{
-        height: '90%',
+        height: '100%',
         width: '100%',
         overflowY: 'auto',
         overflowX: 'hidden',
@@ -91,7 +91,7 @@ const Evolution = ({ pokeDetails, color, loading }) => {
                     <img
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${urlConvert({ ...pokemon, name: pokemon.originalName || pokemon.name })}.png`}
                       alt={pokemon.name}
-                      style={{ height: '80px' }}
+                      style={{ height: 'fit-content', maxHeight: '150px' }}
                     />
                     <Typography
                       sx={{

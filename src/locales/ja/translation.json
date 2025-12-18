@@ -71,6 +71,17 @@
     "reset": "リセット",
     "apply": "適用"
   },
+  "generations": {
+    "generation1": "第一世代",
+    "generation2": "第二世代",
+    "generation3": "第三世代",
+    "generation4": "第四世代",
+    "generation5": "第五世代",
+    "generation6": "第六世代",
+    "generation7": "第七世代",
+    "generation8": "第八世代",
+    "generation9": "第九世代"
+  },
   "language": {
     "select": "言語を選択",
     "languages": {

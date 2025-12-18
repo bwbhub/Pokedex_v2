@@ -43,6 +43,17 @@
     "reset": "Zurücksetzen",
     "apply": "Anwenden"
   },
+  "generations": {
+    "generation1": "Generation I",
+    "generation2": "Generation II",
+    "generation3": "Generation III",
+    "generation4": "Generation IV",
+    "generation5": "Generation V",
+    "generation6": "Generation VI",
+    "generation7": "Generation VII",
+    "generation8": "Generation VIII",
+    "generation9": "Generation IX"
+  },
   "language": {
     "select": "Sprache auswählen",
     "languages": {
