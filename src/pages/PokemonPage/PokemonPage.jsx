@@ -12,6 +12,7 @@ import {
   FormControl,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import './PokemonPage.css';
 import usePokemonPage from './PokemonPageHooks';
@@ -30,6 +31,7 @@ import EvolutionTab from '../../components/PokemonTabs/EvolutionTab/EvolutionTab
 
 const PokemonPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const [tabValue, setTabValue] = useState(0);
 
@@ -38,21 +40,29 @@ const PokemonPage = () => {
   };
 
   const {
-    species,
+    id,
     pokeInfo,
+    species,
+    color,
     filteredName,
     shownId,
+    navigationInfo,
     animationDistance,
-    setAnimationDistance,
     shinyImg,
     setShinyImg,
+    setAnimationDistance,
     mainType,
-    color,
     theme,
     activeLanguage,
-    id,
-    navigationInfo,
   } = usePokemonPage();
+  
+  // Redirect to home if invalid ID
+  useEffect(() => {
+    if (id === null) {
+      navigate('/', { replace: true });
+    }
+  }, [id, navigate]);
+
   const textRef = useRef(null);
   const containerRef = useRef(null);
 

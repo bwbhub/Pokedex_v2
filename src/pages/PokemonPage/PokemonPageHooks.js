@@ -15,7 +15,16 @@ const usePokemonPage = () => {
   const params = useParams();
   const theme = useTheme();
 
-  const id = params?.id;
+  // Validate and clean the id parameter
+  const id = useMemo(() => {
+    const rawId = params?.id;
+    // Check if id is numeric (valid Pokemon ID)
+    if (rawId && /^\d+$/.test(rawId)) {
+      return parseInt(rawId, 10);
+    }
+    // If invalid or contains non-numeric characters, return null
+    return null;
+  }, [params?.id]);
 
   const activeLanguage = useSelector((state) => state.language.activeLanguage);
 
