@@ -6,12 +6,14 @@ import pokeball from '../../assets/pokeball.png';
 import dots from '../../assets/dot.svg';
 import { formatId } from '../../utils/textConvert';
 import PokemonTypeChip from '../PokemonTypeChip/PokemonTypeChip';
+import { useModal } from '../../contexts/ModalContext';
 import './ListCard.css';
 
-const ListCard = ({ pokemonId, setOpenModal }) => {
+const ListCard = ({ pokemonId }) => {
+  const { openModal } = useModal();
   const { pokeInfo, handleOpenModal, filteredName, shownId } = useListCard({
     id: pokemonId,
-    setOpenModal,
+    openModal,
   });
   const theme = useTheme();
 

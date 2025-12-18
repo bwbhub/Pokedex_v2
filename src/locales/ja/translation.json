@@ -8,6 +8,44 @@
     "close": "閉じる",
     "clear": "クリア"
   },
+  "location": {
+    "title": "場所",
+    "location": "場所",
+    "locations": "場所",
+    "noLocations": "場所情報がありません",
+    "disclaimer": "第8世代と第9世代のポケモンの場所データは利用できません。",
+    "versionGroups": {
+      "redBlue": "赤・青",
+      "goldSilver": "金・銀",
+      "rubySapphire": "ルビー・サファイア",
+      "diamondPearl": "ダイヤモンド・パール",
+      "blackWhite": "ブラック・ホワイト",
+      "black2White2": "ブラック2・ホワイト2",
+      "xy": "X・Y",
+      "sunMoon": "サン・ムーン",
+      "ultraSunMoon": "ウルトラサン・ウルトラムーン",
+      "swordShield": "ソード・シールド",
+      "scarletViolet": "スカーレット・バイオレット"
+    },
+    "encounterMethods": "出現方法",
+    "levels": "レベル",
+    "chance": "確率",
+    "maxChance": "最大",
+    "version": "バージョン",
+    "versions": "バージョン",
+    "method": "方法",
+    "unknown": "不明"
+  },
+  "pokemonTabs": {
+    "statistics": {
+      "legend": {
+        "order": "順番：",
+        "base": "種族値",
+        "level50": "レベル50",
+        "level100": "レベル100"
+      }
+    }
+  },
   "pokemon": {
     "id": "ID",
     "name": "名前",
@@ -32,6 +70,17 @@
     "sort": "並び替え",
     "reset": "リセット",
     "apply": "適用"
+  },
+  "generations": {
+    "generation1": "第一世代",
+    "generation2": "第二世代",
+    "generation3": "第三世代",
+    "generation4": "第四世代",
+    "generation5": "第五世代",
+    "generation6": "第六世代",
+    "generation7": "第七世代",
+    "generation8": "第八世代",
+    "generation9": "第九世代"
   },
   "language": {
     "select": "言語を選択",

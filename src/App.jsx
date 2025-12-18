@@ -13,6 +13,8 @@ import {
   setLanguages,
   setActiveLanguage,
 } from './redux/features/languageSlice';
+import PokemonPage from './pages/PokemonPage/PokemonPage';
+import { ModalProvider } from './contexts/ModalContext';
 
 // Créer un contexte pour le mode de couleur
 export const ColorModeContext = createContext({
@@ -71,11 +73,16 @@ function App() {
       <CssBaseline />
       {/* Passer la fonction toggleColorMode via le contexte */}
       <ColorModeContext.Provider value={{ toggleColorMode, mode }}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage />} />
-          </Route>
-        </Routes>
+        <ModalProvider>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<HomePage />} />
+            </Route>
+            <Route path="/:id" element={<Layout />}>
+              <Route index element={<PokemonPage />} />
+            </Route>
+          </Routes>
+        </ModalProvider>
       </ColorModeContext.Provider>
     </ThemeProvider>
   );

@@ -8,6 +8,157 @@
     "close": "Close",
     "clear": "Clear"
   },
+  "pokemonTabs": {
+    "selectTab": "Select section",
+    "tabs": {
+      "generalInfo": "Information",
+      "statistics": "Statistics",
+      "abilities": "Abilities",
+      "location": "Location",
+      "evolution": "Evolution"
+    },
+    "generalInfo": {
+      "title": "General Information",
+      "category": "Category",
+      "height": "Height",
+      "weight": "Weight",
+      "eggGroups": "Egg Groups",
+      "habitat": "Habitat",
+      "shape": "Shape",
+      "color": "Color",
+      "captureRate": "Capture Rate",
+      "eggGroupTypes": {
+        "monster": "Monster",
+        "water1": "Water 1",
+        "water2": "Water 2",
+        "water3": "Water 3",
+        "bug": "Bug",
+        "flying": "Flying",
+        "ground": "Ground",
+        "fairy": "Fairy",
+        "plant": "Plant",
+        "humanshape": "Humanshape",
+        "mineral": "Mineral",
+        "amorphous": "Amorphous",
+        "ditto": "Ditto",
+        "dragon": "Dragon",
+        "no-eggs": "No Eggs"
+      },
+      "habitatTypes": {
+        "cave": "Cave",
+        "forest": "Forest",
+        "grassland": "Grassland",
+        "mountain": "Mountain",
+        "rare": "Rare",
+        "rough-terrain": "Rough Terrain",
+        "sea": "Sea",
+        "urban": "Urban",
+        "waters-edge": "Waters Edge"
+      },
+      "shapeTypes": {
+        "ball": "Ball",
+        "squiggle": "Squiggle",
+        "fish": "Fish",
+        "arms": "Arms",
+        "blob": "Blob",
+        "upright": "Upright",
+        "legs": "Legs",
+        "quadruped": "Quadruped",
+        "wings": "Wings",
+        "tentacles": "Tentacles",
+        "heads": "Heads",
+        "humanoid": "Humanoid",
+        "bug-wings": "Bug Wings",
+        "armor": "Armor"
+      },
+      "colorTypes": {
+        "black": "Black",
+        "blue": "Blue",
+        "brown": "Brown",
+        "gray": "Gray",
+        "green": "Green",
+        "pink": "Pink",
+        "purple": "Purple",
+        "red": "Red",
+        "white": "White",
+        "yellow": "Yellow"
+      }
+    },
+    "statistics": {
+      "title": "Statistics",
+      "hp": "HP",
+      "attack": "Attack",
+      "defense": "Defense",
+      "specialAttack": "Special Attack",
+      "specialDefense": "Special Defense",
+      "speed": "Speed",
+      "total": "Total",
+      "legend": {
+        "order": "Order:",
+        "base": "Base",
+        "level50": "Level 50",
+        "level100": "Level 100"
+      }
+    },
+    "abilities": {
+      "title": "Abilities",
+      "normalAbilities": "Normal Abilities",
+      "hiddenAbility": "Hidden Ability",
+      "none": "No abilities",
+      "noHidden": "No hidden ability"
+    },
+    "location": {
+      "title": "Location",
+      "location": "location",
+      "locations": "locations",
+      "noLocations": "No location information available",
+      "disclaimer": "Location data is not available for Generation 8 and 9 Pokémon.",
+      "versionGroups": {
+        "redBlue": "Red & Blue",
+        "goldSilver": "Gold & Silver",
+        "rubySapphire": "Ruby & Sapphire",
+        "diamondPearl": "Diamond & Pearl",
+        "blackWhite": "Black & White",
+        "black2White2": "Black 2 & White 2",
+        "xy": "X & Y",
+        "sunMoon": "Sun & Moon",
+        "ultraSunMoon": "Ultra Sun & Ultra Moon",
+        "swordShield": "Sword & Shield",
+        "scarletViolet": "Scarlet & Violet"
+      },
+      "encounterMethods": "Encounter Methods",
+      "levels": "Levels",
+      "chance": "Chance",
+      "maxChance": "max",
+      "version": "version",
+      "versions": "versions",
+      "method": "Method",
+      "unknown": "Unknown"
+    },
+    "evolution": {
+      "title": "Evolution Chain",
+      "noEvolutions": "This Pokémon does not evolve",
+      "level": "Level {{level}}",
+      "item": "{{item}}",
+      "trade": "Trade",
+      "heldItem": " + {{item}}",
+      "useItem": "{{item}}",
+      "happiness": "Happiness {{value}}",
+      "unknown": "Unknown method",
+      "items": {
+        "fire-stone": "Fire Stone",
+        "water-stone": "Water Stone",
+        "thunder-stone": "Thunder Stone",
+        "leaf-stone": "Leaf Stone",
+        "moon-stone": "Moon Stone",
+        "sun-stone": "Sun Stone",
+        "shiny-stone": "Shiny Stone",
+        "dusk-stone": "Dusk Stone",
+        "dawn-stone": "Dawn Stone",
+        "ice-stone": "Ice Stone"
+      }
+    }
+  },
   "pokemon": {
     "id": "ID",
     "name": "Name",
@@ -32,6 +183,17 @@
     "sort": "Sort",
     "reset": "Reset",
     "apply": "Apply"
+  },
+  "generations": {
+    "generation1": "Generation I",
+    "generation2": "Generation II",
+    "generation3": "Generation III",
+    "generation4": "Generation IV",
+    "generation5": "Generation V",
+    "generation6": "Generation VI",
+    "generation7": "Generation VII",
+    "generation8": "Generation VIII",
+    "generation9": "Generation IX"
   },
   "language": {
     "select": "Select language",

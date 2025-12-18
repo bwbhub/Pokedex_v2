@@ -3,7 +3,7 @@ import pokeApi from '../../api/modules/pokedex.api';
 import { usePokedetails } from '../../context/Pokedetails';
 import { useSelector } from 'react-redux';
 
-const useListCard = ({ id, setOpenModal }) => {
+const useListCard = ({ id, openModal }) => {
   const [pokeInfo, setPokeInfo] = useState(null);
   const [species, setSpecies] = useState(null);
   const { setPokeDetails, setPokeSpecies, regionDex } = usePokedetails();
@@ -11,7 +11,9 @@ const useListCard = ({ id, setOpenModal }) => {
   const activeLanguage = useSelector((state) => state.language.activeLanguage);
 
   const handleOpenModal = () => {
-    setOpenModal(true);
+    // Passer les données Pokémon au contexte modal global
+    openModal({ pokeInfo, species });
+    // Aussi mettre à jour le contexte Pokedetails pour la compatibilité
     setPokeDetails(pokeInfo);
     setPokeSpecies(species);
   };

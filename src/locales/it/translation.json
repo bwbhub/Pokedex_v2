@@ -8,6 +8,16 @@
     "close": "Chiudi",
     "clear": "Cancella"
   },
+  "pokemonTabs": {
+    "statistics": {
+      "legend": {
+        "order": "Ordine:",
+        "base": "Base",
+        "level50": "Livello 50",
+        "level100": "Livello 100"
+      }
+    }
+  },
   "pokemon": {
     "id": "ID",
     "name": "Nome",
@@ -32,6 +42,17 @@
     "sort": "Ordina",
     "reset": "Reimposta",
     "apply": "Applica"
+  },
+  "generations": {
+    "generation1": "Generazione I",
+    "generation2": "Generazione II",
+    "generation3": "Generazione III",
+    "generation4": "Generazione IV",
+    "generation5": "Generazione V",
+    "generation6": "Generazione VI",
+    "generation7": "Generazione VII",
+    "generation8": "Generazione VIII",
+    "generation9": "Generazione IX"
   },
   "language": {
     "select": "Seleziona lingua",
@@ -67,8 +88,34 @@
   "botCard": {
     "about": "Informazioni",
     "stats": "Statistiche",
-    "evolution": "Evoluzione",
-    "noEvolutionData": "Nessun dato di evoluzione disponibile",
+    "location": {
+      "title": "Posizione",
+      "location": "posizione",
+      "locations": "posizioni",
+      "noLocations": "Nessuna informazione sulla posizione disponibile",
+      "disclaimer": "I dati sulla posizione non sono disponibili per i Pokémon di Generazione 8 e 9.",
+      "versionGroups": {
+        "redBlue": "Rosso & Blu",
+        "goldSilver": "Oro & Argento",
+        "rubySapphire": "Rubino & Zaffiro",
+        "diamondPearl": "Diamante & Perla",
+        "blackWhite": "Nero & Bianco",
+        "black2White2": "Nero 2 & Bianco 2",
+        "xy": "X & Y",
+        "sunMoon": "Sole & Luna",
+        "ultraSunMoon": "Ultra Sole & Ultra Luna",
+        "swordShield": "Spada & Scudo",
+        "scarletViolet": "Scarlatto & Violetto"
+      },
+      "encounterMethods": "Metodi di incontro",
+      "levels": "Livelli",
+      "chance": "Probabilità",
+      "maxChance": "max",
+      "version": "versione",
+      "versions": "versioni",
+      "method": "Metodo",
+      "unknown": "Sconosciuto"
+    },
     "pokemonData": "Dati del Pokémon",
     "height": "Altezza:",
     "weight": "Peso:",
